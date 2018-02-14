@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="appchallengers_vt@localhost">
+  <database-model serializer="dbm" rdbms="DERBY" format-version="4.7">
+    <root id="1"/>
+    <schema id="2" parent="1" name="APP"/>
+    <schema id="3" parent="1" name="APPCHALLENGERS">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="4" parent="1" name="NULLID"/>
+    <schema id="5" parent="1" name="SQLJ"/>
+    <schema id="6" parent="1" name="SYS"/>
+    <schema id="7" parent="1" name="SYSCAT"/>
+    <schema id="8" parent="1" name="SYSCS_DIAG"/>
+    <schema id="9" parent="1" name="SYSCS_UTIL"/>
+    <schema id="10" parent="1" name="SYSFUN"/>
+    <schema id="11" parent="1" name="SYSIBM"/>
+    <schema id="12" parent="1" name="SYSPROC"/>
+    <schema id="13" parent="1" name="SYSSTAT"/>
+    <schema id="14" parent="1" name="USER"/>
+    <table id="15" parent="3" name="CONFİRM"/>
+    <table id="16" parent="3" name="USERS"/>
+    <column id="17" parent="15" name="İD">
+      <Position>1</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="18" parent="15" name="CONFİRMKEY">
+      <Position>2</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="19" parent="15" name="USERS_İD">
+      <Position>3</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <key id="20" parent="15" name="SQL180214195723490">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>İD</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="21" parent="15" name="CONFİRM_USERS_İD">
+      <ColNames>USERS_İD</ColNames>
+      <RefSchemaName>APPCHALLENGERS</RefSchemaName>
+      <RefTableName>USERS</RefTableName>
+      <RefKeyName>SQL180214195723460</RefKeyName>
+      <RefColNames>İD</RefColNames>
+    </foreign-key>
+    <column id="22" parent="16" name="İD">
+      <Position>1</Position>
+      <DataType>INTEGER(10)|4</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
+    </column>
+    <column id="23" parent="16" name="ACTİVE">
+      <Position>2</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <column id="24" parent="16" name="COUNTRY">
+      <Position>3</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="25" parent="16" name="CREATEDATE">
+      <Position>4</Position>
+      <DataType>TIMESTAMP(29,9)|93</DataType>
+    </column>
+    <column id="26" parent="16" name="EMAİL">
+      <Position>5</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="27" parent="16" name="FULLNAME">
+      <Position>6</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="28" parent="16" name="PASSWORDHASH">
+      <Position>7</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="29" parent="16" name="PASSWORDSALT">
+      <Position>8</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="30" parent="16" name="PROFİLEPİCTURE">
+      <Position>9</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="31" parent="16" name="UPDATEDATE">
+      <Position>10</Position>
+      <DataType>TIMESTAMP(29,9)|93</DataType>
+    </column>
+    <key id="32" parent="16" name="SQL180214195723460">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>İD</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
