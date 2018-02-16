@@ -1,12 +1,11 @@
 package com.appchallengers.webservice;
 
-import com.appchallengers.webservice.dao.ConfirmDao;
-import com.appchallengers.webservice.dao.Jpa.ConfirmDaoImpl;
 import com.appchallengers.webservice.dao.Jpa.UserDaoImpl;
 import com.appchallengers.webservice.dao.UserDao;
-import com.appchallengers.webservice.model.Confirm;
 import com.appchallengers.webservice.model.Users;
+import com.appchallengers.webservice.model.request.LoginRequest;
 import com.appchallengers.webservice.model.response.UserSignUpAndLoginResponseModel;
+import com.appchallengers.webservice.util.EmailUtil;
 import com.appchallengers.webservice.util.Util;
 import com.google.gson.Gson;
 import com.sun.jersey.core.header.FormDataContentDisposition;
@@ -19,29 +18,26 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
-import java.util.Random;
 
 
-@Path("/users")
-public class UserFeedService {
+@Path("/users/account")
+public class UserAccountService {
 
     private UserDao mUserDao = new UserDaoImpl();
-    private ConfirmDao confirmDao = new ConfirmDaoImpl();
 
     @GET
-    @Path("/createaccount")
+    @Path("/example")
     @Produces("text/plain")
     public String createAccount() {
         return "hello word";
     }
 
     @POST
-    @Path("/uploadphoto")
+    @Path("/create/withimage")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces("application/json")
-    public Response uploadUserProfilePicture(
+    public Response createAccountWtihImage(
             @FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail,
             @FormDataParam("fullName") String fullName,
@@ -49,7 +45,7 @@ public class UserFeedService {
             @FormDataParam("password") String password,
             @FormDataParam("country") String country) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         String uploadedFileLocation = null;
-        if (mUserDao.checkEmail(email).size() == 0) {
+        if (mUserDao.checkEmail(email) == 0) {
             java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance(Locale.US).getTime().getTime());
             if (uploadedInputStream != null) {
                 uploadedFileLocation = "c://Users/MHMTNASIF/Desktop/uploaded/" + Util.hashMD5(currentTimestamp.toString() + email) + fileDetail.getFileName();
@@ -64,23 +60,39 @@ public class UserFeedService {
                     Util.hashMD5(currentTimestamp.toString() + password),
                     country, uploadedFileLocation, Users.Active.NOT_CONFİRMED,
                     currentTimestamp, currentTimestamp
-
             ));
             Users user = mUserDao.findByEmail(email);
-            confirmDao.saveConfirm(new Confirm(
-                    (1000000 + new Random().nextInt(8888888)) + "",
-                    user
-            ));
             UserSignUpAndLoginResponseModel userSignUpAndLoginResponseModel = new UserSignUpAndLoginResponseModel(
                     user.getId(), Util.createToken(user.getEmail(), user.getFullName(), user.getId()),
                     user.getEmail(), user.getActive().ordinal()
             );
+            String url = "https://www.appchallengers.com./confirm.jsp?id=" + user.getId() + "&" + "hash=" + user.getPasswordSalt();
+            EmailUtil.sendEmail(user.getEmail(), "Confirm Email", url);
             return Response.status(200).entity(new Gson().toJson(userSignUpAndLoginResponseModel)).build();
         } else {
             return Response.status(250).build();
         }
     }
 
+    @POST
+    @Path("/login")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response login(LoginRequest loginRequest) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        Long status =(Long)mUserDao.login(loginRequest.getEmail(), Util.hashMD5(loginRequest.getPassword()));
+        if (status == 0) {
+            return Response.status(256).build();
+        } else if (status == 1) {
+            Users user = mUserDao.findByEmail(loginRequest.getEmail());
+            UserSignUpAndLoginResponseModel userSignUpAndLoginResponseModel = new UserSignUpAndLoginResponseModel(
+                    user.getId(), Util.createToken(user.getEmail(), user.getFullName(), user.getId()),
+                    user.getEmail(), user.getActive().ordinal()
+            );
+            return Response.status(200).entity(new Gson().toJson(userSignUpAndLoginResponseModel)).build();
+        } else {
+            return Response.status(245).build();
+        }
+    }
 }
 
 

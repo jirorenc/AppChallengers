@@ -26,6 +26,9 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" />
           <element id="library" level="project" name="JPA 2.0-2.0" />
           <element id="library" level="project" name="JAX-RS" />
+          <element id="library" level="project" name="Maven: javax.mail:javax.mail-api:1.6.0" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.5" />
         </element>
       </element>
     </root>

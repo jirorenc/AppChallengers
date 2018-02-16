@@ -7,105 +7,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d0933ac-0f79-4f97-9452-c7588c286a4a" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/30e3f86f-78c9-426c-8ac5-57775b685415.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/JAX_RS.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/JPA_2_0_2_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_8_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_8_9.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_8_9.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_contribs_jersey_multipart_1_18.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_jersey_jersey_core_1_18.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_jsonwebtoken_jjwt_0_9_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_derby_derbyclient_10_2_1_6.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_javax_persistence_2_1_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_org_eclipse_persistence_antlr_2_6_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_org_eclipse_persistence_asm_2_6_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_org_eclipse_persistence_core_2_6_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_org_eclipse_persistence_jpa_2_6_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_persistence_org_eclipse_persistence_jpa_jpql_2_6_0.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_javax_json_1_0_4.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jvnet_mimepull_mimepull_1_9_3.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/lib/javax.persistence.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/META-INF/MANIFEST.MF" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/META-INF/persistence.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/UserFeedService.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/dao/ConfirmDao.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/dao/Jpa/ConfirmDaoImpl.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/dao/Jpa/UserDaoImpl.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/dao/UserDao.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/model/Confirm.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/model/Users$Active.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/model/Users.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/model/response/UserSignUpAndLoginResponseModel.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/util/JpaFactory.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/util/Util.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/asm-3.1.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/commons-codec-1.7.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/derbyclient-10.2.1.6.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/gson-2.2.1.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jackson-annotations-2.8.0.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jackson-core-2.8.9.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jackson-core-asl-1.9.13.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jackson-core-lgpl-1.9.13.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jackson-databind-2.8.9.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jackson-jaxrs-1.9.13.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jackson-mapper-asl-1.9.13.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jackson-mapper-lgpl-1.9.13.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jackson-xc-1.9.13.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/javax.json-1.0.4.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/javax.persistence-2.1.0.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/javax.persistence.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jersey-client-1.18.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jersey-core-1.18.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jersey-json-1.18.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jersey-multipart-1.18.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jersey-server-1.18.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jersey-servlet-1.18.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jjwt-0.9.0.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/json-20090211.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/jsr311-api-1.1.1.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/log4j-1.2.17.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/mimepull-1.9.3.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/org.eclipse.persistence.antlr-2.6.0.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/org.eclipse.persistence.asm-2.6.0.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/org.eclipse.persistence.core-2.6.0.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/org.eclipse.persistence.jpa-2.6.0.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/org.eclipse.persistence.jpa.jpql-2.6.0.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/lib/persistence-api-1.0.2.jar" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserFeedService.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/ConfirmDao.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/Jpa/ConfirmDaoImpl.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/Jpa/UserDaoImpl.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/UserDao.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Confirm.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Users.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/response/UserSignUpAndLoginResponseModel.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/util/JpaFactory.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/util/Util.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/UserFeedService.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/dao/ConfirmDao.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/dao/Jpa/ConfirmDaoImpl.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/dao/Jpa/UserDaoImpl.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/dao/UserDao.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/model/Confirm.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/model/Users$Active.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/model/Users.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/model/response/UserSignUpAndLoginResponseModel.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/util/JpaFactory.class" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/util/Util.class" />
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/appchallengers_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/appchallengers_war_exploded.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/30e3f86f-78c9-426c-8ac5-57775b685415.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/30e3f86f-78c9-426c-8ac5-57775b685415.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/appchallengers.iml" afterPath="$PROJECT_DIR$/appchallengers.iml" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/web.xml" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/META-INF/persistence.xml" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/UserFeedService.class" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/UserFeedService.class" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/dao/Jpa/UserDaoImpl.class" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/dao/Jpa/UserDaoImpl.class" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/dao/UserDao.class" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/dao/UserDao.class" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/model/Users$Active.class" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/model/Users$Active.class" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/model/Users.class" afterPath="$PROJECT_DIR$/out/artifacts/appchallengers_war_exploded/WEB-INF/classes/com/appchallengers/webservice/model/Users.class" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserFeedService.java" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserAccountService.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/ConfirmDao.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/Jpa/ConfirmDaoImpl.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/Jpa/UserDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/Jpa/UserDaoImpl.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/UserDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/UserDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Confirm.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Users.java" afterPath="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Users.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" afterPath="$PROJECT_DIR$/target/classes/META-INF/persistence.xml" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/UserFeedService.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/dao/ConfirmDao.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/dao/Jpa/ConfirmDaoImpl.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/dao/Jpa/UserDaoImpl.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/dao/UserDao.class" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/dao/UserDao.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/model/Confirm.class" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/model/Users$Active.class" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/model/Users$Active.class" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/model/Users.class" afterPath="$PROJECT_DIR$/target/classes/com/appchallengers/webservice/model/Users.class" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -139,13 +69,37 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="UserFeedService.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserFeedService.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="Users.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Users.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="466">
-              <caret line="80" column="9" lean-forward="false" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="-990">
+              <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+              <folding>
+                <element signature="e#1736#1737#0" expanded="true" />
+                <element signature="e#1761#1762#0" expanded="true" />
+                <element signature="e#1988#1989#0" expanded="true" />
+                <element signature="e#2023#2024#0" expanded="true" />
+                <element signature="e#2067#2068#0" expanded="true" />
+                <element signature="e#2103#2104#0" expanded="true" />
+                <element signature="e#2159#2160#0" expanded="true" />
+                <element signature="e#2207#2208#0" expanded="true" />
+                <element signature="e#2246#2247#0" expanded="true" />
+                <element signature="e#2281#2282#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmailUtil.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/util/EmailUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="390">
+              <caret line="19" column="52" lean-forward="false" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
+              <folding>
+                <element signature="e#688#897#0" expanded="true" />
+                <element signature="e#896#897#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -172,15 +126,18 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/UserDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/ConfirmDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/Jpa/ConfirmDaoImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Confirm.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserFeedService.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/UserDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/request/LoginRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Users.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/Jpa/UserDaoImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserFeedService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserAccountService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/util/EmailUtil.java" />
       </list>
     </option>
   </component>
@@ -237,6 +194,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -244,13 +202,47 @@
               <item name="appchallengers" type="b2602c69:ProjectViewProjectNode" />
               <item name="appchallengers" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="appchallengers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="appchallengers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="appchallengers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="appchallengers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="appchallengers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="appchallengers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="appchallengers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="appchallengers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="webservice" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="appchallengers" type="b2602c69:ProjectViewProjectNode" />
+              <item name="appchallengers" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="webservice" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="AndroidView" />
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -452,16 +444,19 @@
       <updated>1518540030128</updated>
       <workItem from="1518540045377" duration="83000" />
       <workItem from="1518540141018" duration="197000" />
-      <workItem from="1518623400488" duration="7161000" />
+      <workItem from="1518623400488" duration="7469000" />
+      <workItem from="1518690065118" duration="6239000" />
+      <workItem from="1518714818387" duration="7971000" />
+      <workItem from="1518735530648" duration="1693000" />
+      <workItem from="1518791616005" duration="4902000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7441000" />
+    <option name="totallyTimeSpent" value="28554000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -469,11 +464,11 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18259935" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1783029" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.61381656" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -481,10 +476,10 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.56851643" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.68856174" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17400645" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18474758" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -493,8 +488,41 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1783029" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.61381656" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.68856174" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18474758" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -503,7 +531,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="6" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -511,19 +541,139 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/30e3f86f-78c9-426c-8ac5-57775b685415/console.sql">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Users.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="1352">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding>
+            <element signature="e#1736#1737#0" expanded="true" />
+            <element signature="e#1761#1762#0" expanded="true" />
+            <element signature="e#1988#1989#0" expanded="true" />
+            <element signature="e#2023#2024#0" expanded="true" />
+            <element signature="e#2067#2068#0" expanded="true" />
+            <element signature="e#2103#2104#0" expanded="true" />
+            <element signature="e#2159#2160#0" expanded="true" />
+            <element signature="e#2207#2208#0" expanded="true" />
+            <element signature="e#2246#2247#0" expanded="true" />
+            <element signature="e#2281#2282#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/Jpa/UserDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="29" column="21" lean-forward="false" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+        <state relative-caret-position="832">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserAccountService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="11" column="21" lean-forward="true" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1056#1057#0" expanded="true" />
+            <element signature="e#1091#1092#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://table:/d7b66ce6/30e3f86f-78c9-426c-8ac5-57775b685415/APPCHALLENGERS.USERS">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Users.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1352">
+          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding>
+            <element signature="e#1736#1737#0" expanded="true" />
+            <element signature="e#1761#1762#0" expanded="true" />
+            <element signature="e#1988#1989#0" expanded="true" />
+            <element signature="e#2023#2024#0" expanded="true" />
+            <element signature="e#2067#2068#0" expanded="true" />
+            <element signature="e#2103#2104#0" expanded="true" />
+            <element signature="e#2159#2160#0" expanded="true" />
+            <element signature="e#2207#2208#0" expanded="true" />
+            <element signature="e#2246#2247#0" expanded="true" />
+            <element signature="e#2281#2282#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="9" column="39" lean-forward="false" selection-start-line="9" selection-start-column="39" selection-end-line="9" selection-end-column="39" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserAccountService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1144">
+          <caret line="62" column="31" lean-forward="false" selection-start-line="62" selection-start-column="26" selection-end-line="62" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1056#1057#0" expanded="true" />
+            <element signature="e#1091#1092#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/Jpa/UserDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="988">
+          <caret line="45" column="16" lean-forward="false" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserAccountService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1056#1057#0" expanded="true" />
+            <element signature="e#1091#1092#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserAccountService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1056#1057#0" expanded="true" />
+            <element signature="e#1091#1092#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/30e3f86f-78c9-426c-8ac5-57775b685415/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -531,14 +681,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
           <caret line="11" column="35" lean-forward="false" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/Jpa/ConfirmDaoImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/ConfirmDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/response/UserSignUpAndLoginResponseModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Confirm.java" />
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="6" column="58" lean-forward="false" selection-start-line="6" selection-start-column="58" selection-end-line="6" selection-end-column="58" />
+        <state relative-caret-position="354">
+          <caret line="37" column="17" lean-forward="true" selection-start-line="37" selection-start-column="17" selection-end-line="37" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -550,6 +710,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="12" column="69" lean-forward="true" selection-start-line="12" selection-start-column="69" selection-end-line="12" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="das://table:/d7b66ce6/30e3f86f-78c9-426c-8ac5-57775b685415/APPCHALLENGERS.USERS">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -557,83 +725,99 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.jpa/2.6.0/org.eclipse.persistence.jpa-2.6.0.jar!/org/eclipse/persistence/internal/jpa/QueryImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="48" column="47" lean-forward="false" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.jpa/2.6.0/org.eclipse.persistence.jpa-2.6.0.jar!/org/eclipse/persistence/internal/jpa/EJBQueryImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="45" column="32" lean-forward="false" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/request/LoginRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding>
+            <element signature="e#168#169#0" expanded="true" />
+            <element signature="e#196#197#0" expanded="true" />
+            <element signature="e#262#263#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserAccountService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1142">
+          <caret line="92" column="48" lean-forward="true" selection-start-line="92" selection-start-column="48" selection-end-line="92" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1056#1057#0" expanded="true" />
+            <element signature="e#1091#1092#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/Jpa/UserDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="23" column="34" lean-forward="false" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
+        <state relative-caret-position="1324">
+          <caret line="78" column="0" lean-forward="true" selection-start-line="78" selection-start-column="0" selection-end-line="78" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/Jpa/ConfirmDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="10" column="27" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/ConfirmDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="4" column="27" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/dao/UserDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="260">
-          <caret line="10" column="26" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/response/UserSignUpAndLoginResponseModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+          <caret line="10" column="21" lean-forward="false" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Users.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="27" column="24" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/model/Confirm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
-          <folding />
+        <state relative-caret-position="-990">
+          <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+          <folding>
+            <element signature="e#1736#1737#0" expanded="true" />
+            <element signature="e#1761#1762#0" expanded="true" />
+            <element signature="e#1988#1989#0" expanded="true" />
+            <element signature="e#2023#2024#0" expanded="true" />
+            <element signature="e#2067#2068#0" expanded="true" />
+            <element signature="e#2103#2104#0" expanded="true" />
+            <element signature="e#2159#2160#0" expanded="true" />
+            <element signature="e#2207#2208#0" expanded="true" />
+            <element signature="e#2246#2247#0" expanded="true" />
+            <element signature="e#2281#2282#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/util/Util.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="36" column="23" lean-forward="false" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="364">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/UserFeedService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/appchallengers/webservice/util/EmailUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="466">
-          <caret line="80" column="9" lean-forward="false" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
-          <folding />
+        <state relative-caret-position="390">
+          <caret line="19" column="52" lean-forward="false" selection-start-line="19" selection-start-column="52" selection-end-line="19" selection-end-column="52" />
+          <folding>
+            <element signature="e#688#897#0" expanded="true" />
+            <element signature="e#896#897#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

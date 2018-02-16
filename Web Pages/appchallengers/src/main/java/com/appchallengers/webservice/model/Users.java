@@ -5,7 +5,10 @@ import java.sql.Timestamp;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Users.findUserByEmail", query = "select user from Users user where user.email=:email")
+        @NamedQuery(name = "Users.findUserByEmail", query = "SELECT user from Users user where user.email=:email"),
+        @NamedQuery(name = "Users.checkEmail", query = "SELECT COUNT(user) from Users user where user.email=:email"),
+        @NamedQuery(name = "Users.checkIdAndPasswordSalt", query = "SELECT COUNT(user) from Users user where user.id=:id and user.passwordSalt=:passwordSalt"),
+        @NamedQuery(name="Users.login",query = "select count(user)from Users user where user.email=:email and user.passwordHash=:passwordHash")
 })
 public class Users {
 
@@ -24,8 +27,6 @@ public class Users {
     private Active active;
     private Timestamp createDate;
     private Timestamp updateDate;
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL, optional = false)
-    private Confirm confirm;
 
     public Users() {
     }
@@ -56,5 +57,21 @@ public class Users {
 
     public Active getActive() {
         return active;
+    }
+
+    public String getPasswordSalt() {
+        return passwordSalt;
+    }
+
+    public void setActive(Active active) {
+        this.active = active;
+    }
+
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
     }
 }
