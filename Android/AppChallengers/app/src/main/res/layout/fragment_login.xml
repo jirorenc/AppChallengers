@@ -1,15 +1,115 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.appchallengers.appchallengers.fragments.login.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/login_fragment_login_image_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Login Fragment" />
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:weightSum="1.0">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.4"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="1">
 
+            <ImageView
+                android:id="@+id/login_fragment_logo_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/logo1" />
 
-</FrameLayout>
+            <com.appchallengers.appchallengers.helpers.component.TextViewComponent
+                android:id="@+id/login_fragment_app_name_textviev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="AppChallengers"
+                android:textColor="#969FAA"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <com.appchallengers.appchallengers.helpers.component.TextViewComponent
+                android:id="@+id/login_fragment_slogan_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Stop Watching Do It"
+                android:textColor="#969FAA"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <EditText
+                android:id="@+id/login_fragment_email_edittext"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@color/Color_login_edit"
+                android:drawableLeft="@drawable/ic_email_white_24dp"
+                android:drawablePadding="10dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff" />
+
+            <EditText
+                android:id="@+id/login_fragment_password_edittext"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@color/Color_login_edit"
+                android:drawableLeft="@drawable/ic_lock_outline_white_24dp"
+                android:drawablePadding="10dp"
+                android:hint="password"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff" />
+
+            <com.dd.processbutton.iml.ActionProcessButton
+                android:id="@+id/login_fragment_login_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@color/Color_login_edit"
+                android:text="Login"
+                android:textColor="@android:color/white" />
+
+            <com.appchallengers.appchallengers.helpers.component.TextViewComponent
+                android:id="@+id/login_fragment_forgot_password_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Forgot My Password"
+                android:textColor="#969FAA"
+                android:textSize="15sp" />
+
+            <com.appchallengers.appchallengers.helpers.component.TextViewComponent
+                android:id="@+id/login_fragment_signup_link_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="i dont have an account"
+                android:textColor="#969FAA"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

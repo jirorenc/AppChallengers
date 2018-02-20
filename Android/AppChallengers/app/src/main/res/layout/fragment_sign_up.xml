@@ -1,13 +1,196 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.appchallengers.appchallengers.fragments.login.SignUpFragment">
+    android:orientation="vertical"
+    android:weightSum="1.0">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Sign up fragment" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.2"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/sign_up_fragment_back_arrow_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_arrow_back_white_24dp" />
+
+        <TextView
+            android:id="@+id/sing_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="Sign Up"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+<LinearLayout
+    android:id="@+id/sign_up_fragment_profile_image_ll"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:weightSum="1.0"
+    android:layout_weight="0.8"
+    >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.3"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/sign_up_fragment_profile_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/profile"
+            app:civ_border_color="@color/colorAccent"
+            app:civ_border_width="2dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/sign_up_fragment_user_fullname_edittext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@color/Color_login_edit"
+            android:drawableLeft="@drawable/ic_person_white_24dp"
+            android:drawablePadding="10dp"
+            android:hint="Full Name"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+        <EditText
+            android:id="@+id/sign_up_fragment_email_edittext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@color/Color_login_edit"
+            android:drawableLeft="@drawable/ic_email_white_24dp"
+            android:drawablePadding="10dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+        <EditText
+            android:id="@+id/sign_up_fragment_password_edittext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@color/Color_login_edit"
+            android:drawableLeft="@drawable/ic_lock_outline_white_24dp"
+            android:drawablePadding="10dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+        <EditText
+            android:id="@+id/sign_up_fragment_country_edittext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@color/Color_login_edit"
+            android:drawableLeft="@drawable/ic_flag_white_24dp"
+            android:drawablePadding="10dp"
+            android:hint="Country"
+            android:inputType="text"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff" />
+
+        <com.dd.processbutton.iml.ActionProcessButton
+            android:id="@+id/sign_up_fragment_sign_up_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Color_login_edit"
+            android:text="Sign up"
+            android:textColor="@android:color/white" />
+
+        <com.appchallengers.appchallengers.helpers.component.TextViewComponent
+            android:id="@+id/sign_up_fragment_login_link_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="I already have an account"
+            android:textColor="#969FAA"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_weight="0.1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <com.appchallengers.appchallengers.helpers.component.TextViewComponent
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="bottom"
+            android:text="By using AppChallenger you will accept "
+            android:textColor="#969FAA"
+            android:textSize="10sp" />
+
+        <com.appchallengers.appchallengers.helpers.component.TextViewComponent
+            android:id="@+id/sign_up_fragment_profile_terms_cookie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="bottom"
+            android:text="terms and cookie policy"
+            android:textColor="#969FAA"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sign_up_fragment_country_fragment"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+        </LinearLayout>
+
+</LinearLayout>
+</LinearLayout>
+
+
+
+
+
+
+
+

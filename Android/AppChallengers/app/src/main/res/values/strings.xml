@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">AppChallengers</string>
+    <string name="error_250">Bu e-mail zaten kullanılmakta</string>
+    <string name="error_290">Beklenmeyen bir hata oluştu, lütfen tekrar deneyiniz.</string>
+    <string name="error_251">Böyle bir kullanıcı bulunmamaktadır.</string>
+    <string name="info_252">Postanıza bir doğrulama bağlantısı gönderildi. Lütfen bağlantıya tıklayıp doğrulma yapınız.</string>
+    <string name="info_253">Posta addresiniz henüz doğrulanmamış.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

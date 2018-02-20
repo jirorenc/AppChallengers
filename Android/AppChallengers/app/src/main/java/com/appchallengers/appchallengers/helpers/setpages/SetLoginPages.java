@@ -9,6 +9,8 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.appchallengers.appchallengers.LoginActivity;
 import com.appchallengers.appchallengers.R;
+import com.appchallengers.appchallengers.fragments.login.ConfirmEmailFragment;
+import com.appchallengers.appchallengers.fragments.login.ForgotPasswordFragment;
 import com.appchallengers.appchallengers.fragments.login.LoginFragment;
 import com.appchallengers.appchallengers.fragments.login.SignUpFragment;
 
@@ -55,10 +57,21 @@ public class SetLoginPages {
                 replace("signup");
                 break;
             }
+            case 2: {
+                mFragment = new ConfirmEmailFragment();
+                replace("confirm_email");
+                break;
+            }
+            case 3: {
+                mFragment = new ForgotPasswordFragment();
+                replace("forgot_password");
+                break;
+            }
         }
     }
 
     private void replace(String tag) {
+
         mFragmentTransaction.replace(R.id.pager, mFragment, tag);
         mFragmentTransaction.commit();
     }
