@@ -43,4 +43,6 @@ dependencies {
     compile 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
     //https://github.com/kakajika/FragmentAnimations
     compile 'com.labo.kaji:fragmentanimations:0.1.1'
+    //https://github.com/orhanobut/dialogplus
+    compile 'com.orhanobut:dialogplus:1.11@aar'
 }

@@ -14,17 +14,20 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import com.appchallengers.appchallengers.R;
+import com.appchallengers.appchallengers.helpers.adapters.CustomAdapter;
 import com.appchallengers.appchallengers.helpers.setpages.SetLoginPages;
 import com.appchallengers.appchallengers.helpers.util.CameraUtils;
 import com.appchallengers.appchallengers.helpers.util.CheckPermissions;
@@ -38,6 +41,8 @@ import com.appchallengers.appchallengers.webservice.request.SignUpRequestModel;
 import com.appchallengers.appchallengers.webservice.response.UserPreferencesData;
 import com.dd.processbutton.iml.ActionProcessButton;
 import com.labo.kaji.fragmentanimations.MoveAnimation;
+import com.orhanobut.dialogplus.DialogPlus;
+import com.orhanobut.dialogplus.Holder;
 
 import java.io.File;
 import java.io.IOException;
@@ -72,10 +77,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     private String mImageUrl = null;
     private Animation mShakeAnimation;
     private SharedPreferences mSharedPreferences;
+    private CustomAdapter mCustomAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-
         mRootView = inflater.inflate(R.layout.fragment_sign_up, container, false);
         initalView(mRootView);
         return mRootView;
@@ -95,16 +100,14 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         mShakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
         mSharedPreferences = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         mSignUpButton.setMode(ActionProcessButton.Mode.ENDLESS);
+        mCustomAdapter =new CustomAdapter(getContext(),true);
         mSignUpBackArrow.setOnClickListener(this);
         mSignUpLinkLogin.setOnClickListener(this);
         mSignUpProfileImage.setOnClickListener(this);
         mSignUpButton.setOnClickListener(this);
         mTermsAndCookie.setOnClickListener(this);
         mSignUpCountry.setOnClickListener(this);
-
     }
-
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -137,6 +140,10 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             }
+            case R.id.sign_up_fragment_country_edittext:{
+                countryDialog();
+                break;
+            }
         }
     }
 
@@ -149,9 +156,17 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     private boolean checkPermission() {
         return CheckPermissions.getInstance().hasPermissions(getActivity(), new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE});
     }
+    private void countryDialog(){
+        mCustomAdapter = new CustomAdapter(getContext(),true);
+        final DialogPlus dialogPlus = DialogPlus.newDialog(getContext())
+                .setAdapter(mCustomAdapter).setExpanded(true).setHeader(R.layout.fragment_contry_select)
+                .create();
+        dialogPlus.show();
+
+    }
 
     private void showPictureDialog() {
-        final Dialog dialog = new Dialog(getContext());
+        final Dialog dialog = new Dialog (getContext());
         dialog.setContentView(R.layout.custom_alert_dialog_select_image_provider);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         mCustomAlertDialogCamera = (TextView) dialog.findViewById(R.id.custom_alert_dialog_image_provider_camera);
