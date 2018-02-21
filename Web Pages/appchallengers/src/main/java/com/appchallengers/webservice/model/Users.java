@@ -43,6 +43,17 @@ public class Users {
         this.updateDate = updateDate;
     }
 
+    public Users(String fullName, String email, String passwordHash, String passwordSalt, String country, Active active, Timestamp createDate, Timestamp updateDate) {
+        this.fullName = fullName;
+        this.email = email;
+        this.passwordHash = passwordHash;
+        this.passwordSalt = passwordSalt;
+        this.country = country;
+        this.active = active;
+        this.createDate = createDate;
+        this.updateDate = updateDate;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -73,5 +84,13 @@ public class Users {
 
     public String getPasswordHash() {
         return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public void setUpdateDate(Timestamp updateDate) {
+        this.updateDate = updateDate;
     }
 }

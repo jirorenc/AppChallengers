@@ -1,5 +1,7 @@
 package com.appchallengers.webservice.util;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -42,7 +44,7 @@ public class Util {
 
     }
 
-    public static String createToken(String email,String name,Integer id) throws UnsupportedEncodingException {
+    public static String createToken(String email, String name, Integer id) throws UnsupportedEncodingException {
         String jwt = Jwts.builder()
                 .setSubject(email)
                 .claim("name", name)
@@ -53,5 +55,12 @@ public class Util {
                 )
                 .compact();
         return jwt;
+    }
+
+    public static String getEmailFromToken(String token) throws UnsupportedEncodingException {
+        Jws<Claims> claims = Jwts.parser()
+                .setSigningKey("secret".getBytes("UTF-8"))
+                .parseClaimsJws(token);
+        return claims.getBody().getSubject();
     }
 }

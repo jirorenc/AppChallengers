@@ -4,10 +4,11 @@ import com.appchallengers.webservice.dao.UserDao;
 import com.appchallengers.webservice.model.Users;
 import com.appchallengers.webservice.util.JpaFactory;
 import com.appchallengers.webservice.util.Util;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import java.security.NoSuchAlgorithmException;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class UserDaoImpl implements UserDao {
 
@@ -63,6 +64,31 @@ public class UserDaoImpl implements UserDao {
             entityManager.close();
         }
 
+    }
+
+    public void changePassword(Integer id,String passwordHash) {
+        EntityManager entityManager = JpaFactory.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance(Locale.US).getTime().getTime());
+        Users user = entityManager.find(Users.class, id);
+        user.setPasswordHash(passwordHash);
+        user.setUpdateDate(currentTimestamp);
+        try {
+            user.setPasswordSalt(Util.hashMD5(user.getPasswordHash() + user.getPasswordSalt()));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        entityManager.merge(user);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
+    public Users findUserById(Integer id) {
+        EntityManager entityManager=JpaFactory.getInstance().getEntityManager();
+        entityManager.getTransaction().begin();
+        Users users=entityManager.find(Users.class,id);
+        entityManager.close();
+        return users;
     }
 
     public Long login(String email, String passwordHash) {
