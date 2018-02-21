@@ -85,4 +85,12 @@ public class Users {
     public String getPasswordHash() {
         return passwordHash;
     }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public void setUpdateDate(Timestamp updateDate) {
+        this.updateDate = updateDate;
+    }
 }

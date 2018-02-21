@@ -1,10 +1,10 @@
 package com.appchallengers.webservice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@NamedQueries({
+        @NamedQuery(name = "Country.getCountryList",query = "select country from Country country")
+})
 @Entity
 public class Country {
 
