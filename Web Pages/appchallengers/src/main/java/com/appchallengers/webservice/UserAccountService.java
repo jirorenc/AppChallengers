@@ -64,7 +64,8 @@ public class UserAccountService {
             ));
             Users user = mUserDao.findByEmail(email);
             UserSignUpAndLoginResponseModel userSignUpAndLoginResponseModel = new UserSignUpAndLoginResponseModel(
-                    200, user.getId(), Util.createToken(user.getEmail(), user.getFullName(), user.getId()),
+                    200,Util.createToken(user.getEmail(), user.getFullName(), user.getId()),
+                    user.getFullName(),user.getProfilePicture(),
                     user.getEmail(), user.getActive().ordinal()
             );
             String url = "https://www.appchallengers.com./confirm.jsp?id=" + user.getId() + "&" + "hash=" + user.getPasswordSalt();
@@ -95,7 +96,8 @@ public class UserAccountService {
             ));
             Users user = mUserDao.findByEmail(signUpRequestModel.getEmail());
             UserSignUpAndLoginResponseModel userSignUpAndLoginResponseModel = new UserSignUpAndLoginResponseModel(
-                    200, user.getId(), Util.createToken(user.getEmail(), user.getFullName(), user.getId()),
+                    200,Util.createToken(user.getEmail(), user.getFullName(), user.getId()),
+                    user.getFullName(),user.getProfilePicture(),
                     user.getEmail(), user.getActive().ordinal()
             );
             String url = "https://www.appchallengers.com./confirm.jsp?id=" + user.getId() + "&" + "hash=" + user.getPasswordSalt();
@@ -120,7 +122,8 @@ public class UserAccountService {
         } else if (status == 1) {
             Users user = mUserDao.findByEmail(loginRequestModel.getEmail());
             UserSignUpAndLoginResponseModel userSignUpAndLoginResponseModel = new UserSignUpAndLoginResponseModel(
-                    200, user.getId(), Util.createToken(user.getEmail(), user.getFullName(), user.getId()),
+                    200,Util.createToken(user.getEmail(), user.getFullName(), user.getId()),
+                    user.getFullName(),user.getProfilePicture(),
                     user.getEmail(), user.getActive().ordinal()
             );
             return Response.status(200).entity(new Gson().toJson(userSignUpAndLoginResponseModel)).build();

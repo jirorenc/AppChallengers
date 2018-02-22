@@ -1,6 +1,5 @@
 package com.appchallengers.appchallengers.fragments.login;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,21 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.appchallengers.appchallengers.MainActivity;
 import com.appchallengers.appchallengers.R;
-import com.appchallengers.appchallengers.helpers.setpages.SetLoginPages;
-import com.appchallengers.appchallengers.helpers.util.Constants;
 import com.appchallengers.appchallengers.helpers.util.CustomToast;
 import com.appchallengers.appchallengers.helpers.util.Utils;
 import com.appchallengers.appchallengers.webservice.remote.ApiClient;
 import com.appchallengers.appchallengers.webservice.remote.UserClient;
-import com.appchallengers.appchallengers.webservice.request.UsersLoginRequestModel;
 import com.appchallengers.appchallengers.webservice.response.UserPreferencesData;
-import com.dd.processbutton.iml.ActionProcessButton;
 import com.labo.kaji.fragmentanimations.MoveAnimation;
 
+import cn.xm.weidongjian.progressbuttonlib.ProgressButton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,8 +31,8 @@ import static com.appchallengers.appchallengers.helpers.util.Constants.MY_PREFS_
 
 public class ConfirmEmailFragment extends Fragment implements View.OnClickListener {
     private View mRootView;
-    private ActionProcessButton mConfirmEmailValidate;
-    private TextView mConfirmEmailCodeSendAgain;
+    private ProgressButton mConfirmEmailValidate;
+    private Button mConfirmEmailCodeSendAgain;
     private SharedPreferences mSharedPreferences;
     public static String mToken;
 
@@ -50,9 +47,8 @@ public class ConfirmEmailFragment extends Fragment implements View.OnClickListen
     }
 
     private void initalView(View view) {
-        mConfirmEmailValidate = (ActionProcessButton) view.findViewById(R.id.confirm_email_fragment_email_validate_button);
-        mConfirmEmailCodeSendAgain = (TextView) view.findViewById(R.id.confirm_email_fragment_code_again_send_link_textview);
-        mConfirmEmailValidate.setMode(ActionProcessButton.Mode.ENDLESS);
+        mConfirmEmailValidate = (ProgressButton) view.findViewById(R.id.confirm_email_fragment_email_validate_button);
+        mConfirmEmailCodeSendAgain = (Button) view.findViewById(R.id.confirm_email_fragment_code_again_send_link_button);
         mSharedPreferences= getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         mConfirmEmailCodeSendAgain.setOnClickListener(this);
         mConfirmEmailValidate.setOnClickListener(this);
@@ -66,7 +62,8 @@ public class ConfirmEmailFragment extends Fragment implements View.OnClickListen
                 checkConfrimEmail();
                 break;
             }
-            case R.id.confirm_email_fragment_code_again_send_link_textview: {
+            case R.id.confirm_email_fragment_code_again_send_link_button: {
+                ButtonActionActive();
                 userResendConfirmEmail();
                 break;
             }
@@ -84,15 +81,17 @@ public class ConfirmEmailFragment extends Fragment implements View.OnClickListen
             public void onResponse(Call<UserPreferencesData> call, Response<UserPreferencesData> response) {
                 if (response.body().getStatusCode()==252){
                     new CustomToast().Show_Toast(getContext(),mRootView,getString(R.string.info_252));
+                    ButtonActionPasif();
                 }
                 else {
                     new CustomToast().Show_Toast(getContext(),mRootView,getString(R.string.error_290));
-
+                    ButtonActionPasif();
                 }
             }
             @Override
             public void onFailure(Call<UserPreferencesData> call, Throwable t) {
                 new CustomToast().Show_Toast(getContext(),mRootView,getString(R.string.error_290));
+                ButtonActionPasif();
             }
         });
     }
@@ -127,11 +126,11 @@ public class ConfirmEmailFragment extends Fragment implements View.OnClickListen
 
 
     private void ButtonActionActive() {
-        mConfirmEmailValidate.setProgress(1);
+        mConfirmEmailValidate.startRotate();
     }
 
     private void ButtonActionPasif() {
-        mConfirmEmailValidate.setProgress(0);
+        mConfirmEmailValidate.stop();
     }
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {

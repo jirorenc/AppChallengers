@@ -1,49 +1,47 @@
 package com.appchallengers.appchallengers.helpers.component;
 
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.widget.TextView;
+import android.widget.Button;
 
 /**
- * Created by jir on 14.2.2018.
+ * Created by MHMTNASIF on 22.02.2018.
  */
 
 @SuppressLint("AppCompatCustomView")
-public class TextViewComponent extends TextView {
+public class ButtonSFUITextRegularComponent extends cn.xm.weidongjian.progressbuttonlib.ProgressButton {
     private Context mContext;
-    public TextViewComponent(Context context) {
+    public ButtonSFUITextRegularComponent(Context context) {
         super(context);
         mContext=context;
-        initialView();
+        init();
     }
 
-    public TextViewComponent(Context context, @Nullable AttributeSet attrs) {
+    public ButtonSFUITextRegularComponent(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext=context;
-        initialView();
+        init();
     }
 
-    public TextViewComponent(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ButtonSFUITextRegularComponent(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext=context;
-        initialView();
+        init();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public TextViewComponent(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ButtonSFUITextRegularComponent(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         mContext=context;
-        initialView();
+        init();
     }
-
-    public void initialView(){
-        Typeface font = Typeface.createFromAsset(mContext.getAssets(), "fonts/roboto_medium.ttf");
+    private void init() {
+        Typeface font = Typeface.createFromAsset(mContext.getAssets(), "fonts/SFUIText-Regular.ttf");
         setTypeface(font);
+
     }
 }

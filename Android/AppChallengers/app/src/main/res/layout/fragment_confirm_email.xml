@@ -3,67 +3,81 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:layout_marginRight="20dp"
     android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     android:gravity="center"
     android:orientation="vertical"
     android:weightSum="1.0"
     tools:context="com.appchallengers.appchallengers.fragments.login.ConfirmEmailFragment">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="0.3"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/confirm_email_fragment_logo_imageview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/logo1" />
-
-        <com.appchallengers.appchallengers.helpers.component.TextViewComponent
-            android:id="@+id/confirm_email_fragment_app_name_textviev"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="AppChallengers"
-            android:textColor="#969FAA"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="0.7"
+        android:foregroundGravity="center"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_bg_primary_color"
+            android:padding="40dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_email_white_50dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_weight="0.3"
+        android:layout_marginBottom="30dp"
+        android:gravity="bottom"
         android:orientation="vertical">
 
-        <com.dd.processbutton.iml.ActionProcessButton
-            android:id="@+id/confirm_email_fragment_email_validate_button"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:background="@color/Color_login_edit"
-            android:text="My E-mail Validate"
-            android:textColor="@android:color/white" />
-
-        <com.appchallengers.appchallengers.helpers.component.TextViewComponent
-            android:id="@+id/confirm_email_fragment_code_again_send_link_textview"
+        <com.appchallengers.appchallengers.helpers.component.SFUITextRegularTextViewComponent
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
+            android:text="You need to verify your email address we sent to you email to verify your email address.Please check your inbox"
+            android:textColor="@color/edittext_text_color"
+            android:textSize="15dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Didn't come to code, again send!"
-            android:textColor="#969FAA"
-            android:textSize="20sp" />
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
+            <com.appchallengers.appchallengers.helpers.component.ButtonSFUITextRegularComponent
+                android:id="@+id/confirm_email_fragment_email_validate_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_corner_radius_bg"
+                android:text="Verified"
+                android:layout_marginRight="20dp"
+                android:padding="10dp"
+                android:layout_gravity="left"
+                android:textColor="#FFFEFE"
+                android:textSize="17sp" />
 
+            <com.appchallengers.appchallengers.helpers.component.ButtonSFUITextRegularComponent
+                android:id="@+id/confirm_email_fragment_code_again_send_link_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_corner_radius_bg"
+                android:text="send me again"
+                android:padding="10dp"
+                android:textColor="#FFFEFE"
+                android:textSize="17sp" />
+        </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

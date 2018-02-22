@@ -19,4 +19,8 @@ public class ApiClient {
     public static UserClient getUserClient() {
         return getRetroClient().create(UserClient.class);
     }
+
+    public static AppClient getAppClient() {
+        return getRetroClient().create(AppClient.class);
+    }
 }

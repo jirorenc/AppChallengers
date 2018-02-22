@@ -29,7 +29,7 @@
             android:layout_marginLeft="10dp"
             >
 
-            <com.appchallengers.appchallengers.helpers.component.TextViewComponent
+            <com.appchallengers.appchallengers.helpers.component.SFUITextRegularTextViewComponent
                 android:id="@+id/custom_alert_dialog_image_provider_galery"
                 android:layout_width="279dp"
                 android:layout_height="match_parent"
@@ -43,7 +43,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
+            android:background="@color/edittext_text_color"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:orientation="horizontal"
             android:layout_marginBottom="10dp"
             >
@@ -57,7 +59,7 @@
             android:orientation="horizontal"
             >
 
-            <com.appchallengers.appchallengers.helpers.component.TextViewComponent
+            <com.appchallengers.appchallengers.helpers.component.SFUITextRegularTextViewComponent
                 android:id="@+id/custom_alert_dialog_image_provider_camera"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

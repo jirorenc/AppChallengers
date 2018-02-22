@@ -6,8 +6,9 @@ package com.appchallengers.appchallengers.webservice.response;
 
 public class UserPreferencesData {
     private Integer statusCode;
-    private Integer id;
     private String token;
+    private String fullName;
+    private String imageUrl;
     private String email;
     private Integer active;
 
@@ -19,13 +20,6 @@ public class UserPreferencesData {
         this.active = active;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getToken() {
         return token;
@@ -45,5 +39,25 @@ public class UserPreferencesData {
 
     public Integer getStatusCode() {
         return statusCode;
+    }
+
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

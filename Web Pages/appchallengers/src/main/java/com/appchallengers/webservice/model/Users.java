@@ -93,4 +93,8 @@ public class Users {
     public void setUpdateDate(Timestamp updateDate) {
         this.updateDate = updateDate;
     }
+
+    public String getProfilePicture() {
+        return profilePicture;
+    }
 }

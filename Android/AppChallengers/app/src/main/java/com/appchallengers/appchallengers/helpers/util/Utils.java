@@ -24,6 +24,11 @@ public class Utils {
         editor.putString(tag, value);
         editor.commit();
     }
+    public static void setSharedPreferencesBoolean(String tag, boolean value) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(tag, value);
+        editor.commit();
+    }
 
     public static String getPref(String tag) {
         String value = null;
@@ -41,6 +46,8 @@ public class Utils {
         }
 
         return value;
+    }public static boolean getPrefBoolean(String tag) {
+        return sharedPreferences.getBoolean(tag,true);
     }
 
     public static boolean isNetworkConnected(Context context) {

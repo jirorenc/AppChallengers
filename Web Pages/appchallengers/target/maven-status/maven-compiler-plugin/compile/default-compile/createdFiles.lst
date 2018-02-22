@@ -1,12 +1,17 @@
 com\appchallengers\webservice\model\request\LoginRequestModel.class
+com\appchallengers\webservice\ApplicationService.class
+com\appchallengers\webservice\model\Country.class
 com\appchallengers\webservice\dao\Jpa\UserDaoImpl.class
 com\appchallengers\webservice\util\JpaFactory.class
+com\appchallengers\webservice\dao\ApplicationDao.class
 com\appchallengers\webservice\model\Users$Active.class
+com\appchallengers\webservice\dao\Jpa\ApplicationDaoImpl.class
 com\appchallengers\webservice\util\EmailUtil.class
 com\appchallengers\webservice\UserAccountService.class
 com\appchallengers\webservice\model\Users.class
 com\appchallengers\webservice\util\Util.class
 com\appchallengers\webservice\model\request\SignUpRequestModel.class
 com\appchallengers\webservice\dao\UserDao.class
+com\appchallengers\webservice\model\request\LoginRequest.class
 com\appchallengers\webservice\util\EmailUtil$1.class
 com\appchallengers\webservice\model\response\UserSignUpAndLoginResponseModel.class
