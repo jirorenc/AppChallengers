@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity  implements BottomNavigation
 
         switch (item.getItemId()) {
             case R.id.action_add_challenge:
+                startActivity(new Intent(MainActivity.this,CameraActivity.class));
                 break;
             case R.id.action_user_feed:
                 if (mFragmentManager!=null)

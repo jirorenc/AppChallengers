@@ -29,10 +29,10 @@
         <item name="unselected_width">6dp</item>
         <item name="unselected_height">6dp</item>
     </style>
-    <!-- <style name="FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
+     <style name="FullScreen" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
-    </style>-->
+    </style>
 </resources>
