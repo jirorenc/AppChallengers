@@ -2,13 +2,15 @@ package com.appchallengers.webservice.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Users.findUserByEmail", query = "SELECT user from Users user where user.email=:email"),
         @NamedQuery(name = "Users.checkEmail", query = "SELECT COUNT(user) from Users user where user.email=:email"),
         @NamedQuery(name = "Users.checkIdAndPasswordSalt", query = "SELECT COUNT(user) from Users user where user.id=:id and user.passwordSalt=:passwordSalt"),
-        @NamedQuery(name="Users.login",query = "select count(user)from Users user where user.email=:email and user.passwordHash=:passwordHash")
+        @NamedQuery(name = "Users.login", query = "select count(user)from Users user where user.email=:email and user.passwordHash=:passwordHash")
 })
 public class Users {
 
@@ -27,6 +29,12 @@ public class Users {
     private Active active;
     private Timestamp createDate;
     private Timestamp updateDate;
+
+    @OneToMany(orphanRemoval = true, mappedBy = "firstUser", cascade = {CascadeType.ALL})
+    private List<Relationship> relationships_one = new LinkedList<Relationship>();
+
+    @OneToMany(orphanRemoval = true, mappedBy = "secondUser", cascade = {CascadeType.ALL})
+    private List<Relationship> relationships_two = new LinkedList<Relationship>();
 
     public Users() {
     }
@@ -96,5 +104,9 @@ public class Users {
 
     public String getProfilePicture() {
         return profilePicture;
+    }
+
+    public String getCountry() {
+        return country;
     }
 }

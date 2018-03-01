@@ -5,6 +5,7 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <class>com.appchallengers.webservice.model.Users</class>
         <class>com.appchallengers.webservice.model.Country</class>
+        <class>com.appchallengers.webservice.model.Relationship</class>
         <properties>
             <property name="eclipselink.jdbc.url" value="jdbc:derby://localhost:1527/appchallengers_vt"/>
             <property name="eclipselink.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>

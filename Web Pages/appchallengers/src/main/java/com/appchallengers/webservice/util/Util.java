@@ -63,4 +63,11 @@ public class Util {
                 .parseClaimsJws(token);
         return claims.getBody().getSubject();
     }
+
+    public static Integer getIdFromToken(String token) throws UnsupportedEncodingException {
+        Jws<Claims> claims = Jwts.parser()
+                .setSigningKey("secret".getBytes("UTF-8"))
+                .parseClaimsJws(token);
+        return (Integer) claims.getBody().get("id");
+    }
 }
