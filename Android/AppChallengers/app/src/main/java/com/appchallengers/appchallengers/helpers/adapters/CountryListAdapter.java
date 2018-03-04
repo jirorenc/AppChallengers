@@ -46,7 +46,7 @@ public class CountryListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         View rowView = convertView;
         final ViewHolder viewHolder;
@@ -65,9 +65,9 @@ public class CountryListAdapter extends BaseAdapter {
         }
         viewHolder.mCountriesCharTextView.setText(mCountriesListModelList.get(position).getCountryName().charAt(0)+"");
         viewHolder.mCountriesNameTextView.setText(mCountriesListModelList.get(position).getCountryName());
-
         return rowView;
     }
+
 
     private static class ViewHolder {
         TextView mCountriesCharTextView;

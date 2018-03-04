@@ -4,13 +4,14 @@ package com.appchallengers.appchallengers.fragments.login;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
-import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,17 +22,18 @@ import com.appchallengers.appchallengers.helpers.setpages.SetLoginPages;
 import com.appchallengers.appchallengers.helpers.util.Constants;
 import com.appchallengers.appchallengers.helpers.util.CustomToast;
 import com.appchallengers.appchallengers.helpers.util.Instructions;
-import com.appchallengers.appchallengers.helpers.util.SaveImageToDirectoryUtils;
 import com.appchallengers.appchallengers.helpers.util.Utils;
-import com.appchallengers.appchallengers.webservice.remote.ApiClient;
-import com.appchallengers.appchallengers.webservice.remote.UserClient;
-import com.appchallengers.appchallengers.webservice.response.UserPreferencesData;
+import com.appchallengers.appchallengers.webservice.remote.ApiClientWithoutCache;
+import com.appchallengers.appchallengers.webservice.remote.UserAccountClient;
 import com.appchallengers.appchallengers.webservice.request.UsersLoginRequestModel;
+import com.appchallengers.appchallengers.webservice.response.UserPreferencesData;
 import com.labo.kaji.fragmentanimations.MoveAnimation;
-
-import cn.xm.weidongjian.progressbuttonlib.ProgressButton;
-import retrofit2.Call;
-import retrofit2.Callback;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -42,12 +44,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private View mRootView;
     private EditText mLoginFragmentUserEmail;
     private EditText mLoginFragmentPassword;
-    private ProgressButton mLoginFragmentLogin;
+    private Button mLoginFragmentLogin;
     private TextView mLoginFragmentForgotPassword;
     private LinearLayout mLinearLayout;
     private Animation mShakeAnimation;
     private SharedPreferences mSharedPreferences;
     private ImageView mLoginBackArrow;
+    private CompositeDisposable mCompositeDisposable;
+    private Observable<Response<UserPreferencesData>> mResponseObservable;
 
 
     @Override
@@ -58,10 +62,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initialView(View rootView) {
+        mCompositeDisposable = new CompositeDisposable();
         mLoginFragmentUserEmail = (EditText) rootView.findViewById(R.id.login_fragment_email_edittext);
         mLoginFragmentPassword = (EditText) rootView.findViewById(R.id.login_fragment_password_edittext);
-        mLoginFragmentLogin = (ProgressButton) rootView.findViewById(R.id.login_fragment_login_button);
-        mLoginBackArrow=(ImageView)mRootView.findViewById(R.id.login_fragment_back_arrow_imageview);
+        mLoginFragmentLogin = (Button) rootView.findViewById(R.id.login_fragment_login_button);
+        mLoginBackArrow = (ImageView) mRootView.findViewById(R.id.login_fragment_back_arrow_imageview);
         mLoginFragmentForgotPassword = (TextView) rootView.findViewById(R.id.login_fragment_forgot_password_textview);
         mLinearLayout = (LinearLayout) rootView.findViewById(R.id.login_fragment_login_image_ll);
         mShakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
@@ -86,53 +91,63 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             }
-            case R.id.login_fragment_back_arrow_imageview:{
-                SetLoginPages.getInstance().constructor(getActivity(),1);
+            case R.id.login_fragment_back_arrow_imageview: {
+                SetLoginPages.getInstance().constructor(getActivity(), 1);
             }
 
         }
     }
 
     private void usersLogin() {
-        UserClient userClient = ApiClient.getUserClient();
+        UserAccountClient userAccountClient = ApiClientWithoutCache.getUserAccountClient();
         String email = mLoginFragmentUserEmail.getText().toString();
         String password = mLoginFragmentPassword.getText().toString();
-        Call<UserPreferencesData> userPreferencesDataCall = userClient.usersLogin(new UsersLoginRequestModel(email, password));
-        userPreferencesDataCall.enqueue(new Callback<UserPreferencesData>() {
-            @Override
-            public void onResponse(Call<UserPreferencesData> call, Response<UserPreferencesData> response) {
-                if (response.body().getStatusCode() == 200) {
-                   Utils.sharedPreferences = mSharedPreferences;
-                    Utils.setSharedPreferences("token", response.body().getToken());
-                    Utils.setSharedPreferences("fullName", response.body().getFullName());
-                    Utils.setSharedPreferences("imageUrl",response.body().getImageUrl());
-                    Utils.setSharedPreferences("email", response.body().getEmail());
-                    Utils.setSharedPreferences("active", response.body().getActive() + "");
-                    ButtonActionPasif();
-                    if (response.body().getActive() == 0) {
-                        SetLoginPages.getInstance().constructor(getActivity(), 4);
-                    } else if (response.body().getActive() == 1) {
-                        startActivity(new Intent(getActivity(), MainActivity.class));
-                        getActivity().finish();
+        mResponseObservable = userAccountClient.usersLogin(new UsersLoginRequestModel(email, password));
+        mResponseObservable.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<UserPreferencesData>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        mCompositeDisposable.add(d);
                     }
 
-                } else if (response.body().getStatusCode() == 251) {
-                    new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_251));
-                    ButtonActionPasif();
-                } else {
-                    new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
-                    ButtonActionPasif();
-                }
-            }
+                    @Override
+                    public void onNext(Response<UserPreferencesData> value) {
+                        if (value.body().getStatusCode() == 200) {
+                            Utils.sharedPreferences = mSharedPreferences;
+                            Utils.setSharedPreferences("token", value.body().getToken());
+                            Utils.setSharedPreferences("fullName", value.body().getFullName());
+                            Utils.setSharedPreferences("imageUrl", value.body().getImageUrl());
+                            Utils.setSharedPreferences("email", value.body().getEmail());
+                            Utils.setSharedPreferences("active", value.body().getActive() + "");
+                            ButtonActionPasif();
+                            if (value.body().getActive() == 0) {
+                                SetLoginPages.getInstance().constructor(getActivity(), 4);
+                            } else if (value.body().getActive() == 1) {
+                                startActivity(new Intent(getActivity(), MainActivity.class));
+                                getActivity().finish();
+                            }
 
-            @Override
-            public void onFailure(Call<UserPreferencesData> call, Throwable t) {
-                new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
-                ButtonActionPasif();
-            }
-        });
+                        } else if (value.body().getStatusCode() == 251) {
+                            new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_251));
+                            ButtonActionPasif();
+                        } else {
+                            new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
+                            ButtonActionPasif();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
+                        ButtonActionPasif();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
-
 
 
     private boolean checkValidation() {
@@ -142,11 +157,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void ButtonActionActive() {
-        mLoginFragmentLogin.startRotate();
+        //mLoginFragmentLogin.startRotate();
     }
 
     private void ButtonActionPasif() {
-        mLoginFragmentLogin.stop();
+        //mLoginFragmentLogin.stop();
     }
 
     @Override
@@ -158,4 +173,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onPause() {
+        mCompositeDisposable.dispose();
+        super.onPause();
+    }
 }

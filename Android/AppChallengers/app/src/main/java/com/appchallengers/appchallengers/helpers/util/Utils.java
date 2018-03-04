@@ -38,33 +38,12 @@ public class Utils {
         } catch (Exception ex) {
 
         }
-
-        try {
-            value = sharedPreferences.getInt(tag, 0) + "";
-        } catch (Exception ex) {
-
-        }
-
         return value;
     }public static boolean getPrefBoolean(String tag) {
         return sharedPreferences.getBoolean(tag,true);
     }
 
-    public static boolean isNetworkConnected(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        return cm.getActiveNetworkInfo() != null && isInternetAvailable();
-    }
-
-    public static boolean isInternetAvailable() {
-        try {
-            InetAddress ipAddr = InetAddress.getByName("google.com");
-            return !ipAddr.equals("");
-
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
     public static boolean checkValidation(String[] components,
                                           LinearLayout linearLayout,

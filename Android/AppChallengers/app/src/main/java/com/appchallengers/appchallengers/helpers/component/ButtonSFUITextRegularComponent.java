@@ -13,32 +13,34 @@ import android.widget.Button;
  */
 
 @SuppressLint("AppCompatCustomView")
-public class ButtonSFUITextRegularComponent extends cn.xm.weidongjian.progressbuttonlib.ProgressButton {
+public class ButtonSFUITextRegularComponent extends Button{
     private Context mContext;
+
     public ButtonSFUITextRegularComponent(Context context) {
         super(context);
-        mContext=context;
+        mContext = context;
         init();
     }
 
     public ButtonSFUITextRegularComponent(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext=context;
+        mContext = context;
         init();
     }
 
     public ButtonSFUITextRegularComponent(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext=context;
+        mContext = context;
         init();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ButtonSFUITextRegularComponent(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        mContext=context;
+        mContext = context;
         init();
     }
+
     private void init() {
         Typeface font = Typeface.createFromAsset(mContext.getAssets(), "fonts/SFUIText-Regular.ttf");
         setTypeface(font);

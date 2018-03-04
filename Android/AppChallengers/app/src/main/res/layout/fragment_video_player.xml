@@ -45,7 +45,7 @@
 
 
         <com.appchallengers.appchallengers.helpers.component.ButtonSFUITextRegularComponent
-            android:id="@+id/login_fragment_login_button"
+            android:id="@+id/video_player_fragment_challenge_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"

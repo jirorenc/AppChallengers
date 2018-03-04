@@ -4,7 +4,8 @@ import com.appchallengers.appchallengers.webservice.response.CountryList;
 
 import java.util.List;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
+import retrofit2.Response;
 import retrofit2.http.GET;
 
 /**
@@ -14,5 +15,5 @@ import retrofit2.http.GET;
 public interface AppClient {
 
     @GET("application/get_country_list")
-    Call<List<CountryList>> getCountryList();
+    Observable<Response<List<CountryList>>> getCountryList();
 }

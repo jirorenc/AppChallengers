@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.appchallengers.appchallengers.fragments.main.TrendsFeedFragment;
 import com.appchallengers.appchallengers.helpers.setpages.SetMainPages;
+import com.appchallengers.appchallengers.helpers.util.Constants;
 import com.appchallengers.appchallengers.helpers.util.Utils;
 import com.squareup.picasso.Picasso;
 
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity  implements BottomNavigation
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Constants.contex=getApplicationContext();
         initialView();
         checkAuthentication();
 

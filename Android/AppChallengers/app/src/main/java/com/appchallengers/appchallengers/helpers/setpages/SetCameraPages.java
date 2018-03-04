@@ -12,8 +12,6 @@ import com.appchallengers.appchallengers.CameraActivity;
 import com.appchallengers.appchallengers.R;
 import com.appchallengers.appchallengers.fragments.camera.CaptureVideoFragment;
 import com.appchallengers.appchallengers.fragments.camera.VideoPlayerFragment;
-import com.appchallengers.appchallengers.fragments.main.TrendsFeedFragment;
-import com.appchallengers.appchallengers.fragments.main.UserFeedFragment;
 
 /**
  * Created by MHMTNASIF on 25.02.2018.
@@ -53,6 +51,7 @@ public class SetCameraPages {
                 replace("capture_video_fragment");
                 break;
             }
+
         }
     }
     public void constructorWithBundle(final Activity activity, final int i, Bundle bundle) {
