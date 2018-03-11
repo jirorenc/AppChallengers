@@ -1,4 +1,4 @@
-package com.appchallengers.webservice.model;
+package com.appchallengers.webservice.model.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -35,6 +35,15 @@ public class Users {
 
     @OneToMany(orphanRemoval = true, mappedBy = "secondUser", cascade = {CascadeType.ALL})
     private List<Relationship> relationships_two = new LinkedList<Relationship>();
+
+    @OneToMany(orphanRemoval = true, mappedBy = "challenge_user", cascade = {CascadeType.ALL})
+    private List<Challenges> challengesList = new LinkedList<Challenges>();
+
+    @OneToMany(orphanRemoval = true, mappedBy = "challenge_detail_user", cascade = {CascadeType.ALL})
+    private List<ChallengeDetail> challengeDetailList = new LinkedList<ChallengeDetail>();
+
+    @OneToMany(orphanRemoval = true, mappedBy = "reaction_user", cascade = {CascadeType.ALL})
+    private List<Reaction> reactionList = new LinkedList<Reaction>();
 
     public Users() {
     }

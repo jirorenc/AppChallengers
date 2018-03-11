@@ -1,7 +1,7 @@
-package com.appchallengers.webservice.dao.Jpa;
+package com.appchallengers.webservice.dao.daoimpl;
 
-import com.appchallengers.webservice.dao.UserDao;
-import com.appchallengers.webservice.model.Users;
+import com.appchallengers.webservice.dao.dao.UserDao;
+import com.appchallengers.webservice.model.entity.Users;
 import com.appchallengers.webservice.util.JpaFactory;
 import com.appchallengers.webservice.util.Util;
 import javax.persistence.EntityManager;
@@ -13,12 +13,14 @@ import java.util.Locale;
 public class UserDaoImpl implements UserDao {
 
 
-    public void saveUser(Users users) {
+    public Users saveUser(Users users) {
         EntityManager entityManager = JpaFactory.getInstance().getEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(users);
+        entityManager.flush();
         entityManager.getTransaction().commit();
         entityManager.close();
+        return users;
     }
 
     public Users findByEmail(String email) {
@@ -30,6 +32,7 @@ public class UserDaoImpl implements UserDao {
         entityManager.close();
         return user;
     }
+
 
     public Long checkEmail(String email) {
         EntityManager entityManager = JpaFactory.getInstance().getEntityManager();

@@ -1,10 +1,10 @@
-package com.appchallengers.webservice.dao;
+package com.appchallengers.webservice.dao.dao;
 
-import com.appchallengers.webservice.model.Users;
+import com.appchallengers.webservice.model.entity.Users;
 
 public interface UserDao {
 
-    void saveUser(Users user);
+    Users saveUser(Users user);
     Users findByEmail(String email);
     Long checkEmail(String email);
     Long checkIdAndPasswordSalt(Integer id,String passwordSalt);

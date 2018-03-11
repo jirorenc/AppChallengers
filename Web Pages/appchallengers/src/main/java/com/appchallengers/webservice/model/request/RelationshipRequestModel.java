@@ -1,6 +1,6 @@
 package com.appchallengers.webservice.model.request;
 
-public class AddFriendModel {
+public class RelationshipRequestModel {
 
     private Integer firstId;
     private Integer secondId;

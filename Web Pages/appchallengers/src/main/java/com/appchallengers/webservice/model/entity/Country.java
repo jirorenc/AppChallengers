@@ -1,9 +1,9 @@
-package com.appchallengers.webservice.model;
+package com.appchallengers.webservice.model.entity;
 
 import javax.persistence.*;
 
-@NamedQueries({
-        @NamedQuery(name = "Country.getCountryList",query = "select country from Country country")
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "Country.getCountryList", query = "select * from Country ",resultClass = Country.class)
 })
 @Entity
 public class Country {

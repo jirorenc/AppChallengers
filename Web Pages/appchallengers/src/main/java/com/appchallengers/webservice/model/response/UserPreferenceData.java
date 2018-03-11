@@ -1,16 +1,14 @@
 package com.appchallengers.webservice.model.response;
 
-public class UserSignUpAndLoginResponseModel {
+public class UserPreferenceData {
 
-    private Integer statusCode;
     private String  token;
     private String fullName;
     private String imageUrl;
     private String email;
     private Integer active;
 
-    public UserSignUpAndLoginResponseModel(Integer statusCode, String token, String fullName, String imageUrl, String email, Integer active) {
-        this.statusCode = statusCode;
+    public UserPreferenceData(String token, String fullName, String imageUrl, String email, Integer active) {
         this.token = token;
         this.fullName = fullName;
         this.imageUrl = imageUrl;
@@ -18,8 +16,6 @@ public class UserSignUpAndLoginResponseModel {
         this.active = active;
     }
 
-    public UserSignUpAndLoginResponseModel(Integer statusCode) {
-        this.statusCode = statusCode;
+    public UserPreferenceData() {
     }
-
 }

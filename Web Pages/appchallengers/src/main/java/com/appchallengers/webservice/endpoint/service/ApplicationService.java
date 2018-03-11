@@ -1,7 +1,7 @@
-package com.appchallengers.webservice;
+package com.appchallengers.webservice.endpoint.service;
 
-import com.appchallengers.webservice.dao.ApplicationDao;
-import com.appchallengers.webservice.dao.Jpa.ApplicationDaoImpl;
+import com.appchallengers.webservice.dao.dao.ApplicationDao;
+import com.appchallengers.webservice.dao.daoimpl.ApplicationDaoImpl;
 import com.google.gson.Gson;
 
 import javax.ws.rs.GET;

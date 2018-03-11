@@ -1,8 +1,8 @@
-package com.appchallengers.webservice.dao.Jpa;
+package com.appchallengers.webservice.dao.daoimpl;
 
-import com.appchallengers.webservice.dao.RelationshipDao;
-import com.appchallengers.webservice.model.Relationship;
-import com.appchallengers.webservice.model.Users;
+import com.appchallengers.webservice.dao.dao.RelationshipDao;
+import com.appchallengers.webservice.model.entity.Relationship;
+import com.appchallengers.webservice.model.entity.Users;
 import com.appchallengers.webservice.util.JpaFactory;
 
 import javax.persistence.EntityManager;

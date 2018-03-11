@@ -1,8 +1,8 @@
-package com.appchallengers.webservice.dao;
+package com.appchallengers.webservice.dao.dao;
 
 
-import com.appchallengers.webservice.model.Relationship;
-import com.appchallengers.webservice.model.Users;
+import com.appchallengers.webservice.model.entity.Relationship;
+import com.appchallengers.webservice.model.entity.Users;
 
 import java.util.List;
 
