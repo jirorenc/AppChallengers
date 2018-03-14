@@ -9,36 +9,31 @@ import java.util.List;
 public class Challenges {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @SequenceGenerator(name = "LICENSE_SEQ", sequenceName = "LICENSE_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LICENSE_SEQ")
+    private long id;
     private String headLine;
     private Timestamp createDate;
-    private String challenge_video_url;
-    private long likes;
-    private long dislikes;
     @ManyToOne
     private Users challenge_user;
-    @OneToMany(orphanRemoval = true, mappedBy = "challenge_detail", cascade = {CascadeType.ALL})
+    @OneToMany(orphanRemoval = true, mappedBy = "challenge", cascade = {CascadeType.ALL})
     private List<ChallengeDetail> challengeDetailList = new LinkedList<ChallengeDetail>();
 
     public Challenges() {
     }
 
-    public Challenges(String headLine, Timestamp createDate, String challenge_video_url, long likes, long dislikes, Users challenge_user) {
+    public Challenges(String headLine, Timestamp createDate, Users challenge_user) {
         this.headLine = headLine;
         this.createDate = createDate;
-        this.challenge_video_url = challenge_video_url;
-        this.likes = likes;
-        this.dislikes = dislikes;
         this.challenge_user = challenge_user;
 
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -58,14 +53,6 @@ public class Challenges {
         this.createDate = createDate;
     }
 
-    public String getChallenge_video_url() {
-        return challenge_video_url;
-    }
-
-    public void setChallenge_video_url(String challenge_video_url) {
-        this.challenge_video_url = challenge_video_url;
-    }
-
     public Users getChallenge_user() {
         return challenge_user;
     }
@@ -82,19 +69,4 @@ public class Challenges {
         this.challengeDetailList = challengeDetailList;
     }
 
-    public long getLikes() {
-        return likes;
-    }
-
-    public void setLikes(long likes) {
-        this.likes = likes;
-    }
-
-    public long getDislikes() {
-        return dislikes;
-    }
-
-    public void setDislikes(long dislikes) {
-        this.dislikes = dislikes;
-    }
 }

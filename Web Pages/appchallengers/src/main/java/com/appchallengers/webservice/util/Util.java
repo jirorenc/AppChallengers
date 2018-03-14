@@ -8,7 +8,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 
 public class Util {
 
@@ -44,7 +43,7 @@ public class Util {
 
     }
 
-    public static String createToken(String email, String name, Integer id) throws UnsupportedEncodingException {
+    public static String createToken(String email, String name, long id) throws UnsupportedEncodingException {
         String jwt = Jwts.builder()
                 .setSubject(email)
                 .claim("name", name)

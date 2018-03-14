@@ -1,12 +1,13 @@
 package com.appchallengers.webservice.dao.dao;
 
 import com.appchallengers.webservice.model.entity.ChallengeDetail;
-import com.appchallengers.webservice.model.response.AddChallengeResponse;
+import com.appchallengers.webservice.model.response.ChallengeResponse;
 
 import java.util.List;
 
 public interface ChallengesDetailDao {
 
     ChallengeDetail addChallengesDetail(ChallengeDetail challengeDetail);
-    List<AddChallengeResponse> getUserChallengeFeedList(Integer userId);
+    ChallengeDetail getChallengeDetail(long challenge_detail_id);
+    List<ChallengeResponse> getUserChallengeFeedList(long userId);
 }

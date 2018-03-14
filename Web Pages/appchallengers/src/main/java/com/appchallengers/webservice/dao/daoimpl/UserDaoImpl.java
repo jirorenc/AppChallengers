@@ -42,7 +42,7 @@ public class UserDaoImpl implements UserDao {
         return longTypedQuery.getSingleResult();
     }
 
-    public Long checkIdAndPasswordSalt(Integer id, String passwordSalt) {
+    public Long checkIdAndPasswordSalt(long id, String passwordSalt) {
         EntityManager entityManager = JpaFactory.getInstance().getEntityManager();
         entityManager.getTransaction().begin();
         TypedQuery<Long> longTypedQuery = entityManager.createNamedQuery("Users.checkIdAndPasswordSalt", Long.class);
@@ -51,7 +51,7 @@ public class UserDaoImpl implements UserDao {
         return longTypedQuery.getSingleResult();
     }
 
-    public void confirmEmail(Integer id, String passwordSalt) {
+    public void confirmEmail(long id, String passwordSalt) {
         if (checkIdAndPasswordSalt(id, passwordSalt)==1) {
             EntityManager entityManager = JpaFactory.getInstance().getEntityManager();
             entityManager.getTransaction().begin();
@@ -69,7 +69,7 @@ public class UserDaoImpl implements UserDao {
 
     }
 
-    public void changePassword(Integer id,String passwordHash) {
+    public void changePassword(long id,String passwordHash) {
         EntityManager entityManager = JpaFactory.getInstance().getEntityManager();
         entityManager.getTransaction().begin();
         java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance(Locale.US).getTime().getTime());
@@ -86,7 +86,7 @@ public class UserDaoImpl implements UserDao {
         entityManager.close();
     }
 
-    public Users findUserById(Integer id) {
+    public Users findUserById(long id) {
         EntityManager entityManager=JpaFactory.getInstance().getEntityManager();
         entityManager.getTransaction().begin();
         Users users=entityManager.find(Users.class,id);

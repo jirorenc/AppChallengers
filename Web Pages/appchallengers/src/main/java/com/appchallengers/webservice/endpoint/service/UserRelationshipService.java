@@ -1,14 +1,12 @@
 package com.appchallengers.webservice.endpoint.service;
 
-import com.appchallengers.webservice.dao.daoimpl.RelationshipDaoImpl;
 import com.appchallengers.webservice.dao.dao.RelationshipDao;
+import com.appchallengers.webservice.dao.daoimpl.RelationshipDaoImpl;
 import com.appchallengers.webservice.endpoint.error_handling.CommonExceptionHandler;
 import com.appchallengers.webservice.model.entity.Relationship;
-import com.appchallengers.webservice.model.entity.Users;
 import com.appchallengers.webservice.model.request.RelationshipRequestModel;
-import com.appchallengers.webservice.model.response.CommonStatus;
-import com.appchallengers.webservice.model.response.GetFriendListResponse;
 import com.appchallengers.webservice.model.response.RelationshipResponse;
+import com.appchallengers.webservice.model.response.UsersBaseData;
 import com.appchallengers.webservice.util.Util;
 import com.google.gson.Gson;
 import io.jsonwebtoken.MalformedJwtException;
@@ -17,7 +15,6 @@ import io.jsonwebtoken.SignatureException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.io.UnsupportedEncodingException;
-import java.util.LinkedList;
 import java.util.List;
 
 @Path("/users/relationship")
@@ -36,9 +33,9 @@ public class UserRelationshipService {
     @Path("/addfriend")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response addRelationship(@HeaderParam("token") String token, RelationshipRequestModel relationshipRequestModel) {
-        if (token == null) {
-            return Response.status(200).entity(new Gson().toJson(new CommonStatus(290))).build();
+    public Response addRelationship(@HeaderParam("token") String token, RelationshipRequestModel relationshipRequestModel) throws CommonExceptionHandler {
+        if (token == null || token.equals("")) {
+            throw new CommonExceptionHandler("289");
         } else {
             Integer first = 0;
             Integer second = 0;
@@ -51,9 +48,9 @@ public class UserRelationshipService {
             }
             if (relationshipDao.checkRelationship(first, second) == 0) {
                 relationshipDao.addRelationship(first, second, relationshipRequestModel.getFirstId());
-                return Response.status(200).entity(new Gson().toJson(new CommonStatus(200))).build();
+                return Response.status(200).build();
             } else {
-                return Response.status(200).entity(new Gson().toJson(new CommonStatus(290))).build();
+                throw new CommonExceptionHandler("290");
             }
         }
     }
@@ -75,6 +72,7 @@ public class UserRelationshipService {
                 first = relationshipRequestModel.getSecondId();
                 second = relationshipRequestModel.getFirstId();
             }
+            //Todo burası güncellenecek
             Relationship relationship = relationshipDao.getRelationship(first, second);
             return Response.status(200).entity(new Gson().toJson(new RelationshipResponse(relationshipRequestModel.getFirstId(), relationshipRequestModel.getSecondId(),
                     relationship.getUserActionId(), relationship.getStatus().ordinal()))).build();
@@ -88,19 +86,9 @@ public class UserRelationshipService {
         if (token == null || token.equals("")) {
             throw new CommonExceptionHandler("289");
         } else {
-            List<GetFriendListResponse> getFriendListResponses = new LinkedList<GetFriendListResponse>();
             try {
-                List<Users> usersList = relationshipDao.getFriends(Util.getIdFromToken(token));
-                for (Users users : usersList) {
-                    GetFriendListResponse getFriendListResponse = new GetFriendListResponse();
-                    getFriendListResponse.setId(users.getId());
-                    getFriendListResponse.setFullName(users.getFullName());
-                    getFriendListResponse.setEmail(users.getEmail());
-                    getFriendListResponse.setCountry(users.getCountry());
-                    getFriendListResponse.setActive(users.getActive().ordinal());
-                    getFriendListResponse.setImageUrl(users.getProfilePicture());
-                    getFriendListResponses.add(getFriendListResponse);
-                }
+                List<UsersBaseData> usersBaseData = relationshipDao.getFriends(Util.getIdFromToken(token));
+                return Response.status(200).entity(new Gson().toJson(usersBaseData)).build();
             } catch (UnsupportedEncodingException e) {
                 throw new CommonExceptionHandler("290");
             } catch (MalformedJwtException exception) {
@@ -108,7 +96,6 @@ public class UserRelationshipService {
             } catch (SignatureException exception) {
                 throw new CommonExceptionHandler("289");
             }
-            return Response.status(200).entity(new Gson().toJson(getFriendListResponses)).build();
         }
     }
 }

@@ -188,9 +188,6 @@ public class UserAccountService {
             Users user = null;
             try {
                 user=mUserDao.findUserById(Util.getIdFromToken(token));
-                if (user.getId() == null) {
-                    throw new CommonExceptionHandler("289");
-                }
             } catch (UnsupportedEncodingException e) {
                 throw new CommonExceptionHandler("289");
             } catch (MalformedJwtException exception) {
@@ -220,9 +217,6 @@ public class UserAccountService {
             Users user = null;
             try {
                 user=mUserDao.findUserById(Util.getIdFromToken(token));
-                if (user.getId() == null) {
-                    throw new CommonExceptionHandler("289");
-                }
             } catch (UnsupportedEncodingException e) {
                 throw new CommonExceptionHandler("289");
             } catch (MalformedJwtException exception) {

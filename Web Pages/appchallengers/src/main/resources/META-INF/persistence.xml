@@ -8,7 +8,7 @@
         <class>com.appchallengers.webservice.model.entity.Relationship</class>
         <class>com.appchallengers.webservice.model.entity.Challenges</class>
         <class>com.appchallengers.webservice.model.entity.ChallengeDetail</class>
-        <class>com.appchallengers.webservice.model.entity.Reaction</class>
+        <class>com.appchallengers.webservice.model.entity.Votes</class>
         <properties>
             <property name="eclipselink.jdbc.url" value="jdbc:derby://localhost:1527/appchallengers_vt"/>
             <property name="eclipselink.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>

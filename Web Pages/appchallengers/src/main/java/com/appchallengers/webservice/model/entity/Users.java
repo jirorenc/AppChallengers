@@ -17,8 +17,9 @@ public class Users {
     public static enum Active {NOT_CONFİRMED, ACTIVE, FROZEN}
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @SequenceGenerator(name = "LICENSE_SEQ", sequenceName = "LICENSE_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LICENSE_SEQ")
+    private long id;
     private String fullName;
     private String email;
     private String passwordHash;
@@ -42,8 +43,8 @@ public class Users {
     @OneToMany(orphanRemoval = true, mappedBy = "challenge_detail_user", cascade = {CascadeType.ALL})
     private List<ChallengeDetail> challengeDetailList = new LinkedList<ChallengeDetail>();
 
-    @OneToMany(orphanRemoval = true, mappedBy = "reaction_user", cascade = {CascadeType.ALL})
-    private List<Reaction> reactionList = new LinkedList<Reaction>();
+    @OneToMany(orphanRemoval = true, mappedBy = "vote_user", cascade = {CascadeType.ALL})
+    private List<Votes> votes = new LinkedList<Votes>();
 
     public Users() {
     }
@@ -71,7 +72,7 @@ public class Users {
         this.updateDate = updateDate;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 

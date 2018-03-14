@@ -10,7 +10,7 @@ import com.appchallengers.webservice.endpoint.error_handling.*;
 import com.appchallengers.webservice.model.entity.ChallengeDetail;
 import com.appchallengers.webservice.model.entity.Challenges;
 import com.appchallengers.webservice.model.entity.Users;
-import com.appchallengers.webservice.model.response.AddChallengeResponse;
+import com.appchallengers.webservice.model.response.ChallengeResponse;
 import com.appchallengers.webservice.util.Util;
 import com.google.gson.Gson;
 import com.sun.jersey.core.header.FormDataContentDisposition;
@@ -25,7 +25,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -63,12 +62,10 @@ public class UserChallengeService {
             } catch (NoSuchAlgorithmException e) {
                throw new CommonExceptionHandler("290");
             }
+            String temp="https://scontent-frt3-2.cdninstagram.com/vp/ca547410851e8ccd91f9b7bec3d605ec/5AA616F8/t50.2886-16/28838640_572766689788967_7697253445599203511_n.mp4";
             Users users = null;
             try {
                 users = userDao.findUserById(Util.getIdFromToken(token));
-                if (users.getId() == null) {
-                    throw new CommonExceptionHandler("289");
-                }
             } catch (UnsupportedEncodingException e) {
                 throw new CommonExceptionHandler("289");
             } catch (MalformedJwtException exception) {
@@ -80,20 +77,19 @@ public class UserChallengeService {
                 throw new CommonExceptionHandler("290");
             }
             Challenges challenges = challengesDao.addChallenge(new Challenges(
-                    headLine, currentTimestamp, uploadedFileLocation,0,0,users
+                    headLine, currentTimestamp,users
             ));
             ChallengeDetail challengeDetail = challengesDetailDao.addChallengesDetail(new ChallengeDetail(
-                    challenges, users, challenges.getChallenge_video_url(), currentTimestamp,0,0
+                    challenges, users, temp, currentTimestamp
             ));
-            AddChallengeResponse addChallengeResponse = new AddChallengeResponse(
+            ChallengeResponse challengeResponse = new ChallengeResponse(
                     users.getId(), users.getFullName(), users.getProfilePicture(),
-                    challengeDetail.getChallenge_detail().getId(),
-                    challengeDetail.getChallenge_detail().getHeadLine(),
+                    challengeDetail.getId(),
                     challengeDetail.getChallenge_url(),
-                    challengeDetail.getChallenge_detail().getLikes(),
-                    challengeDetail.getChallenge_detail().getDislikes(),2
+                    challengeDetail.getChallenge().getHeadLine(),
+                    0,0
             );
-            return Response.status(Response.Status.OK).entity(new Gson().toJson(addChallengeResponse)).build();
+            return Response.status(Response.Status.OK).entity(new Gson().toJson(challengeResponse)).build();
         }
 
     }
@@ -108,9 +104,6 @@ public class UserChallengeService {
             Users users = null;
             try {
                 users = userDao.findUserById(Util.getIdFromToken(token));
-                if (users.getId() == null) {
-                    throw new CommonExceptionHandler("289");
-                }
             } catch (UnsupportedEncodingException e) {
                 throw new CommonExceptionHandler("289");
             } catch (MalformedJwtException exception) {
@@ -119,7 +112,7 @@ public class UserChallengeService {
                 throw new CommonExceptionHandler("289");
             }
 
-            List<AddChallengeResponse> userChallengeFeedList =challengesDetailDao.getUserChallengeFeedList(users.getId());
+            List<ChallengeResponse> userChallengeFeedList =challengesDetailDao.getUserChallengeFeedList(users.getId());
             return Response.status(Response.Status.OK).entity(new Gson().toJson(userChallengeFeedList)).build();
         }
 

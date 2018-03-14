@@ -1,43 +1,60 @@
 package com.appchallengers.webservice.model.entity;
 
 
+import com.appchallengers.webservice.model.response.UsersBaseData;
+
 import javax.persistence.*;
 
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Relationship.checkRelationship", query = "SELECT COUNT(relationship) from Relationship relationship where relationship.firstUser.id=:firstuser and relationship.secondUser.id=:seconduser"),
         @NamedQuery(name = "Relationship.getRelationship", query = "SELECT relationship from Relationship relationship where relationship.firstUser.id=:firstuser and relationship.secondUser.id=:seconduser"),
-        @NamedQuery(name = "Relationship.getRelationships", query = "SELECT u from Users u,Relationship r where u.id=case when r.firstUser.id=:userid then r.secondUser.id when r.secondUser.id=:userid then r.firstUser.id else -1 end and r.status=:param")
 })
+@NamedNativeQuery(name = "Relationship.getRelationships", query = "SELECT" +
+        " U.İD,U.FULLNAME,U.PROFİLEPİCTURE as PROFİLE_PİCTURE FROM USERS AS U, RELATİONSHİP AS R" +
+        " WHERE U.İD = CASE WHEN R.FİRSTUSER_İD = ? THEN SECONDUSER_İD" +
+        " WHEN SECONDUSER_İD = ? THEN FİRSTUSER_İD END AND R.STATUS = 1"
+        , resultSetMapping = "Relationship.UsersBaseData")
+@SqlResultSetMapping(name = "Relationship.UsersBaseData",
+        classes = @ConstructorResult(
+                targetClass = UsersBaseData.class,
+                columns = {
+                        @ColumnResult(name = "id", type = long.class),
+                        @ColumnResult(name = "fullName"),
+                        @ColumnResult(name = "profile_picture")
+                }
+        ))
 public class Relationship {
 
     public static enum Type {SEND_REQUEST, FRIEND}
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @SequenceGenerator(name = "LICENSE_SEQ", sequenceName = "LICENSE_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LICENSE_SEQ")
+    private long id;
     @ManyToOne()
     private Users firstUser;
     @ManyToOne()
     private Users secondUser;
-    private Integer userActionId;
+    private long userActionId;
     @Enumerated(EnumType.ORDINAL)
     private Type status;
 
     public Relationship() {
     }
-    public Relationship(Users firstUser, Users secondUser, Integer userActionId, Type status) {
+
+    public Relationship(Users firstUser, Users secondUser, long userActionId, Type status) {
         this.firstUser = firstUser;
         this.secondUser = secondUser;
         this.userActionId = userActionId;
         this.status = status;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -57,11 +74,11 @@ public class Relationship {
         this.secondUser = secondUser;
     }
 
-    public Integer getUserActionId() {
+    public long getUserActionId() {
         return userActionId;
     }
 
-    public void setUserActionId(Integer userActionId) {
+    public void setUserActionId(long userActionId) {
         this.userActionId = userActionId;
     }
 

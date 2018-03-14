@@ -1,6 +1,6 @@
 package com.appchallengers.webservice.model.entity;
 
-import com.appchallengers.webservice.model.response.AddChallengeResponse;
+import com.appchallengers.webservice.model.response.ChallengeResponse;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -10,81 +10,69 @@ import java.util.List;
 @Entity
 @NamedNativeQueries({
         @NamedNativeQuery(name = "ChallengeDetail.getUserChallengeDetail", query = "SELECT" +
-                "  CHALLENGE_DETAİL_USER_İD,FULLNAME,PROFİLEPİCTURE," +
-                "CHALLENGE_DETAİL_İD,HEADLİNE,CHALLENGEDETAİL.CHALLENGE_URL," +
-                "  CHALLENGEDETAİL.LİKES,CHALLENGEDETAİL.DİSLİKES,CASE WHEN R.TYPE = 1" +
-                "  THEN 1 WHEN R.TYPE = 0 THEN 0 ELSE 2 END as votes FROM CHALLENGEDETAİL" +
-                "  LEFT JOIN CHALLENGES ON CHALLENGEDETAİL.CHALLENGE_DETAİL_İD = CHALLENGES.İD" +
-                "  LEFT JOIN USERS ON CHALLENGEDETAİL.CHALLENGE_DETAİL_USER_İD = USERS.İD" +
-                "  LEFT JOIN REACTİON R ON CHALLENGEDETAİL.İD = R.CHALLENGE_DETAİL_REACTİON_İD AND " +
-                "CHALLENGE_DETAİL_USER_İD = REACTİON_USER_İD WHERE CHALLENGE_DETAİL_USER_İD IN" +
-                "(SELECT USERS.İD FROM USERS, RELATİONSHİP WHERE USERS.İD = CASE" +
-                "                        WHEN FİRSTUSER_İD =?" +
-                "                          THEN SECONDUSER_İD" +
-                "                        WHEN SECONDUSER_İD = ?" +
-                "                          THEN" +
-                "                            FİRSTUSER_İD" +
-                "                        ELSE -1 END AND STATUS = ?)" +
-                "ORDER BY APPCHALLENGERS.CHALLENGEDETAİL.CREATE_DATE DESC", resultSetMapping = "userChallengeFeedList")})
+                " CHALLENGE_DETAİL_USER_İD,FULLNAME,PROFİLEPİCTURE,CHALLENGEDETAİL.İD AS CHALLENGE_DETAİL_İD," +
+                " CHALLENGE_URL,HEADLİNE,CASE WHEN V.VOTE_USER_İD = ? THEN 1 ELSE 0 END AS vote," +
+                " COUNT(V2.İD) AS LİKES FROM CHALLENGEDETAİL" +
+                " LEFT JOIN USERS ON CHALLENGEDETAİL.CHALLENGE_DETAİL_USER_İD = USERS.İD" +
+                " LEFT JOIN CHALLENGES ON CHALLENGEDETAİL.CHALLENGE_İD = CHALLENGES.İD" +
+                " LEFT JOIN VOTES AS V ON CHALLENGEDETAİL.İD = V.CHALLENGE_DETAİL_İD AND V.VOTE_USER_İD = ?" +
+                " LEFT JOIN VOTES AS V2 ON CHALLENGEDETAİL.İD = V2.CHALLENGE_DETAİL_İD" +
+                " WHERE CHALLENGE_DETAİL_USER_İD IN (SELECT USERS.İD FROM USERS, RELATİONSHİP" +
+                " WHERE USERS.İD = CASE WHEN FİRSTUSER_İD = ? THEN SECONDUSER_İD WHEN SECONDUSER_İD = ?" +
+                " THEN FİRSTUSER_İD ELSE -1 END AND STATUS = ?)" +
+                " GROUP BY CHALLENGE_DETAİL_USER_İD, FULLNAME, PROFİLEPİCTURE, CHALLENGEDETAİL.İD, " +
+                " CHALLENGE_URL, HEADLİNE,V.VOTE_USER_İD,APPCHALLENGERS.CHALLENGEDETAİL.CREATE_DATE" +
+                " ORDER BY APPCHALLENGERS.CHALLENGEDETAİL.CREATE_DATE DESC",
+                resultSetMapping = "userChallengeFeedList")})
 
 @SqlResultSetMapping(name = "userChallengeFeedList",
         classes = @ConstructorResult(
-                targetClass = AddChallengeResponse.class,
+                targetClass = ChallengeResponse.class,
                 columns = {
-                        @ColumnResult(name = "challenge_detail_user_id"),
+                        @ColumnResult(name = "challenge_detail_user_id",type = long.class),
                         @ColumnResult(name = "fullname"),
                         @ColumnResult(name = "profilepicture"),
-                        @ColumnResult(name = "challenge_detail_id"),
-                        @ColumnResult(name = "headline"),
+                        @ColumnResult(name = "challenge_detail_id",type = long.class),
                         @ColumnResult(name = "challenge_url"),
-                        @ColumnResult(name = "likes"),
-                        @ColumnResult(name = "dislikes"),
-                        @ColumnResult(name = "votes"),
+                        @ColumnResult(name = "headline"),
+                        @ColumnResult(name = "vote" ,type = long.class),
+                        @ColumnResult(name = "likes",type = long.class)
                 }
         ))
 public class ChallengeDetail {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @SequenceGenerator(name = "LICENSE_SEQ", sequenceName = "LICENSE_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LICENSE_SEQ")
+    private long id;
     @ManyToOne
-    private Challenges challenge_detail;
+    private Challenges challenge;
     @ManyToOne
     private Users challenge_detail_user;
     private String challenge_url;
     private Timestamp create_date;
-    private long likes;
-    private long dislikes;
-    @OneToMany(orphanRemoval = true, mappedBy = "challenge_detail_reaction", cascade = {CascadeType.ALL})
-    List<Reaction> reactionList = new LinkedList<Reaction>();
 
-    public ChallengeDetail(Challenges challenge_detail, Users challenge_detail_user, String challenge_url, Timestamp create_date, long likes, long dislikes) {
-        this.challenge_detail = challenge_detail;
+    @OneToMany(orphanRemoval = true, mappedBy = "challenge_detail", cascade = {CascadeType.ALL})
+    List<Votes> votes = new LinkedList<Votes>();
+
+    public ChallengeDetail(Challenges challenge, Users challenge_detail_user, String challenge_url, Timestamp create_date) {
+        this.challenge = challenge;
         this.challenge_detail_user = challenge_detail_user;
         this.challenge_url = challenge_url;
         this.create_date = create_date;
-        this.likes = likes;
-        this.dislikes = dislikes;
     }
 
     public ChallengeDetail() {
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Challenges getChallenge_detail() {
-        return challenge_detail;
-    }
-
-    public void setChallenge_detail(Challenges challenge_detail) {
-        this.challenge_detail = challenge_detail;
-    }
 
     public Users getChallenge_detail_user() {
         return challenge_detail_user;
@@ -110,11 +98,11 @@ public class ChallengeDetail {
         this.create_date = create_date;
     }
 
-    public List<Reaction> getReactionList() {
-        return reactionList;
+    public Challenges getChallenge() {
+        return challenge;
     }
 
-    public void setReactionList(List<Reaction> reactionList) {
-        this.reactionList = reactionList;
+    public void setChallenge(Challenges challenge) {
+        this.challenge = challenge;
     }
 }
