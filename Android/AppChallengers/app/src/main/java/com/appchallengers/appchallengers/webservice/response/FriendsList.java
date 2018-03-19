@@ -5,27 +5,16 @@ package com.appchallengers.appchallengers.webservice.response;
  */
 
 public class FriendsList {
-    private Integer id;
+    private long id;
     private String fullName;
-    private String imageUrl;
-    private String email;
-    private String country;
-    private Integer active;
+    private String profile_picture;
     private boolean selected;
 
-    public boolean isSelected() {
-        return selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -37,35 +26,19 @@ public class FriendsList {
         this.fullName = fullName;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getProfile_picture() {
+        return profile_picture;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setProfile_picture(String profile_picture) {
+        this.profile_picture = profile_picture;
     }
 
-    public String getEmail() {
-        return email;
+    public boolean isSelected() {
+        return selected;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public Integer getActive() {
-        return active;
-    }
-
-    public void setActive(Integer active) {
-        this.active = active;
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

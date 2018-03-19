@@ -4,6 +4,7 @@ package com.appchallengers.appchallengers.fragments.camera;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Matrix;
@@ -39,6 +40,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.appchallengers.appchallengers.MainActivity;
+import com.appchallengers.appchallengers.R;
+import com.appchallengers.appchallengers.helpers.camera.AutoFitTextureView;
+import com.appchallengers.appchallengers.helpers.setpages.SetCameraPages;
+
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,10 +55,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
-import com.appchallengers.appchallengers.R;
-import com.appchallengers.appchallengers.helpers.camera.AutoFitTextureView;
-import com.appchallengers.appchallengers.helpers.setpages.SetCameraPages;
-
 import io.netopen.hotbitmapgg.library.view.RingProgressBar;
 
 
@@ -269,6 +273,7 @@ public class CaptureVideoFragment extends Fragment
                     myCounterDownTimer.onFinish();
                     myCounterDownTimer.cancel();
                 } else {
+                    startActivity(new Intent(getActivity(), MainActivity.class));
                     getActivity().finish();
                 }
                 break;
@@ -551,7 +556,8 @@ public class CaptureVideoFragment extends Fragment
             mNextVideoAbsolutePath = getVideoFilePath(getActivity());
         }
         mMediaRecorder.setOutputFile(mNextVideoAbsolutePath);
-        mMediaRecorder.setVideoEncodingBitRate(10000000);
+        mMediaRecorder.setVideoEncodingBitRate(2000000);
+
         mMediaRecorder.setOnInfoListener(new MediaRecorder.OnInfoListener() {
             @Override
             public void onInfo(MediaRecorder mediaRecorder, int i, int i1) {
@@ -670,9 +676,12 @@ public class CaptureVideoFragment extends Fragment
         //mButtonVideo.setText(R.string.record);
         // Stop recording
         mMediaRecorder.stop();
+
         mMediaRecorder.reset();
+
         Activity activity = getActivity();
         if (null != activity) {
+
             Bundle bundle=new Bundle();
             bundle.putString("path",mNextVideoAbsolutePath);
             SetCameraPages.getInstance().constructorWithBundle(getActivity(),0,bundle);
@@ -682,7 +691,6 @@ public class CaptureVideoFragment extends Fragment
     }
 
     static class CompareSizesByArea implements Comparator<Size> {
-
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public int compare(Size lhs, Size rhs) {

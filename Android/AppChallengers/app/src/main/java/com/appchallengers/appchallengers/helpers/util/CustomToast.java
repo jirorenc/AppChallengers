@@ -37,7 +37,6 @@ public class CustomToast {
 
         toast.setDuration(Toast.LENGTH_SHORT);// Set Duration
         toast.setView(layout); // Set Custom View over toast
-
         toast.show();// Finally show toast
     }
 

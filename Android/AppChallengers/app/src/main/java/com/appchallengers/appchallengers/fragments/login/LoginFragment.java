@@ -1,7 +1,6 @@
 package com.appchallengers.appchallengers.fragments.login;
 
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,29 +9,33 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.appchallengers.appchallengers.MainActivity;
 import com.appchallengers.appchallengers.R;
 import com.appchallengers.appchallengers.helpers.setpages.SetLoginPages;
 import com.appchallengers.appchallengers.helpers.util.Constants;
-import com.appchallengers.appchallengers.helpers.util.CustomToast;
+import com.appchallengers.appchallengers.helpers.util.ErrorHandler;
 import com.appchallengers.appchallengers.helpers.util.Instructions;
+import com.appchallengers.appchallengers.helpers.util.InternetControl;
 import com.appchallengers.appchallengers.helpers.util.Utils;
-import com.appchallengers.appchallengers.webservice.remote.ApiClientWithoutCache;
-import com.appchallengers.appchallengers.webservice.remote.UserAccountClient;
+import com.appchallengers.appchallengers.webservice.remote.UserAccount;
+import com.appchallengers.appchallengers.webservice.remote.UserAccountApiClient;
 import com.appchallengers.appchallengers.webservice.request.UsersLoginRequestModel;
 import com.appchallengers.appchallengers.webservice.response.UserPreferencesData;
 import com.labo.kaji.fragmentanimations.MoveAnimation;
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
+
+import java.io.IOException;
+import android.content.Intent;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import com.appchallengers.appchallengers.MainActivity;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
@@ -44,7 +47,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private View mRootView;
     private EditText mLoginFragmentUserEmail;
     private EditText mLoginFragmentPassword;
-    private Button mLoginFragmentLogin;
+    private CircularProgressButton mLoginFragmentLogin;
     private TextView mLoginFragmentForgotPassword;
     private LinearLayout mLinearLayout;
     private Animation mShakeAnimation;
@@ -65,7 +68,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         mCompositeDisposable = new CompositeDisposable();
         mLoginFragmentUserEmail = (EditText) rootView.findViewById(R.id.login_fragment_email_edittext);
         mLoginFragmentPassword = (EditText) rootView.findViewById(R.id.login_fragment_password_edittext);
-        mLoginFragmentLogin = (Button) rootView.findViewById(R.id.login_fragment_login_button);
+        mLoginFragmentLogin = (CircularProgressButton) rootView.findViewById(R.id.login_fragment_login_button);
         mLoginBackArrow = (ImageView) mRootView.findViewById(R.id.login_fragment_back_arrow_imageview);
         mLoginFragmentForgotPassword = (TextView) rootView.findViewById(R.id.login_fragment_forgot_password_textview);
         mLinearLayout = (LinearLayout) rootView.findViewById(R.id.login_fragment_login_image_ll);
@@ -88,6 +91,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 if (checkValidation()) {
                     ButtonActionActive();
                     usersLogin();
+                    InternetControl.getInstance().showSnack(mLoginFragmentForgotPassword);
                 }
                 break;
             }
@@ -99,10 +103,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void usersLogin() {
-        UserAccountClient userAccountClient = ApiClientWithoutCache.getUserAccountClient();
+        UserAccount userAccount = UserAccountApiClient.getUserAccount();
         String email = mLoginFragmentUserEmail.getText().toString();
         String password = mLoginFragmentPassword.getText().toString();
-        mResponseObservable = userAccountClient.usersLogin(new UsersLoginRequestModel(email, password));
+        mResponseObservable = userAccount.usersLogin(new UsersLoginRequestModel(email, password));
         mResponseObservable.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Response<UserPreferencesData>>() {
                     @Override
@@ -112,7 +116,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
                     @Override
                     public void onNext(Response<UserPreferencesData> value) {
-                        if (value.body().getStatusCode() == 200) {
+                        if (value.isSuccessful()) {
                             Utils.sharedPreferences = mSharedPreferences;
                             Utils.setSharedPreferences("token", value.body().getToken());
                             Utils.setSharedPreferences("fullName", value.body().getFullName());
@@ -126,22 +130,32 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                 startActivity(new Intent(getActivity(), MainActivity.class));
                                 getActivity().finish();
                             }
-
-                        } else if (value.body().getStatusCode() == 251) {
-                            new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_251));
-                            ButtonActionPasif();
-                        } else {
-                            new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
+                        } else{
+                            if (value.code()==400){
+                                if (value.errorBody()!=null){
+                                    try {
+                                        ErrorHandler.getInstance(getContext()).showEror(value.errorBody().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }else{
+                                ErrorHandler.getInstance(getContext()).showEror("{code:1000}");
+                            }
                             ButtonActionPasif();
                         }
                     }
-
                     @Override
                     public void onError(Throwable e) {
-                        new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
+                        if (e instanceof IOException){
+                            if (e instanceof java.net.ConnectException){
+                                ErrorHandler.getInstance(getContext()).showInfo(300);
+                            }
+                        }else{
+                            ErrorHandler.getInstance(getContext()).showEror("{code:1000}");
+                        }
                         ButtonActionPasif();
                     }
-
                     @Override
                     public void onComplete() {
 
@@ -157,11 +171,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void ButtonActionActive() {
-        //mLoginFragmentLogin.startRotate();
+        mLoginFragmentLogin.startAnimation();
+        mLoginFragmentLogin.setInitialCornerRadius(75);
     }
 
     private void ButtonActionPasif() {
-        //mLoginFragmentLogin.stop();
+       mLoginFragmentLogin.revertAnimation();
     }
 
     @Override
@@ -172,10 +187,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             return MoveAnimation.create(MoveAnimation.RIGHT, enter, 500);
         }
     }
-
     @Override
     public void onPause() {
-        mCompositeDisposable.dispose();
+
         super.onPause();
     }
+
+    @Override
+    public void onDetach() {
+        mLoginFragmentLogin.revertAnimation();
+        mLoginFragmentLogin.dispose();
+        mCompositeDisposable.dispose();
+        super.onDetach();
+    }
+
 }

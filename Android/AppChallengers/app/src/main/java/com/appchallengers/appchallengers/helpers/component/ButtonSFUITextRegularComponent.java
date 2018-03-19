@@ -8,12 +8,14 @@ import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.widget.Button;
 
+import com.appchallengers.appchallengers.R;
+
 /**
  * Created by MHMTNASIF on 22.02.2018.
  */
 
 @SuppressLint("AppCompatCustomView")
-public class ButtonSFUITextRegularComponent extends Button{
+public class ButtonSFUITextRegularComponent extends br.com.simplepass.loading_button_lib.customViews.CircularProgressButton{
     private Context mContext;
 
     public ButtonSFUITextRegularComponent(Context context) {

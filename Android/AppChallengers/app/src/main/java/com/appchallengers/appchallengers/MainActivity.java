@@ -2,47 +2,61 @@ package com.appchallengers.appchallengers;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.appchallengers.appchallengers.fragments.main.TrendsFeedFragment;
 import com.appchallengers.appchallengers.helpers.setpages.SetMainPages;
+import com.appchallengers.appchallengers.helpers.util.ConnectivityReceiver;
 import com.appchallengers.appchallengers.helpers.util.Constants;
+import com.appchallengers.appchallengers.helpers.util.InternetControl;
+import com.appchallengers.appchallengers.helpers.util.MyApplication;
 import com.appchallengers.appchallengers.helpers.util.Utils;
 import com.squareup.picasso.Picasso;
 
-import okhttp3.internal.Util;
-
 import static com.appchallengers.appchallengers.helpers.util.Constants.MY_PREFS_NAME;
-import static android.content.Context.MODE_PRIVATE;
 
-public class MainActivity extends AppCompatActivity  implements BottomNavigationView.OnNavigationItemSelectedListener,View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener
+        , View.OnClickListener
+        , ConnectivityReceiver.ConnectivityReceiverListener {
     private SharedPreferences mSharedPreferences;
     private String mToken;
     private String mActive;
+    private int mControl;
     private String mProfileImageUrl;
     private ImageView mProfileImageView;
     public static FragmentManager mFragmentManager;
     private BottomNavigationView mBottomNavigationView;
     private static final String TAG = "MainActivity";
+    private boolean hasBundle = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Constants.contex=getApplicationContext();
+        mFragmentManager = getSupportFragmentManager();
         initialView();
         checkAuthentication();
+        if (!getIntent().hasExtra("status")) {
+            SetMainPages.getInstance().constructor(MainActivity.this, 0);
+        } else {
+            Bundle bundle = getIntent().getExtras();
+            SetMainPages.getInstance().constructorWithBundle(MainActivity.this, 0, bundle);
+        }
 
     }
+
     private void checkAuthentication(){
-        if (mToken.equals("") || mToken == null || mToken.equals("0")) {
+        if (mToken == null) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivityForResult(intent, 0);
             finish();
@@ -52,13 +66,13 @@ public class MainActivity extends AppCompatActivity  implements BottomNavigation
                 startActivityForResult(intent, 0);
                 finish();
             }else{
-                mFragmentManager = getSupportFragmentManager();
                 mBottomNavigationView.getMenu().getItem(0).setCheckable(true);
                 SetMainPages.getInstance().constructor(MainActivity.this, 0);
             }
         }
 
     }
+
     private void initialView() {
         mSharedPreferences = getSharedPreferences(MY_PREFS_NAME,MODE_PRIVATE);
         Utils.sharedPreferences = mSharedPreferences;
@@ -70,8 +84,8 @@ public class MainActivity extends AppCompatActivity  implements BottomNavigation
             Picasso.with(this).load(mProfileImageUrl).into(mProfileImageView);
         }
         mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-
         mBottomNavigationView.setOnNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -80,15 +94,22 @@ public class MainActivity extends AppCompatActivity  implements BottomNavigation
 
         switch (item.getItemId()) {
             case R.id.action_add_challenge:
-                startActivity(new Intent(MainActivity.this,CameraActivity.class));
+                startActivity(new Intent(MainActivity.this, CameraActivity.class));
+                finish();
                 break;
-            case R.id.action_user_feed:
-                if (mFragmentManager!=null)
-                    SetMainPages.getInstance().constructor(MainActivity.this,0);
+            case R.id.action_user_feed:{
+
+                if (mFragmentManager != null&&mControl!=0){
+                    SetMainPages.getInstance().constructor(MainActivity.this, 0);
+                }
+                mControl=0;
                 break;
+            }
+
             case R.id.action_trends_feed:
-                if (mFragmentManager!=null)
+                if (mFragmentManager!=null&&mControl!=1)
                     SetMainPages.getInstance().constructor(MainActivity.this,1);
+                mControl=1;
                 break;
         }
         return false;
@@ -98,6 +119,7 @@ public class MainActivity extends AppCompatActivity  implements BottomNavigation
     public void onClick(View view) {
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -109,4 +131,21 @@ public class MainActivity extends AppCompatActivity  implements BottomNavigation
         }
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // register connection status listener
+
+        MyApplication.getInstance().setConnectivityListener(this);
+    }
+
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        FrameLayout frameLayout = (FrameLayout) findViewById(R.id.pager);
+        InternetControl.getInstance().showSnackGeneral(frameLayout, isConnected);
+    }
+
 }
+

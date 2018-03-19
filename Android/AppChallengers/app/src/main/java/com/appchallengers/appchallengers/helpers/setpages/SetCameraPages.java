@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import com.appchallengers.appchallengers.CameraActivity;
 import com.appchallengers.appchallengers.R;
 import com.appchallengers.appchallengers.fragments.camera.CaptureVideoFragment;
+import com.appchallengers.appchallengers.fragments.camera.SelectFriendsFragment;
 import com.appchallengers.appchallengers.fragments.camera.VideoPlayerFragment;
 
 /**
@@ -68,6 +69,12 @@ public class SetCameraPages {
                 mFragment = new VideoPlayerFragment();
                 mFragment.setArguments(bundle);
                 replace("video_player_fragment");
+                break;
+            }
+            case 1: {
+                mFragment = new SelectFriendsFragment();
+                mFragment.setArguments(bundle);
+                replace("select_friends_fragment");
                 break;
             }
         }

@@ -1,11 +1,6 @@
 package com.appchallengers.appchallengers.webservice.response;
 
-/**
- * Created by jir on 16.2.2018.
- */
-
 public class UserPreferencesData {
-    private Integer statusCode;
     private String token;
     private String fullName;
     private String imageUrl;
@@ -19,7 +14,6 @@ public class UserPreferencesData {
     public void setActive(Integer active) {
         this.active = active;
     }
-
 
     public String getToken() {
         return token;
@@ -35,14 +29,6 @@ public class UserPreferencesData {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Integer getStatusCode() {
-        return statusCode;
-    }
-
-    public void setStatusCode(Integer statusCode) {
-        this.statusCode = statusCode;
     }
 
     public String getFullName() {
