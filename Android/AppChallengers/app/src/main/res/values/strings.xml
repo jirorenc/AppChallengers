@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">AppChallengers</string>
-    <string name="error_250">Bu e-mail zaten kullanılmakta</string>
+    <string name="error_250">Bu e-mail zaten kullanılmakta.</string>
     <string name="error_290">Beklenmeyen bir hata oluştu, lütfen tekrar deneyiniz.</string>
-    <string name="error_251">Böyle bir kullanıcı bulunmamaktadır.</string>
+    <string name="error_251">Yanlış Email ve Şifre Kombinasyonu.</string>
     <string name="info_252">Postanıza bir doğrulama bağlantısı gönderildi. Lütfen bağlantıya tıklayıp doğrulma yapınız.</string>
-    <string name="info_253">Posta addresiniz henüz doğrulanmamış.</string>
+    <string name="info_150">HeaderLine alanını boş bırakamazsınız.</string>
+    <string name="info_151">Lütfen internet bağlantısını kontrol ediniz.</string>
+    <string name="info_152">En az bir arkadaş seçimi yapmalısınız.</string>
+    <string name="error_300">Servere Bağlanılamadı</string>
+    <string name="error_253">Posta addresiniz henüz doğrulanmamış.</string>
+    <string name="error_254">Email gönderme işlmi başarısız.</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

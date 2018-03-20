@@ -88,7 +88,7 @@
         <com.daimajia.slider.library.Indicators.PagerIndicator
             android:id="@+id/custom_indicator"
             custom:selected_color="#FD5739"
-            style="@style/AndroidImageSlider_Magnifier_Oval_Black" />
+            style="@style/AndroidImageSlider_Magnifier_Oval_Black"/>
     </LinearLayout>
 
     <LinearLayout

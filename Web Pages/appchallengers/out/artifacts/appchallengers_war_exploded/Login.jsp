@@ -1,7 +1,7 @@
 <%@ page import="com.appchallengers.appchallengers.dao.dao.UserDao" %>
 <%@ page import="com.appchallengers.appchallengers.dao.daoimpl.UserDaoImpl" %>
-<%@ page import="com.appchallengers.appchallengers.web.servlets.LoginServlet" %>
-<%@ page import="com.appchallengers.appchallengers.web.bussiness.BussinessLogin" %><%--
+<%@ page import="com.appchallengers.appchallengers.web.bussiness.BussinessLogin" %>
+<%--
 
 <%--
 >>>>>>> 91c64ae2046da8213343f7b3f8f4167d92670b3e
@@ -30,7 +30,6 @@
 
 
 <%!
-    //String login_message=null;
     UserDao userDao;
     boolean check_login;
     String getLogin_message;
@@ -82,61 +81,62 @@
     <div class="row">
         <!-- LEFT PART -->
         <div class="col-sm-2"></div>
-        <div class="col-sm-2"id="mobile-fisrtpart"></div>
+        <div class="col-sm-2" id="mobile-fisrtpart"></div>
         <div class="col-sm-4" id="carousel">
             <br><br>
-               <!-- PANEL BEGINNIG -->
-                      <!-- PANEL BODY BEGINNING-->
+            <!-- PANEL BEGINNIG -->
+            <!-- PANEL BODY BEGINNING-->
 
-                 <div id="myCarousel" class="carousel slide float-sm-right" style="min-height:min-content%;"  role="listbox" data-ride="carousel">
-                     <!-- Indicators -->
-                     <ol class="carousel-indicators">
-                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                         <li data-target="#myCarousel" data-slide-to="1"></li>
-                         <li data-target="#myCarousel" data-slide-to="2"></li>
-                     </ol>
+            <div id="myCarousel" class="carousel slide float-sm-right" style="min-height:min-content%;" role="listbox"
+                 data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
 
-                     <!-- Wrapper for slides -->
-                     <div class="carousel-inner">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
 
-                         <div class="item active">
-                             <img src="/images/mlt.jpg" alt="Los Angeles"  style="min-height:100%;">
-                             <div class="carousel-caption">
-                                 <h3>AppChallengers</h3>
-                                 <p>Stot Watching! Let's Do It</p>
-                             </div>
-                         </div>
+                    <div class="item active">
+                        <img src="/images/mlt.jpg" alt="Los Angeles" style="min-height:100%;">
+                        <div class="carousel-caption">
+                            <h3>AppChallengers</h3>
+                            <p>Stot Watching! Let's Do It</p>
+                        </div>
+                    </div>
 
-                         <div class="item">
-                             <img src="/images/mlt.jpg" alt="Chicago" style="min-height:100%;" >
-                             <div class="carousel-caption">
-                                 <h3>AppChallengers</h3>
-                                 <p>Stot Watching! Let's Do It</p>
-                             </div>
-                         </div>
+                    <div class="item">
+                        <img src="/images/mlt.jpg" alt="Chicago" style="min-height:100%;">
+                        <div class="carousel-caption">
+                            <h3>AppChallengers</h3>
+                            <p>Stot Watching! Let's Do It</p>
+                        </div>
+                    </div>
 
-                         <div class="item">
-                             <img src="/images/mlt.jpg" alt="New York" style="min-height:100%;" >
-                             <div class="carousel-caption">
-                                 <h3>AppChallengers</h3>
-                                 <p>Stot Watching! Let's Do It</p>
-                             </div>
-                         </div>
+                    <div class="item">
+                        <img src="/images/mlt.jpg" alt="New York" style="min-height:100%;">
+                        <div class="carousel-caption">
+                            <h3>AppChallengers</h3>
+                            <p>Stot Watching! Let's Do It</p>
+                        </div>
+                    </div>
 
 
-                     </div>
+                </div>
 
-                     <!-- Left and right controls -->
-                     <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                         <span class="glyphicon glyphicon-chevron-left"></span>
-                         <span class="sr-only">Previous</span>
-                     </a>
-                     <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                         <span class="glyphicon glyphicon-chevron-right"></span>
-                         <span class="sr-only">Next</span>
-                     </a>
-                 </div>
-                                         <!-- PANEL ENDING -->
+                <!-- Left and right controls -->
+                <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <!-- PANEL ENDING -->
             <br>
 
         </div>
@@ -159,7 +159,8 @@
                                    style="background-color:#fafafa" placeholder="Enter password" name="password">
                         </div>
                         <br>
-                        <button type="submit" id="submitt" class="btn btn-primary btn-block input-sm" name="btnlogin">Login
+                        <button type="submit" id="submitt" class="btn btn-primary btn-block input-sm" name="btnlogin">
+                            Login
                         </button>
                     </form>
                     <br>
@@ -176,7 +177,7 @@
                     <div class="text-center text-muted">Hesabın Yok mu? <a href="signup.jsp">Kaydol</a></div>
                 </div>
             </div>
-            <div class="panel panel-default " >
+            <div class="panel panel-default ">
                 <div class="panel-body">
                     <div class="text-center"><a href="https://play.google.com/store?hl=tr">
                         <img src="/images/google-play-badge.png" alt="GooglePlay" style="width:50%">
@@ -197,9 +198,6 @@
             <li><a href="#"><strong>DESTEK</strong></a></li>
             <li><a href="#"><strong>GİZLİLİK</strong></a></li>
             <li><a href="#"><strong>KOŞULLAR</strong></a></li>
-            <li><a href="#"><strong>API</strong></a></li>
-
-
             <ul class="list-inline pull-right">
                 <li>
                     <div>
@@ -213,7 +211,7 @@
 
     </div>
     <div class="col-sm-2"></div>
-    <div class="col-sm-2"id="mobile-secondpart"></div>
+    <div class="col-sm-2" id="mobile-secondpart"></div>
 </div>
 <!-- FOOTER ENDING-->
 <%
@@ -222,19 +220,19 @@
 <script type="text/javascript">
 
     // setting the templete for mobile devices
-     $(document).ready(function () {
-         var width = window.innerWidth;
-         var height = window.innerHeight;
-         $('#mobile-fisrtpart').hide();
-         $('#mobile-secondpart').hide()
-         if(width<768){
-             $('#carousel').hide();
-             $('#mobile-fisrtpart').show();
-             $('#mobile-secondpart').show()
+    $(document).ready(function () {
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        $('#mobile-fisrtpart').hide();
+        $('#mobile-secondpart').hide()
+        if (width < 768) {
+            $('#carousel').hide();
+            $('#mobile-fisrtpart').show();
+            $('#mobile-secondpart').show()
 
-         }
+        }
 
-     });
+    });
 </script>
 
 </body>

@@ -19,6 +19,7 @@
             android:background="@drawable/edittext_bg"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:drawablePadding="10dp"
+            android:maxLength="254"
             android:hint="search"
             android:padding="10dp"
             android:textColor="@color/edittext_text_color" />

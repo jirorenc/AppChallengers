@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-
+import android.os.Bundle;
 import com.appchallengers.appchallengers.MainActivity;
 import com.appchallengers.appchallengers.R;
 import com.appchallengers.appchallengers.fragments.main.TrendsFeedFragment;
@@ -52,6 +52,25 @@ public class SetMainPages {
             } case 1: {
                 mFragment = new TrendsFeedFragment();
                 replace("trends_feed_fragment");
+                break;
+            }
+
+        }
+    }
+    public void constructorWithBundle(final Activity activity, final int i,Bundle bundle) {
+        View view = activity.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+
+        this.mActivity = activity;
+
+        switch (i) {
+            case 0: {
+                mFragment = new UserFeedFragment();
+                mFragment.setArguments(bundle);
+                replace("user_feed_fragment");
                 break;
             }
 

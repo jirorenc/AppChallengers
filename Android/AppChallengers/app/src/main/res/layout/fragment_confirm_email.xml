@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     android:layout_marginLeft="20dp"
     android:layout_marginRight="20dp"
@@ -51,30 +52,34 @@
             android:textSize="15dp" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <com.appchallengers.appchallengers.helpers.component.ButtonSFUITextRegularComponent
                 android:id="@+id/confirm_email_fragment_email_validate_button"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_corner_radius_bg"
+                android:background="@drawable/button_bg"
                 android:text="Verified"
-                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                app:spinning_bar_width="4dp"
+                app:spinning_bar_color="#FFF"
                 android:padding="10dp"
-                android:layout_gravity="left"
                 android:textColor="#FFFEFE"
                 android:textSize="17sp" />
 
             <com.appchallengers.appchallengers.helpers.component.ButtonSFUITextRegularComponent
                 android:id="@+id/confirm_email_fragment_code_again_send_link_button"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_corner_radius_bg"
+                android:background="@drawable/button_bg"
                 android:text="send me again"
+                app:spinning_bar_width="4dp"
+                app:spinning_bar_color="#FFF"
                 android:padding="10dp"
                 android:textColor="#FFFEFE"
                 android:textSize="17sp" />

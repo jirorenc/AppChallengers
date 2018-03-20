@@ -51,19 +51,6 @@
 
 %>
 <%
-    /*
-        javax.servlet.http.Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-          for (javax.servlet.http.Cookie cookie : cookies) {
-            if (cookie.getName().equals("user")==false) {
-            // response.sendRedirect("Login.jsp");
-            }
-          }
-        }else {
-          response.sendRedirect("Login.jsp");
-        }
-      */
-
     HttpSession session1 = request.getSession(false);
     UserDao userDao= new UserDaoImpl();
     String userName = null;
@@ -236,127 +223,6 @@
 
 <%}%>
 
-<div class="container">
-    <div class="row">
-        <!-- LEFT PART -->
-        <div class="col-sm-2"></div>
-        <!-- CONTENT PART-->
-        <div class="col-sm-8">
-            <!-- PANEL BEGINNIG -->
-            <div class="panel panel-default" >
-                <div class="panel-heading" style="background-color: #fefefe">Panel Heading</div>
-                <div class="panel-body">
-                    <h1>Post Content</h1>
-                    <h1>Post Content</h1>
-                    <h1>Post Content</h1>
-                    <h1>Post Content</h1>
-                    <h1>Post Content</h1>
-                </div>
-                <div class="panel-footer" style="background-color: #fefefe">
-                    <ul class="list-inline">
-                        <li>
-                            <button type="button" class="btn btn-default btn-sm" ><span
-                                    class="glyphicon glyphicon-thumbs-up"></span>Like
-                            </button>
-                        </li>
-                        <li><span id="like-counter2">0</span></li>
-                        <li>
-                            <button type="button" class="btn btn-default btn-sm" ><span
-                                    class="glyphicon glyphicon-thumbs-down"></span>Dislike
-                            </button>
-                        </li>
-                        <li><span id="dislike-counter2">0</span></li>
-
-                    </ul>
-                </div>
-                <!-- PANEL ENDING -->
-            </div>
-        </div>
-        <!--RIGHT PART -->
-        <div class="col-sm-2"></div>
-    </div>
-</div>
-
-
-<div class="container">
-    <div class="row">
-        <!-- LEFT PART -->
-        <div class="col-sm-2"></div>
-        <!-- CONTENT PART-->
-        <div class="col-sm-8">
-            <!-- PANEL BEGINNIG -->
-            <div class="panel panel-default">
-                <div class="panel-heading" style="background-color: #fefefe">Panel Heading</div>
-                <div class="panel-body">
-                    <h1>Post Content</h1>
-                    <h1>Post Content</h1>
-                    <h1>Post Content</h1>
-                    <h1>Post Content</h1>
-                    <h1>Post Content</h1>
-                </div>
-                <div class="panel-footer" style="background-color: #fefefe">
-                    <ul class="list-inline">
-                        <li>
-                            <button type="button" class="btn btn-link"><span
-                                    class="glyphicon glyphicon-thumbs-up"></span></button>
-                        </li>
-                        <li><span id="like-counter3">0</span></li>
-                        <li>
-                            <button type="button" class="btn btn-link"><span
-                                    class="glyphicon glyphicon-thumbs-up"></span></button>
-                        </li>
-                        <li><span id="dislike-counter3">0</span></li>
-
-                    </ul>
-                </div>
-                <!-- PANEL ENDING -->
-            </div>
-        </div>
-        <!--RIGHT PART -->
-        <div class="col-sm-2"></div>
-    </div>
-</div>
-
-
-<div class="container">
-    <div class="row">
-        <!-- LEFT PART -->
-        <div class="col-sm-2"></div>
-        <!-- CONTENT PART-->
-        <div class="col-sm-8">
-            <!-- PANEL BEGINNIG -->
-            <div class="panel panel-default">
-                <div class="panel-heading" style="background-color: #fefefe">Panel Heading</div>
-                <div class="panel-body">
-                    <h1>Post Content</h1>
-                    <h1>Post Content</h1>
-                    <h1>Post Content</h1>
-                    <h1>Post Content</h1>
-                    <h1>Post Content</h1>
-                </div>
-                <div class="panel-footer" style="background-color: #fefefe">
-                    <ul class="list-inline">
-                        <li>
-                            <button type="button" class="btn btn-link" id="furkan"><span
-                                    class="glyphicon glyphicon-thumbs-up"></span></button>
-                        </li>
-                        <li><span id="like-counter4">0</span></li>
-                        <li>
-                            <button type="button" class="btn btn-link"><span
-                                    class="glyphicon glyphicon-thumbs-up"></span></button>
-                        </li>
-                        <li><span id="dislike-counter4">0</span></li>
-
-                    </ul>
-                </div>
-                <!-- PANEL ENDING -->
-            </div>
-        </div>
-        <!--RIGHT PART -->
-        <div class="col-sm-2"></div>
-    </div>
-</div>
-
 
 <!-- BEGENELER MODAL-->
 <div class="modal fade" id="begenenler" role="dialog">
@@ -369,22 +235,7 @@
                 <h4 class="modal-title">Begenenler</h4>
             </div>
             <div class="modal-body">
-                <p>Furkan ÖNEL</p>
-                <p>Mahmut Nasifoğlu</p>
-                <p>Akif Bilici</p>
-                <p>Mehmet Aras</p>
-                <p>Furkan ÖNEL</p>
-                <p>Mahmut Nasifoğlu</p>
-                <p>Akif Bilici</p>
-                <p>Mehmet Aras</p>
-                <p>Furkan ÖNEL</p>
-                <p>Mahmut Nasifoğlu</p>
-                <p>Akif Bilici</p>
-                <p>Mehmet Aras</p>
-                <p>Furkan ÖNEL</p>
-                <p>Mahmut Nasifoğlu</p>
-                <p>Akif Bilici</p>
-                <p>Mehmet Aras</p>
+                // ajax like response
 
             </div>
             <div class="modal-footer">
@@ -436,29 +287,7 @@
 
                 }
             });
-
-        }else if(id_lenght==10){                         // dislike butonuna basılma durumu
-            //alert("Dislike butonuna basıldı"+clear_id);
-
-            var dislike_idd="dislikenumber-"+clear_id;         // begenelerin sayısısnı yazan div in id si
-            var dislike_sayısı=$("#"+dislike_idd).html().trim().toString();
-            var status=0;
-            //alert("Like butonuna basıldı"+clear_id+like_sayısı);
-            //  Buradaki ajax metodu beğenilen postun id sini ve  begennen kullanıcının id sini
-            // parametre olarak gönderiyor. Eger bu kisi daha önce begenmisse begeni geri alınacak
-            // ilk defa begenmisse begeni bir arttırılıp veri tabanına kaydedilecek
-            $.ajax({
-                url:"http://localhost:8080/likeresponse.jsp?pro=",
-                data:{postid:clear_id,userid:<%=users.getId()+""%>,like:dislike_sayısı.toString(),status:status},
-                success: function (cevap) {
-                    // $("#"+like_idd).html(cevap);
-                    $("#"+dislike_idd).html($(cevap).filter("div").html());
-
-                }
-            });
-
         }
-
     });
 
     $('.embed-responsive-item').click(function () {

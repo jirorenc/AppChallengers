@@ -13,8 +13,8 @@ import retrofit2.http.Header;
  * Created by MHMTNASIF on 2.03.2018.
  */
 
-public interface UserRelationshipClient {
+public interface UserRelationship {
 
     @GET("users/relationship/get_friend_list")
-    Observable<Response<List<FriendsList>>> getFriendList(@Header("token") String token);
+    Observable<Response<List<FriendsList>>> getFriendList();
 }

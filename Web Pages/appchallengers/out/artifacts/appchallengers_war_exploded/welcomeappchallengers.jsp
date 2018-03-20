@@ -17,68 +17,9 @@
 <body>
 
 <%!
-
     UserDao userDao;
 %>
-    <%
 
-       // HttpSession session1=request.getSession(false);
-        //sonradam
-        /*
-        javax.servlet.http.Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (javax.servlet.http.Cookie cookie : cookies) {
-                if (cookie.getName().equals("user")) {
-                    loginCookie = cookie;
-                    System.out.println("----->>>>>>>>>>>>>>>>>"+loginCookie.getValue().toString());
-                    if(Integer.parseInt(String.valueOf(session1.getAttribute("active")))==0){
-                        response.sendRedirect("confirmmail.jsp");
-                    }else if(Integer.parseInt(String.valueOf(session1.getAttribute("active")))==1){
-                        response.sendRedirect("index.jsp");
-                    }
-                }
-            }
-        }else{
-            response.sendRedirect("Login.jsp");
-        }
-         // sonradan
-        */
-
-        /*
-         if(session1.getAttribute("username")==null){
-             response.sendRedirect("Login.jsp");
-         }else {
-         if(Integer.parseInt(String.valueOf(session1.getAttribute("active")))==0){
-                        response.sendRedirect("confirmmail.jsp");
-                    }else if(Integer.parseInt(String.valueOf(session1.getAttribute("active")))==1){
-                        response.sendRedirect("index.jsp");
-                    }
-
-         }*/
-    %>
-
-<%/*
-    session2=request.getSession(false);
-    userDao= new UserDaoImpl();
-    javax.servlet.http.Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-        for (javax.servlet.http.Cookie cookie : cookies) {
-            if (cookie.getName().equals("user")) {
-                loginCookie = cookie;
-                System.out.println("-----Girdi");
-                int status=userDao.findByEmail(loginCookie.getValue().toString()).getActive().ordinal();
-                if(status==0){
-                    response.sendRedirect("confirmmail.jsp");
-                }else if(status==1){
-                    response.sendRedirect("index.jsp");
-                }
-            }
-        }
-    }else {
-        response.sendRedirect("Login.jsp");
-    }*/
-
-%>
 <%
     String userName=null;
     userDao= new UserDaoImpl();
@@ -115,6 +56,5 @@
         }
     }
 %>
-
 </body>
 </html>

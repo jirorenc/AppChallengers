@@ -1,23 +1,26 @@
 package com.appchallengers.appchallengers.fragments.login;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.widget.Button;
 
 import com.appchallengers.appchallengers.MainActivity;
 import com.appchallengers.appchallengers.R;
-import com.appchallengers.appchallengers.helpers.util.CustomToast;
+import com.appchallengers.appchallengers.helpers.util.ErrorHandler;
+import com.appchallengers.appchallengers.helpers.util.InternetControl;
 import com.appchallengers.appchallengers.helpers.util.Utils;
-import com.appchallengers.appchallengers.webservice.remote.ApiClientWithoutCache;
-import com.appchallengers.appchallengers.webservice.remote.UserAccountClient;
+import com.appchallengers.appchallengers.webservice.remote.UserAccountApiClient;
+import com.appchallengers.appchallengers.webservice.remote.UserAccount;
 import com.appchallengers.appchallengers.webservice.response.UserPreferencesData;
 import com.labo.kaji.fragmentanimations.MoveAnimation;
+
+import java.io.IOException;
+
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -26,16 +29,13 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-import static android.content.Context.MODE_PRIVATE;
-import static com.appchallengers.appchallengers.helpers.util.Constants.MY_PREFS_NAME;
+
 
 
 public class ConfirmEmailFragment extends Fragment implements View.OnClickListener {
     private View mRootView;
-    private Button mConfirmEmailValidate;
-    private Button mConfirmEmailCodeSendAgain;
-    private SharedPreferences mSharedPreferences;
-    public static String mToken;
+    private CircularProgressButton mConfirmEmailValidate;
+    private CircularProgressButton mConfirmEmailCodeSendAgain;
     private Observable<Response<UserPreferencesData>> mResponseObservableResent;
     private CompositeDisposable mCompositeDisposable;
     private Observable<Response<UserPreferencesData>> mResponseObservableCheckEmail;
@@ -53,24 +53,29 @@ public class ConfirmEmailFragment extends Fragment implements View.OnClickListen
 
     private void initalView(View view) {
         mCompositeDisposable = new CompositeDisposable();
-        mConfirmEmailValidate = (Button) view.findViewById(R.id.confirm_email_fragment_email_validate_button);
-        mConfirmEmailCodeSendAgain = (Button) view.findViewById(R.id.confirm_email_fragment_code_again_send_link_button);
-        mSharedPreferences = getActivity().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        mConfirmEmailValidate = (CircularProgressButton) view.findViewById(R.id.confirm_email_fragment_email_validate_button);
+        mConfirmEmailCodeSendAgain = (CircularProgressButton) view.findViewById(R.id.confirm_email_fragment_code_again_send_link_button);
         mConfirmEmailCodeSendAgain.setOnClickListener(this);
         mConfirmEmailValidate.setOnClickListener(this);
+
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.confirm_email_fragment_email_validate_button: {
-                ButtonActionActive();
+                mConfirmEmailValidate.startAnimation();
+                mConfirmEmailValidate.setInitialCornerRadius(75);
                 checkConfrimEmail();
+                InternetControl.getInstance().showSnack(mConfirmEmailCodeSendAgain);
                 break;
             }
             case R.id.confirm_email_fragment_code_again_send_link_button: {
-                ButtonActionActive();
+                mConfirmEmailCodeSendAgain.startAnimation();
+                mConfirmEmailCodeSendAgain.setInitialCornerRadius(75);
                 userResendConfirmEmail();
+                InternetControl.getInstance().showSnack(mConfirmEmailCodeSendAgain);
                 break;
             }
 
@@ -79,10 +84,8 @@ public class ConfirmEmailFragment extends Fragment implements View.OnClickListen
     }
 
     private void userResendConfirmEmail() {
-        Utils.sharedPreferences = mSharedPreferences;
-        UserAccountClient userAccountClient = ApiClientWithoutCache.getUserAccountClient();
-        mToken = Utils.getPref("token");
-        mResponseObservableResent = userAccountClient.userResendConfirmEmail(mToken);
+        UserAccount userAccount = UserAccountApiClient.getUserAccountClient(getContext());
+        mResponseObservableResent = userAccount.userResendConfirmEmail();
         mResponseObservableResent.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Response<UserPreferencesData>>() {
                     @Override
@@ -92,18 +95,34 @@ public class ConfirmEmailFragment extends Fragment implements View.OnClickListen
 
                     @Override
                     public void onNext(Response<UserPreferencesData> value) {
-                        if (value.body().getStatusCode() == 252) {
-                            new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.info_252));
+                        if (value.isSuccessful()) {
+                            ErrorHandler.getInstance(getContext()).showInfo(252);
                             ButtonActionPasif();
-                        } else {
-                            new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
+                        } else{
+                            if (value.code()==400){
+                                if (value.errorBody()!=null){
+                                    try {
+                                        ErrorHandler.getInstance(getContext()).showEror(value.errorBody().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }else{
+                                ErrorHandler.getInstance(getContext()).showEror("{code:1000}");
+                            }
                             ButtonActionPasif();
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
+                        if (e instanceof IOException){
+                            if (e instanceof java.net.ConnectException){
+                                ErrorHandler.getInstance(getContext()).showInfo(300);
+                            }
+                        }else{
+                            ErrorHandler.getInstance(getContext()).showEror("{code:1000}");
+                        }
                         ButtonActionPasif();
                     }
 
@@ -115,10 +134,8 @@ public class ConfirmEmailFragment extends Fragment implements View.OnClickListen
     }
 
     private void checkConfrimEmail() {
-        Utils.sharedPreferences = mSharedPreferences;
-        UserAccountClient userAccountClient = ApiClientWithoutCache.getUserAccountClient();
-        mToken = Utils.getPref("token");
-        mResponseObservableCheckEmail = userAccountClient.checkConfrimEmail(mToken);
+        UserAccount userAccount = UserAccountApiClient.getUserAccountClient(getContext());
+        mResponseObservableCheckEmail = userAccount.checkConfrimEmail();
         mResponseObservableCheckEmail.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Response<UserPreferencesData>>() {
                     @Override
@@ -128,40 +145,51 @@ public class ConfirmEmailFragment extends Fragment implements View.OnClickListen
 
                     @Override
                     public void onNext(Response<UserPreferencesData> value) {
-                        if (value.body().getStatusCode() == 253) {
-                            new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.info_253));
-                            ButtonActionPasif();
-                        } else if (value.body().getStatusCode() == 200) {
+                        if (value.isSuccessful()) {
                             Utils.setSharedPreferences("active", 1 + "");
                             ButtonActionPasif();
                             startActivity(new Intent(getActivity(), MainActivity.class));
                             getActivity().finish();
-                        } else {
-                            new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
+                        } else{
+                            if (value.code()==400){
+                                if (value.errorBody()!=null){
+                                    try {
+                                        ErrorHandler.getInstance(getContext()).showEror(value.errorBody().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }else{
+                                ErrorHandler.getInstance(getContext()).showEror("{code:1000}");
+                            }
                             ButtonActionPasif();
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
+                        if (e instanceof IOException){
+                            if (e instanceof java.net.ConnectException){
+                                ErrorHandler.getInstance(getContext()).showInfo(300);
+                            }
+                        }else{
+                            ErrorHandler.getInstance(getContext()).showEror("{code:1000}");
+                        }
                         ButtonActionPasif();
                     }
 
                     @Override
                     public void onComplete() {
-
+                        ButtonActionPasif();
                     }
                 });
     }
 
 
-    private void ButtonActionActive() {
-        //mConfirmEmailValidate.startRotate();
-    }
 
     private void ButtonActionPasif() {
-        //mConfirmEmailValidate.stop();
+        mConfirmEmailValidate.revertAnimation();
+        mConfirmEmailCodeSendAgain.revertAnimation();
     }
 
     @Override
@@ -174,8 +202,15 @@ public class ConfirmEmailFragment extends Fragment implements View.OnClickListen
     }
 
     @Override
-    public void onPause() {
+    public void onDetach() {
+        mConfirmEmailValidate.dispose();
+        mConfirmEmailCodeSendAgain.dispose();
         mCompositeDisposable.dispose();
+        super.onDetach();
+    }
+
+    @Override
+    public void onPause() {
         super.onPause();
     }
 }

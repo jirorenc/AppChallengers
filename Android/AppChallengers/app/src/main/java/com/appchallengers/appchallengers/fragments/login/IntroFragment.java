@@ -106,10 +106,11 @@ public class IntroFragment extends Fragment implements View.OnClickListener{
     private void controlAuthorization() {
         Utils.sharedPreferences = mSharedPreferences;
         String control = Utils.getPref("token");
-        if (control.equals("") || control == null || control.equals("0")) {
+        if (control == null) {
 
         } else {
             SetLoginPages.getInstance().constructor(getActivity(), 4);
         }
     }
+
 }

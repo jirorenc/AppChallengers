@@ -10,12 +10,16 @@
     android:weightSum="1"
     tools:context="com.appchallengers.appchallengers.MainActivity">
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:id="@+id/menu_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        >
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:background="@color/colorPrimaryDark"
         android:weightSum="1.0">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -24,9 +28,7 @@
             android:layout_height="38dp"
             android:layout_gravity="center"
             android:layout_weight="0.1"
-            android:src="@drawable/ic_account_circle_black_24dp"
-            app:civ_border_color="@color/colorPrimary"
-            app:civ_border_width="1dp" />
+            android:src="@drawable/ic_account_circle_black_24dp" />
 
         <com.appchallengers.appchallengers.helpers.component.EditTextComponent
             android:id="@+id/country_select_fragment_edittext"
@@ -35,7 +37,8 @@
             android:layout_gravity="center"
             android:layout_weight="0.8"
             android:focusable="false"
-            android:background="@drawable/edittext_main_bg"
+            android:maxLength="254"
+            android:background="@drawable/edittext_bg"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:drawablePadding="10dp"
             android:hint="search"
@@ -48,8 +51,10 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_weight="0.1"
-            android:src="@drawable/ic_add_alert_black_24dp" />
+            android:src="@drawable/ic_notifications_orange_24dp" />
     </LinearLayout>
+    </android.support.v7.widget.CardView>
+
 
     <FrameLayout
         android:id="@+id/pager"
@@ -57,8 +62,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_navigation"
         android:layout_below="@id/menu_top">
-
     </FrameLayout>
+
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -68,10 +73,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_gravity="bottom"
+        android:theme="@style/BottomNavigationViewTheme"
         android:background="@color/colorPrimaryDark"
         android:foreground="?attr/selectableItemBackground"
-        app:itemBackground="@color/colorPrimaryDark"
-        app:itemIconTint="@color/edittext_text_color"
-        app:itemTextColor="@color/edittext_text_color"
         app:menu="@menu/bottom_navigation_main" />
+
+
 </RelativeLayout>

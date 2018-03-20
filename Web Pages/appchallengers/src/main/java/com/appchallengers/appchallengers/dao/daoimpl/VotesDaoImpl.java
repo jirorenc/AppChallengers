@@ -47,7 +47,6 @@ public class VotesDaoImpl implements VotesDao {
         entityManager.getTransaction().begin();
         Query query = entityManager.createNamedQuery("Vote.getVoteList");
         query.setParameter(1, challenge_detail_id);
-        entityManager.close();
         return query.getResultList();
     }
 }

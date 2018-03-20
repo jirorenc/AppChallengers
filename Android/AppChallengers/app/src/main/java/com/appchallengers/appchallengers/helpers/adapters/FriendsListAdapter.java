@@ -15,6 +15,7 @@ import com.appchallengers.appchallengers.webservice.response.FriendsList;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -81,7 +82,7 @@ public class FriendsListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.mFriendsCheckBox.setTag(position);
-        Picasso.with(mContext).load(mFriendList.get(position).getImageUrl()).into(viewHolder.mFriendProfilePicture);
+        Picasso.with(mContext).load(mFriendList.get(position).getProfile_picture()).into(viewHolder.mFriendProfilePicture);
         viewHolder.mFriendsFullName.setText(mFriendList.get(position).getFullName());
         viewHolder.mFriendsCheckBox.setChecked(mFriendList.get(position).isSelected());
         return rowView;
@@ -133,7 +134,15 @@ public class FriendsListAdapter extends BaseAdapter {
             return true;
         }
     }
-
+    public List<FriendsList> getSelectedItemsList() {
+        List<FriendsList> temp=new LinkedList<>();
+        for (FriendsList friendsList : mFriendArray) {
+            if (friendsList.isSelected()) {
+                temp.add(friendsList);
+            }
+        }
+        return temp;
+    }
     public void filter(String charText) {
         charText = charText.toLowerCase(Locale.getDefault());
         mFriendList.clear();

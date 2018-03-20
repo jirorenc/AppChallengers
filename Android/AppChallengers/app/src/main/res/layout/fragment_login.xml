@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.appchallengers.appchallengers.fragments.login.LoginFragment">
 
@@ -49,6 +50,7 @@
                 android:background="@drawable/edittext_bg"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
+                android:maxLength="254"
                 android:padding="10dp"
                 android:textColor="@color/edittext_text_color"
                 android:textColorHint="@color/edittext_text_color"
@@ -62,18 +64,22 @@
                 android:background="@drawable/edittext_bg"
                 android:hint="password"
                 android:inputType="textPassword"
+                android:maxLength="254"
                 android:padding="10dp"
                 android:textColor="@color/edittext_text_color"
                 android:textColorHint="@color/edittext_text_color"
                 android:textSize="17sp" />
-
             <com.appchallengers.appchallengers.helpers.component.ButtonSFUITextRegularComponent
                 android:id="@+id/login_fragment_login_button"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:background="@drawable/button_bg"
                 android:text="Login"
+                app:spinning_bar_width="4dp"
+                app:spinning_bar_color="#FFF"
                 android:textColor="#FFFEFE"
                 android:textSize="17sp" />
 

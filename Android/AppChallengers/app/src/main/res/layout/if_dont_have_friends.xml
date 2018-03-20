@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    >
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/shimmer_select_friend" />
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/shimmer_select_friend" />
+
+    <com.appchallengers.appchallengers.helpers.component.SFUITextRegularTextViewComponent
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="15dp"
+        android:layout_gravity="center"
+        android:text="Sory! You have not any friends.
+ Please go to your profile > settings > addfriends tab to addfriends."
+        />
+
+</LinearLayout>

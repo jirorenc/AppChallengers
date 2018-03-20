@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -28,11 +29,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.appchallengers.appchallengers.R;
@@ -40,14 +41,15 @@ import com.appchallengers.appchallengers.helpers.adapters.CountryListAdapter;
 import com.appchallengers.appchallengers.helpers.database.CountriesTable;
 import com.appchallengers.appchallengers.helpers.database.Database;
 import com.appchallengers.appchallengers.helpers.setpages.SetLoginPages;
-import com.appchallengers.appchallengers.helpers.util.SaveImageToDirectoryUtils;
 import com.appchallengers.appchallengers.helpers.util.CheckPermissions;
 import com.appchallengers.appchallengers.helpers.util.Constants;
-import com.appchallengers.appchallengers.helpers.util.CustomToast;
+import com.appchallengers.appchallengers.helpers.util.ErrorHandler;
 import com.appchallengers.appchallengers.helpers.util.Instructions;
+import com.appchallengers.appchallengers.helpers.util.InternetControl;
+import com.appchallengers.appchallengers.helpers.util.SaveImageToDirectoryUtils;
 import com.appchallengers.appchallengers.helpers.util.Utils;
-import com.appchallengers.appchallengers.webservice.remote.ApiClientWithoutCache;
-import com.appchallengers.appchallengers.webservice.remote.UserAccountClient;
+import com.appchallengers.appchallengers.webservice.remote.UserAccount;
+import com.appchallengers.appchallengers.webservice.remote.UserAccountApiClient;
 import com.appchallengers.appchallengers.webservice.request.SignUpRequestModel;
 import com.appchallengers.appchallengers.webservice.response.CountryList;
 import com.appchallengers.appchallengers.webservice.response.UserPreferencesData;
@@ -58,15 +60,21 @@ import com.orhanobut.dialogplus.ViewHolder;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
+import id.zelory.compressor.Compressor;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -81,7 +89,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     private EditText mSignUpEmail;
     private EditText mSignUpPassword;
     private EditText mSignUpCountry;
-    private Button mSignUpButton;
+    private ProgressBar mProgressbar;
+    private CircularProgressButton mSignUpButton;
     private LinearLayout mLinearLayout;
     private TextView mCustomAlertDialogCamera;
     private TextView mCustomAlertDialogGalery;
@@ -111,13 +120,14 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     @SuppressLint("ResourceType")
     private void initalView(View view) {
         mCompositeDisposable=new CompositeDisposable();
+        mProgressbar = (ProgressBar) view.findViewById(R.id.sign_up_fragment_progressbar);
         mSignUpProfileImage = (ImageView) view.findViewById(R.id.sign_up_fragment_profile_image);
         mSignUpBackArrow = (ImageView) view.findViewById(R.id.sign_up_fragment_back_arrow_imageview);
         mSignUpFullName = (EditText) view.findViewById(R.id.sign_up_fragment_user_fullname_edittext);
         mSignUpEmail = (EditText) view.findViewById(R.id.sign_up_fragment_email_edittext);
         mSignUpPassword = (EditText) view.findViewById(R.id.sign_up_fragment_password_edittext);
         mSignUpCountry = (EditText) view.findViewById(R.id.sign_up_fragment_country_edittext);
-        mSignUpButton = (Button) view.findViewById(R.id.sign_up_fragment_sign_up_button);
+        mSignUpButton = (CircularProgressButton) view.findViewById(R.id.sign_up_fragment_sign_up_button);
         mTermsAndCookie = (TextView) view.findViewById(R.id.sign_up_fragment_profile_terms_cookie);
         mLinearLayout = (LinearLayout) view.findViewById(R.id.sign_up_fragment_profile_image_ll);
         mShakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.shake);
@@ -149,8 +159,11 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
             case R.id.sign_up_fragment_sign_up_button: {
                 if (checkValidation()) {
                     if (mImageUrl == null) {
+                      InternetControl.getInstance().showSnack(mSignUpButton);
                         createAccountWithoutImage();
+
                     } else {
+                        InternetControl.getInstance().showSnack(mSignUpButton);
                         ceateAccountWithImage();
                     }
                 }
@@ -164,11 +177,12 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     }
 
     private void ButtonActionActive() {
-
+        mSignUpButton.startAnimation();
+        mSignUpButton.setInitialCornerRadius(75);
     }
 
     private void ButtonActionPasif() {
-
+        mSignUpButton.revertAnimation();
     }
 
     private boolean checkPermission() {
@@ -286,25 +300,55 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
                 Cursor cursor = getActivity().getContentResolver().query(contentURI, filePathColumn, null, null, null);
                 if (cursor != null) {
+                    mProgressbar.setVisibility(View.VISIBLE);
                     cursor.moveToFirst();
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    mImageUrl = cursor.getString(columnIndex);
-                    Log.e("galery", mImageUrl);
+                    imageCompressor(cursor.getString(columnIndex));
                     cursor.close();
                 }
-                mSignUpProfileImage.setImageURI(contentURI);
             }
 
         } else if (requestCode == CAMERA) {
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            String path = null;
             try {
-                mImageUrl = SaveImageToDirectoryUtils.getOutputMediaFileUri(getActivity().getBaseContext(), thumbnail);
-                Log.e("kamera", mImageUrl);
+                path = SaveImageToDirectoryUtils.getOutputMediaFileUri(getActivity().getBaseContext(), thumbnail);
+                imageCompressor(path);
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                if (path != null)
+                    new File(path);
             }
-            mSignUpProfileImage.setImageBitmap(thumbnail);
         }
+    }
+
+    private void imageCompressor(String path) {
+        new Compressor(getContext())
+                .compressToFileAsFlowable(new File(path))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<File>() {
+                    @Override
+                    public void accept(File file) {
+                        Bitmap bitmap = BitmapFactory.decodeFile(file.getPath());
+                        try {
+                            mImageUrl = SaveImageToDirectoryUtils.getOutputMediaFileUri(getActivity().getBaseContext(), bitmap);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        mSignUpProfileImage.setImageBitmap(bitmap);
+                        mProgressbar.setVisibility(View.GONE);
+                        Log.e("galery", mImageUrl);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) {
+                        throwable.printStackTrace();
+                        Log.e("image compressor", throwable.getMessage());
+                        mProgressbar.setVisibility(View.GONE);
+                    }
+                });
     }
 
     private boolean checkValidation() {
@@ -316,7 +360,8 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     }
 
     private void ceateAccountWithImage() {
-        UserAccountClient userAccountClient = ApiClientWithoutCache.getUserAccountClient();
+        ButtonActionActive();
+        UserAccount userClient = UserAccountApiClient.getUserAccount();
         File file = new File(mImageUrl);
         RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         RequestBody fullName = RequestBody.create(MultipartBody.FORM, mSignUpFullName.getText().toString());
@@ -324,58 +369,60 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         RequestBody password = RequestBody.create(MultipartBody.FORM, mSignUpPassword.getText().toString());
         RequestBody country = RequestBody.create(MultipartBody.FORM, mSignUpCountry.getText().toString());
         MultipartBody.Part body = MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-        mResponseObservableWithImage=userAccountClient.createAccountWithImage(fullName, email, password, country, body);
-        mResponseObservableWithImage.subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Response<UserPreferencesData>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        ButtonActionActive();
-                        mCompositeDisposable.add(d);
-                    }
+        Call<UserPreferencesData> createAccountResponseModelCall = userClient.createAccountWithImage(fullName, email, password, country, body);
+        createAccountResponseModelCall.enqueue(new Callback<UserPreferencesData>() {
+            @Override
+            public void onResponse(Call<UserPreferencesData> call, Response<UserPreferencesData> response) {
 
-                    @Override
-                    public void onNext(Response<UserPreferencesData> value) {
-                        if (value.body().getStatusCode() == 200) {
-                            Utils.sharedPreferences = mSharedPreferences;
-                            Utils.setSharedPreferences("token", value.body().getToken());
-                            Utils.setSharedPreferences("fullName", value.body().getFullName());
-                            Utils.setSharedPreferences("imageUrl",value.body().getImageUrl());
-                            Utils.setSharedPreferences("email", value.body().getEmail());
-                            Utils.setSharedPreferences("active", value.body().getActive() + "");
-                            ButtonActionPasif();
-                            SetLoginPages.getInstance().constructor(getActivity(), 4);
-                        } else if (value.body().getStatusCode() == 250) {
-                            new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_250));
-                            ButtonActionPasif();
-                        } else {
-                            new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
-                            ButtonActionPasif();
+                if (response.isSuccessful()) {
+                    Utils.sharedPreferences = mSharedPreferences;
+                    Utils.setSharedPreferences("token", response.body().getToken());
+                    Utils.setSharedPreferences("fullName", response.body().getFullName());
+                    Utils.setSharedPreferences("imageUrl", response.body().getImageUrl());
+                    Utils.setSharedPreferences("email", response.body().getEmail());
+                    Utils.setSharedPreferences("active", response.body().getActive() + "");
+                    ButtonActionPasif();
+                    SetLoginPages.getInstance().constructor(getActivity(), 4);
+                } else{
+                    if (response.code()==400){
+                        if (response.errorBody()!=null){
+                            try {
+                                ErrorHandler.getInstance(getContext()).showEror(response.errorBody().string());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         }
+                    }else{
+                        ErrorHandler.getInstance(getContext()).showEror("{code:1000}");
                     }
+                    ButtonActionPasif();
+                }
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
-                        ButtonActionPasif();
+            @Override
+            public void onFailure(Call<UserPreferencesData> call, Throwable t) {
+                if (t instanceof IOException){
+                    if (t instanceof java.net.ConnectException){
+                        ErrorHandler.getInstance(getContext()).showInfo(300);
                     }
+                }else{
+                    ErrorHandler.getInstance(getContext()).showEror("1000");
+                }
+                ButtonActionPasif();
 
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+            }
+        });
     }
 
     private void createAccountWithoutImage() {
-        UserAccountClient userAccountClient = ApiClientWithoutCache.getUserAccountClient();
+        UserAccount userAccount = UserAccountApiClient.getUserAccount();
         SignUpRequestModel signUpRequestModel = new SignUpRequestModel(
                 mSignUpFullName.getText().toString(),
                 mSignUpEmail.getText().toString(),
                 mSignUpPassword.getText().toString(),
                 mSignUpCountry.getText().toString()
         );
-        mResponseObservableWithoutImage=userAccountClient.createAccountWithoutImage(signUpRequestModel);
+        mResponseObservableWithoutImage = userAccount.createAccountWithoutImage(signUpRequestModel);
         mResponseObservableWithoutImage.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Response<UserPreferencesData>>() {
@@ -387,7 +434,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
                     @Override
                     public void onNext(Response<UserPreferencesData> value) {
-                        if (value.body().getStatusCode() == 200) {
+                        if (value.isSuccessful()) {
                             Utils.sharedPreferences = mSharedPreferences;
                             Utils.setSharedPreferences("token", value.body().getToken());
                             Utils.setSharedPreferences("fullName", value.body().getFullName());
@@ -396,18 +443,31 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                             Utils.setSharedPreferences("active", value.body().getActive() + "");
                             ButtonActionPasif();
                             SetLoginPages.getInstance().constructor(getActivity(), 4);
-                        } else if (value.body().getStatusCode() == 250) {
-                            new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_250));
-                            ButtonActionPasif();
-                        } else {
-                            new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
+                        } else{
+                            if (value.code()==400){
+                                if (value.errorBody()!=null){
+                                    try {
+                                        ErrorHandler.getInstance(getContext()).showEror(value.errorBody().string());
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }else{
+                                ErrorHandler.getInstance(getContext()).showEror("1000");
+                            }
                             ButtonActionPasif();
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        new CustomToast().Show_Toast(getContext(), mRootView, getString(R.string.error_290));
+                        if (e instanceof IOException){
+                            if (e instanceof java.net.ConnectException){
+                                ErrorHandler.getInstance(getContext()).showInfo(300);
+                            }
+                        }else{
+                            ErrorHandler.getInstance(getContext()).showEror("1000");
+                        }
                         ButtonActionPasif();
                     }
 
@@ -429,7 +489,15 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onPause() {
-        mCompositeDisposable.dispose();
         super.onPause();
     }
+
+    @Override
+    public void onDetach() {
+        mSignUpButton.revertAnimation();
+        mSignUpButton.dispose();
+        mCompositeDisposable.dispose();
+        super.onDetach();
+    }
+
 }
