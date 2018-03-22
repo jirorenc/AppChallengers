@@ -6,7 +6,7 @@ import com.appchallengers.appchallengers.dao.dao.UserDao;
 import com.appchallengers.appchallengers.dao.daoimpl.ChallengesDaoImpl;
 import com.appchallengers.appchallengers.dao.daoimpl.ChallengesDetailDaoImpl;
 import com.appchallengers.appchallengers.dao.daoimpl.UserDaoImpl;
-import com.appchallengers.appchallengers.endpoint.error_handling.*;
+import com.appchallengers.appchallengers.endpoint.error_handling.CommonExceptionHandler;
 import com.appchallengers.appchallengers.model.entity.ChallengeDetail;
 import com.appchallengers.appchallengers.model.entity.Challenges;
 import com.appchallengers.appchallengers.model.entity.Users;
@@ -22,7 +22,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Calendar;
 import java.util.List;
@@ -60,24 +59,15 @@ public class UserChallengeService {
             try {
                 uploadedFileLocation = "c://Users/MHMTNASIF/Desktop/uploaded/" + Util.hashMD5(currentTimestamp.toString() + token) + fileDetail.getFileName();
             } catch (NoSuchAlgorithmException e) {
-               throw new CommonExceptionHandler("290");
+                throw new CommonExceptionHandler("290");
             }
-            String temp="https://vcdn.ensonhaber.com//flv/flvideo/v/2018/02/1519182275.mp4";
-            Users users = null;
-            try {
-                users = userDao.findUserById(Util.getIdFromToken(token));
-            } catch (UnsupportedEncodingException e) {
-                throw new CommonExceptionHandler("289");
-            } catch (MalformedJwtException exception) {
-                throw new CommonExceptionHandler("289");
-            } catch (SignatureException exception) {
-                throw new CommonExceptionHandler("289");
-            }
+            String temp = "https://vcdn.ensonhaber.com//flv/flvideo/v/2018/02/1519182275.mp4";
+            Users users = userDao.findUserById(Util.getId(token));
             if (!Util.writeToFile(uploadedInputStream, uploadedFileLocation)) {
                 throw new CommonExceptionHandler("290");
             }
             Challenges challenges = challengesDao.addChallenge(new Challenges(
-                    headLine, currentTimestamp,users
+                    headLine, currentTimestamp, users
             ));
             ChallengeDetail challengeDetail = challengesDetailDao.addChallengesDetail(new ChallengeDetail(
                     challenges, users, temp, currentTimestamp
@@ -87,12 +77,13 @@ public class UserChallengeService {
                     challengeDetail.getId(),
                     challengeDetail.getChallenge_url(),
                     challengeDetail.getChallenge().getHeadLine(),
-                    0,0
+                    0, 0
             );
             return Response.status(Response.Status.OK).entity(new Gson().toJson(challengeResponse)).build();
         }
 
     }
+
     @GET
     @Path("/get_user_challenge_feed")
     @Produces("application/json")
@@ -101,18 +92,8 @@ public class UserChallengeService {
         if (token == null || token.equals("")) {
             throw new CommonExceptionHandler("289");
         } else {
-            Users users = null;
-            try {
-                users = userDao.findUserById(Util.getIdFromToken(token));
-            } catch (UnsupportedEncodingException e) {
-                throw new CommonExceptionHandler("289");
-            } catch (MalformedJwtException exception) {
-                throw new CommonExceptionHandler("289");
-            } catch (SignatureException exception) {
-                throw new CommonExceptionHandler("289");
-            }
-
-            List<ChallengeResponse> userChallengeFeedList =challengesDetailDao.getUserChallengeFeedList(users.getId());
+            Users users = userDao.findUserById(Util.getId(token));
+            List<ChallengeResponse> userChallengeFeedList = challengesDetailDao.getUserChallengeFeedList(users.getId());
             return Response.status(Response.Status.OK).entity(new Gson().toJson(userChallengeFeedList)).build();
         }
 

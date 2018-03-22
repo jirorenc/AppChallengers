@@ -1,7 +1,7 @@
 package com.appchallengers.appchallengers.endpoint.service;
 
-import com.appchallengers.appchallengers.dao.daoimpl.UserDaoImpl;
 import com.appchallengers.appchallengers.dao.dao.UserDao;
+import com.appchallengers.appchallengers.dao.daoimpl.UserDaoImpl;
 import com.appchallengers.appchallengers.endpoint.error_handling.CommonExceptionHandler;
 import com.appchallengers.appchallengers.model.entity.Users;
 import com.appchallengers.appchallengers.model.request.LoginRequestModel;
@@ -12,8 +12,6 @@ import com.appchallengers.appchallengers.util.Util;
 import com.google.gson.Gson;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
 
 import javax.mail.MessagingException;
 import javax.ws.rs.*;
@@ -185,16 +183,7 @@ public class UserAccountService {
         if (token == null || token.equals("")) {
             throw new CommonExceptionHandler("289");
         } else {
-            Users user = null;
-            try {
-                user=mUserDao.findUserById(Util.getIdFromToken(token));
-            } catch (UnsupportedEncodingException e) {
-                throw new CommonExceptionHandler("289");
-            } catch (MalformedJwtException exception) {
-                throw new CommonExceptionHandler("289");
-            } catch (SignatureException exception) {
-                throw new CommonExceptionHandler("289");
-            }
+            Users user = mUserDao.findUserById(Util.getId(token));
             String url = "https://www.appchallengers.com./confirm.jsp?id=" + user.getId() + "&" + "hash=" + user.getPasswordSalt();
             try {
                 EmailUtil.sendEmail(user.getEmail(), "Confirm Email", url);
@@ -214,16 +203,7 @@ public class UserAccountService {
         if (token == null || token.equals("")) {
             throw new CommonExceptionHandler("289");
         } else {
-            Users user = null;
-            try {
-                user=mUserDao.findUserById(Util.getIdFromToken(token));
-            } catch (UnsupportedEncodingException e) {
-                throw new CommonExceptionHandler("289");
-            } catch (MalformedJwtException exception) {
-                throw new CommonExceptionHandler("289");
-            } catch (SignatureException exception) {
-                throw new CommonExceptionHandler("289");
-            }
+            Users user = mUserDao.findUserById(Util.getId(token));
             if (user.getActive() == Users.Active.NOT_CONFİRMED) {
                 throw new CommonExceptionHandler("253");
             } else {

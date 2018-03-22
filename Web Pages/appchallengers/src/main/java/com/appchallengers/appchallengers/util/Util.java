@@ -1,9 +1,7 @@
 package com.appchallengers.appchallengers.util;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.appchallengers.appchallengers.endpoint.error_handling.CommonExceptionHandler;
+import io.jsonwebtoken.*;
 
 import java.io.*;
 import java.security.MessageDigest;
@@ -68,5 +66,17 @@ public class Util {
                 .setSigningKey("secret".getBytes("UTF-8"))
                 .parseClaimsJws(token);
         return (Integer) claims.getBody().get("id");
+    }
+
+    public static long getId(String token) throws CommonExceptionHandler {
+        try {
+            return Util.getIdFromToken(token);
+        } catch (UnsupportedEncodingException e) {
+            throw new CommonExceptionHandler("289");
+        } catch (MalformedJwtException exception) {
+            throw new CommonExceptionHandler("289");
+        } catch (SignatureException exception) {
+            throw new CommonExceptionHandler("289");
+        }
     }
 }

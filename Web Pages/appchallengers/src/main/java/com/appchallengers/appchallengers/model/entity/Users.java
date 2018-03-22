@@ -1,5 +1,7 @@
 package com.appchallengers.appchallengers.model.entity;
 
+import com.appchallengers.appchallengers.model.response.GetUserInfoResponseModel;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.LinkedList;
@@ -12,6 +14,58 @@ import java.util.List;
         @NamedQuery(name = "Users.checkIdAndPasswordSalt", query = "SELECT COUNT(user) from Users user where user.id=:id and user.passwordSalt=:passwordSalt"),
         @NamedQuery(name = "Users.login", query = "select count(user)from Users user where user.email=:email and user.passwordHash=:passwordHash")
 })
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "Users.getInfo", query = "SELECT" +
+                "  A.İD AS İD," +
+                "  A.FULLNAME AS FULLNAME, " +
+                "  A.PROFİLEPİCTURE AS PROFİLEPİCTURE," +
+                "  A.COUNTRY AS COUNTRY," +
+                "  A.USERACTİONID AS USERACTİONİD," +
+                "  A.STATUS AS STATUS," +
+                "  A.CHALLENGES AS CHALLENGES," +
+                "  A.ACCEPTED_CHALLENGES AS ACCEPTED_CHALLENGES," +
+                "  B.FRİENDS AS FRİENDS" +
+                " FROM (SELECT" +
+                "        USERS.İD," +
+                "        USERS.FULLNAME," +
+                "        USERS.PROFİLEPİCTURE," +
+                "        USERS.COUNTRY," +
+                "        CASE WHEN R.USERACTİONID IS NULL" +
+                "          THEN -1" +
+                "        ELSE r.USERACTİONID END as USERACTİONID," +
+                "        CASE WHEN R.STATUS IS NULL" +
+                "          THEN -1" +
+                "        ELSE r.STATUS END as STATUS," +
+                "        COUNT(C2.İD)               AS CHALLENGES," +
+                "        COUNT(C.İD) - COUNT(C2.İD) AS ACCEPTED_CHALLENGES" +
+                "      FROM USERS" +
+                "        LEFT JOIN RELATİONSHİP R ON ? = R.FİRSTUSER_İD AND SECONDUSER_İD = ?" +
+                "        LEFT JOIN CHALLENGEDETAİL C ON USERS.İD = C.CHALLENGE_DETAİL_USER_İD" +
+                "        LEFT JOIN CHALLENGES C2 ON C.CHALLENGE_İD = C2.İD AND C2.CHALLENGE_USER_İD = C.CHALLENGE_DETAİL_USER_İD" +
+                "      WHERE USERS.İD = ?" +
+                "      GROUP BY USERS.İD, USERS.FULLNAME, USERS.PROFİLEPİCTURE," +
+                "        USERS.COUNTRY, R.USERACTİONID, R.STATUS) AS A" +
+                "  LEFT JOIN (" +
+                "              SELECT COUNT(RELATİONSHİP.İD) AS FRİENDS" +
+                "              FROM RELATİONSHİP" +
+                "              WHERE SECONDUSER_İD = ? OR FİRSTUSER_İD = ?" +
+                "            ) AS B ON A.İD = ?", resultSetMapping = "Users.getUserInfo")
+})
+@SqlResultSetMapping(name = "Users.getUserInfo",
+        classes = @ConstructorResult(
+                targetClass = GetUserInfoResponseModel.class,
+                columns = {
+                        @ColumnResult(name = "id", type = long.class),
+                        @ColumnResult(name = "fullname"),
+                        @ColumnResult(name = "profilepicture"),
+                        @ColumnResult(name = "country"),
+                        @ColumnResult(name = "useractionid", type = long.class),
+                        @ColumnResult(name = "status", type = int.class),
+                        @ColumnResult(name = "challenges", type = long.class),
+                        @ColumnResult(name = "accepted_challenges", type = long.class),
+                        @ColumnResult(name = "friends", type = long.class)
+                }
+        ))
 public class Users {
 
     public static enum Active {NOT_CONFİRMED, ACTIVE, FROZEN}

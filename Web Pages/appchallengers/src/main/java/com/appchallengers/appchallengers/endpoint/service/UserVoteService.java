@@ -36,16 +36,7 @@ public class UserVoteService {
             throw new CommonExceptionHandler("289");
         } else {
             java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(Calendar.getInstance(Locale.US).getTime().getTime());
-            Users users = null;
-            try {
-                users = userDao.findUserById(Util.getIdFromToken(token));
-            } catch (UnsupportedEncodingException e) {
-                throw new CommonExceptionHandler("289");
-            } catch (MalformedJwtException exception) {
-                throw new CommonExceptionHandler("289");
-            } catch (SignatureException exception) {
-                throw new CommonExceptionHandler("289");
-            }
+            Users users = userDao.findUserById(Util.getId(token));
             Votes votes = votesDao.getVote(challenge_detail_id, users.getId());
             ChallengeDetail challengeDetail = challengesDetailDao.getChallengeDetail(challenge_detail_id);
             if (votes.getCreate_date() == null) {

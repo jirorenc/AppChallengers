@@ -89,4 +89,5 @@ public class Relationship {
     public void setStatus(Type status) {
         this.status = status;
     }
+
 }
