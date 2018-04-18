@@ -23,4 +23,5 @@ public interface UserChallenges {
 
     @GET("users/challenges/get_user_challenge_feed")
     Observable<Response<List<UserChallengeFeedListModel>>> getUserChallengeFeed();
+
 }

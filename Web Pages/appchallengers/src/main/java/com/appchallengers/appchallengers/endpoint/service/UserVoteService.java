@@ -11,27 +11,29 @@ import com.appchallengers.appchallengers.model.entity.ChallengeDetail;
 import com.appchallengers.appchallengers.model.entity.Users;
 import com.appchallengers.appchallengers.model.entity.Votes;
 import com.appchallengers.appchallengers.model.response.UsersBaseData;
+import com.appchallengers.appchallengers.mongodb.dao.ChallengedDao;
+import com.appchallengers.appchallengers.mongodb.daoimpl.ChallengedDaoImpl;
+import com.appchallengers.appchallengers.mongodb.model.ChallengedModel;
 import com.appchallengers.appchallengers.util.Util;
 import com.google.gson.Gson;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
 @Path("/users/votes")
 public class UserVoteService {
     UserDao userDao = new UserDaoImpl();
     VotesDao votesDao = new VotesDaoImpl();
+    ChallengedDao challengedDao = new ChallengedDaoImpl();
     ChallengesDetailDao challengesDetailDao = new ChallengesDetailDaoImpl();
 
     @POST
     @Path("/vote")
     @Produces("application/json")
-    public Response vote(@HeaderParam("token") String token,@FormParam("challenge_detail_id") long challenge_detail_id) throws CommonExceptionHandler {
+    public Response vote(@HeaderParam("token") String token, @FormParam("challenge_detail_id") long challenge_detail_id) throws CommonExceptionHandler {
         if (token == null || token.equals("")) {
             throw new CommonExceptionHandler("289");
         } else {
@@ -43,7 +45,9 @@ public class UserVoteService {
                 votesDao.addVote(new Votes(
                         challengeDetail, users, currentTimestamp
                 ));
-            }else{
+                challengedDao.insert(new ChallengedModel(users.getId(), users.getFullName(),users.getProfilePicture(), challengeDetail.getChallenge_detail_user().getId(), 3, challengeDetail.getChallenge().getHeadLine(), users.getId()));
+
+            } else {
                 votesDao.deleteVote(votes);
             }
             return Response.status(Response.Status.OK).build();
@@ -53,11 +57,11 @@ public class UserVoteService {
     @POST
     @Path("/get_vote_list")
     @Produces("application/json")
-    public Response getVoteList(@HeaderParam("token") String token,@FormParam("challenge_detail_id") long challenge_detail_id) throws CommonExceptionHandler {
+    public Response getVoteList(@HeaderParam("token") String token, @FormParam("challenge_detail_id") long challenge_detail_id) throws CommonExceptionHandler {
         if (token == null || token.equals("")) {
             throw new CommonExceptionHandler("289");
         } else {
-            List<UsersBaseData> usersBaseData=votesDao.getVotes(challenge_detail_id);
+            List<UsersBaseData> usersBaseData = votesDao.getVotes(challenge_detail_id);
             return Response.status(Response.Status.OK).entity(new Gson().toJson(usersBaseData)).build();
         }
     }

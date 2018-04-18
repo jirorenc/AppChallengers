@@ -26,15 +26,21 @@ public class RelationshipDaoImpl implements RelationshipDao {
         entityManager.close();
     }
 
-    public void acceptRelationship(long firstUser, long secondUser, long actionId) {
+    public boolean acceptRelationship(long firstUser, long secondUser, long actionId) {
         EntityManager entityManager=JpaFactory.getInstance().getEntityManager();
         entityManager.getTransaction().begin();
         Relationship relationship=getRelationship(firstUser,secondUser);
-        relationship.setStatus(Relationship.Type.FRIEND);
-        relationship.setUserActionId(actionId);
-        entityManager.merge(relationship);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        if (relationship.getStatus()==Relationship.Type.FRIEND){
+            return false;
+        }else{
+            relationship.setStatus(Relationship.Type.FRIEND);
+            relationship.setUserActionId(actionId);
+            entityManager.merge(relationship);
+            entityManager.getTransaction().commit();
+            entityManager.close();
+            return true;
+        }
+
     }
 
     public void deleteRelationship(long firstUser, long secondUser) {

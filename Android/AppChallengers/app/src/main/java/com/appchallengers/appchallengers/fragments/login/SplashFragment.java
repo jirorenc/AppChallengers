@@ -107,11 +107,12 @@ public class SplashFragment extends Fragment {
                 });
     }
 
-
     @Override
-    public void onDetach() {
-        mCompositeDisposable.dispose();
-        super.onDetach();
+    public void onDestroy() {
+        if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            mCompositeDisposable.dispose();
+        }
+        super.onDestroy();
     }
 
 }

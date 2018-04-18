@@ -74,6 +74,7 @@ public class UserChallengeService {
             ));
             ChallengeResponse challengeResponse = new ChallengeResponse(
                     users.getId(), users.getFullName(), users.getProfilePicture(),
+                    challengeDetail.getChallenge().getId(),
                     challengeDetail.getId(),
                     challengeDetail.getChallenge_url(),
                     challengeDetail.getChallenge().getHeadLine(),

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    buildToolsVersion '27.0.3'
     packagingOptions {
         exclude 'META-INF/rxjava.properties'
     }
@@ -35,9 +35,8 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     implementation 'com.android.support:design:26.+'
-    /*
-            * https://github.com/hdodenhof/CircleImageView
-            */
+
+    // https://github.com/hdodenhof/CircleImageView
     compile 'de.hdodenhof:circleimageview:2.2.0'
     //retrofit
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -69,12 +68,11 @@ dependencies {
     compile 'br.com.simplepass:loading-button-android:[1.12.1]'
     //https://github.com/zetbaitsu/Compressor
     compile 'id.zelory:compressor:2.1.0'
-    //
+    //toro
     compile 'com.google.android.exoplayer:exoplayer:r2.4.3'
     compile 'im.ene.toro3:toro:3.0.0-beta1'
-    // implementation "im.ene.toro3:toro:${toroVersion}"
-    //implementation "im.ene.toro3:toro-ext-exoplayer:${toroVersion}"
-
     //https://github.com/yankai-victor/Loading/wiki/RotateLoading
     compile 'com.victor:lib:1.0.4'
+
+
 }

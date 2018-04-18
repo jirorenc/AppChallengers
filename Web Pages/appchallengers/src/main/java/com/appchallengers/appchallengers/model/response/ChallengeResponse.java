@@ -8,16 +8,18 @@ public class ChallengeResponse {
     private String fullname;
     private String profilepicture;
     private long challenge_id;
+    private long challenge_detail_id;
     private String challenge_url;
     private String headline;
     private long vote;
     private long likes;
 
-    public ChallengeResponse(long challenge_detail_user_id, String fullname, String profilepicture, long challenge_id, String challenge_url, String headline, long vote, long likes) {
+    public ChallengeResponse(long challenge_detail_user_id, String fullname, String profilepicture, long challenge_id, long challenge_detail_id, String challenge_url, String headline, long vote, long likes) {
         this.challenge_detail_user_id = challenge_detail_user_id;
         this.fullname = fullname;
         this.profilepicture = profilepicture;
         this.challenge_id = challenge_id;
+        this.challenge_detail_id = challenge_detail_id;
         this.challenge_url = challenge_url;
         this.headline = headline;
         this.vote = vote;
@@ -57,6 +59,14 @@ public class ChallengeResponse {
 
     public void setChallenge_id(long challenge_id) {
         this.challenge_id = challenge_id;
+    }
+
+    public long getChallenge_detail_id() {
+        return challenge_detail_id;
+    }
+
+    public void setChallenge_detail_id(long challenge_detail_id) {
+        this.challenge_detail_id = challenge_detail_id;
     }
 
     public String getChallenge_url() {

@@ -25,14 +25,14 @@ import com.squareup.picasso.Picasso;
 import static com.appchallengers.appchallengers.helpers.util.Constants.MY_PREFS_NAME;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener
-        , View.OnClickListener
-        , ConnectivityReceiver.ConnectivityReceiverListener {
+        , ConnectivityReceiver.ConnectivityReceiverListener,View.OnClickListener{
     private SharedPreferences mSharedPreferences;
     private String mToken;
     private String mActive;
     private int mControl;
     private String mProfileImageUrl;
     private ImageView mProfileImageView;
+    private ImageView mNotificationImageview;
     public static FragmentManager mFragmentManager;
     private BottomNavigationView mBottomNavigationView;
     private static final String TAG = "MainActivity";
@@ -80,11 +80,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mActive = Utils.getPref("active");
         mProfileImageUrl=Utils.getPref("imageUrl");
         mProfileImageView=(ImageView)findViewById(R.id.main_activity_user_profile_picture);
+        mNotificationImageview=(ImageView)findViewById(R.id.mani_activity_notification_imageview);
         if (mProfileImageUrl!=null){
             Picasso.with(this).load(mProfileImageUrl).into(mProfileImageView);
         }
         mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         mBottomNavigationView.setOnNavigationItemSelectedListener(this);
+        mNotificationImageview.setOnClickListener(this);
 
     }
 
@@ -98,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 finish();
                 break;
             case R.id.action_user_feed:{
-
                 if (mFragmentManager != null&&mControl!=0){
                     SetMainPages.getInstance().constructor(MainActivity.this, 0);
                 }
@@ -117,21 +118,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public void onClick(View view) {
-
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        Fragment currentFragment = MainActivity.mFragmentManager.findFragmentById(R.id.pager);
-        if (currentFragment instanceof TrendsFeedFragment){
-            SetMainPages.getInstance().constructor(MainActivity.this,0);
-        }else{
-            super.onBackPressed();
+        switch (view.getId()){
+            case R.id.mani_activity_notification_imageview:{
+                startActivity(new Intent(MainActivity.this,NotificationActivity.class));
+            }
         }
-
     }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -146,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         FrameLayout frameLayout = (FrameLayout) findViewById(R.id.pager);
         InternetControl.getInstance().showSnackGeneral(frameLayout, isConnected);
     }
+
 
 }
 

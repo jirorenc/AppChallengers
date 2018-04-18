@@ -8,6 +8,7 @@ public class UserChallengeFeedListModel {
     private long challenge_detail_user_id;
     private String fullname;
     private String profilepicture;
+    private long challenge_id;
     private long challenge_detail_id;
     private String headline;
     private String challenge_url;
@@ -37,6 +38,14 @@ public class UserChallengeFeedListModel {
 
     public void setProfilepicture(String profilepicture) {
         this.profilepicture = profilepicture;
+    }
+
+    public long getChallenge_id() {
+        return challenge_id;
+    }
+
+    public void setChallenge_id(long challenge_id) {
+        this.challenge_id = challenge_id;
     }
 
     public long getChallenge_detail_id() {

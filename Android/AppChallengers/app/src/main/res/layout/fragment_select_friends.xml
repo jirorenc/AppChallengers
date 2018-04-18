@@ -1,8 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#fafafa"
     tools:context="com.appchallengers.appchallengers.fragments.camera.SelectFriendsFragment">
 
@@ -33,6 +33,7 @@
             android:textSize="15dp" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
@@ -49,29 +50,30 @@
             android:background="@drawable/edittext_bg"
             android:drawableLeft="@drawable/ic_search_black_24dp"
             android:drawablePadding="10dp"
-            android:maxLength="254"
             android:hint="who do you want to challenge"
+            android:maxLength="254"
             android:padding="10dp"
             android:textColor="@color/edittext_text_color"
             android:textSize="13dp" />
+
         <com.victor.loading.rotate.RotateLoading
             android:id="@+id/select_friends_fragment_rotateloading"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
-            app:loading_width="2dp"
             app:loading_color="#FD5739"
-            android:layout_centerInParent="true"/>
+            app:loading_width="2dp" />
 
 
         <include
-             android:id="@+id/if_dont_have_friends_linear"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_gravity="center"
-             android:visibility="gone"
-             layout="@layout/if_dont_have_friends"
-             />
+            android:id="@+id/if_dont_have_friends_linear"
+            layout="@layout/if_dont_have_friends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
         <ListView
             android:id="@+id/select_Friends_fragment_listview"
             android:layout_width="fill_parent"

@@ -43,6 +43,7 @@ public class GetUserInfoDaoImpl implements GetUserInfoDao {
         query.setParameter(1, user_id);
         query.setParameter(2, user_id);
         query.setParameter(3, info_user_id);
+        query.setParameter(4, info_user_id);
         List<ChallengeResponse> getUserChallengesList = query.getResultList();
         entityManager.close();
         return getUserChallengesList;

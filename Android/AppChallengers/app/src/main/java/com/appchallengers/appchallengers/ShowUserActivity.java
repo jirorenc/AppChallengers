@@ -1,36 +1,20 @@
 package com.appchallengers.appchallengers;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import com.appchallengers.appchallengers.helpers.adapters.ShowLikesAdapter;
-import com.appchallengers.appchallengers.helpers.util.ErrorHandler;
-import com.appchallengers.appchallengers.webservice.remote.UserVote;
-import com.appchallengers.appchallengers.webservice.remote.UserVoteApiClient;
-import com.appchallengers.appchallengers.webservice.response.UserBaseDataModel;
-import com.victor.loading.rotate.RotateLoading;
+import com.appchallengers.appchallengers.fragments.show_user_activity_fragment.ShowUserFragment;
 
-import java.io.IOException;
-import java.util.List;
-
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Response;
 
 public class ShowUserActivity extends AppCompatActivity {
 
-    private long mUserId;
-    private TextView example;
+    private Bundle bundle;
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction mFragmentTransaction;
+    private Fragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +23,15 @@ public class ShowUserActivity extends AppCompatActivity {
         if (!getIntent().hasExtra("user_id")) {
             finish();
         } else {
-            Bundle bundle = getIntent().getExtras();
-            mUserId = bundle.getLong("user_id");
-            initialView();
+            bundle = getIntent().getExtras();
+            mFragmentManager=getSupportFragmentManager();
+            mFragmentTransaction=mFragmentManager.beginTransaction();
+            mFragment=new ShowUserFragment();
+            mFragment.setArguments(bundle);
+            mFragmentTransaction.replace(R.id.pager,mFragment,"show_user_fragment");
+            mFragmentTransaction.commit();
         }
 
     }
 
-    private void initialView() {
-        example=(TextView)findViewById(R.id.example);
-        example.setText(mUserId+"");
-    }
-
-
-
-    @Override
-    public void finish() {
-        super.finish();
-    }
 }

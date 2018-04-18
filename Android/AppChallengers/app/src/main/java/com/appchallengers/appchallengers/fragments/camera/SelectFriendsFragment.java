@@ -71,7 +71,11 @@ public class SelectFriendsFragment extends Fragment implements AdapterView.OnIte
 
     private void initialView(View mRootView) {
         Bundle bundle = getArguments();
-        mPath = bundle.getString("path");
+        if (!bundle.isEmpty()) {
+            mPath = bundle.getString("path");
+        } else {
+            errorHandler();
+        }
         mCompositeDisposable = new CompositeDisposable();
         isShowTheSelected = false;
         isSelectAll = false;
@@ -120,17 +124,23 @@ public class SelectFriendsFragment extends Fragment implements AdapterView.OnIte
                     @Override
                     public void onSubscribe(Disposable d) {
                         mCompositeDisposable.add(d);
+                        mRotateLoading.start();
                     }
 
                     @Override
                     public void onNext(Response<List<FriendsList>> value) {
-                        mFriendList = value.body();
-                        if (mFriendList.size() != 0 && mFriendList != null) {
-                            mFriendsListAdapter = new FriendsListAdapter(getContext(), mFriendList);
-                            mSelectFriendsListview.setAdapter(mFriendsListAdapter);
-                        } else {
-                            mDontFriendsLinearlayout.setVisibility(View.VISIBLE);
+                        if (value.isSuccessful()) {
+                            mFriendList = value.body();
+                            if (mFriendList.size() != 0 && mFriendList != null) {
+                                mFriendsListAdapter = new FriendsListAdapter(getContext(), mFriendList);
+                                mSelectFriendsListview.setAdapter(mFriendsListAdapter);
+                            } else {
+                                mDontFriendsLinearlayout.setVisibility(View.VISIBLE);
+                            }
+                        }else{
+                            ErrorHandler.getInstance(getContext()).showEror("{code:1000}");
                         }
+
                     }
 
                     @Override
@@ -143,6 +153,7 @@ public class SelectFriendsFragment extends Fragment implements AdapterView.OnIte
                         } else {
                             ErrorHandler.getInstance(getContext()).showEror("{code:1000}");
                         }
+                        mRotateLoading.stop();
                     }
 
                     @Override
@@ -151,20 +162,6 @@ public class SelectFriendsFragment extends Fragment implements AdapterView.OnIte
                         mRotateLoading.setVisibility(View.GONE);
                     }
                 });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mRotateLoading.start();
-    }
-
-    @Override
-    public void onDetach() {
-        mRotateLoading.stop();
-        mRotateLoading.setVisibility(View.GONE);
-        mCompositeDisposable.dispose();
-        super.onDetach();
     }
 
 
@@ -218,7 +215,6 @@ public class SelectFriendsFragment extends Fragment implements AdapterView.OnIte
             }
             case R.id.select_friends_fragment_challenge_button: {
                 showBottomSheetDialogFragment();
-
             }
         }
     }
@@ -240,6 +236,7 @@ public class SelectFriendsFragment extends Fragment implements AdapterView.OnIte
                     ErrorHandler.getInstance(getContext()).showInfo(152);
                 } else {
                     mBottomSheetDialog.dismiss();
+                    //TODO PUT THE CHALLENGED LİST IN BUNDLE
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.putExtra("status", true);
                     intent.putExtra("headLine", mEditext.getText().toString());
@@ -252,6 +249,23 @@ public class SelectFriendsFragment extends Fragment implements AdapterView.OnIte
 
     }
 
+    @Override
+    public void onDestroy() {
+        if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            mCompositeDisposable.dispose();
+        }
+        if (mRotateLoading != null && mRotateLoading.isStart()) {
+            mRotateLoading.stop();
+            mRotateLoading.setVisibility(View.GONE);
+        }
+        super.onDestroy();
+    }
+
+
+    private void errorHandler() {
+        ErrorHandler.getInstance(getContext()).showEror("{code:1000}");
+        getActivity().finish();
+    }
 
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {

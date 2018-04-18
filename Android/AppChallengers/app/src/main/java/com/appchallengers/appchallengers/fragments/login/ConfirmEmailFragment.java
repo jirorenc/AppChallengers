@@ -205,12 +205,22 @@ public class ConfirmEmailFragment extends Fragment implements View.OnClickListen
     public void onDetach() {
         mConfirmEmailValidate.dispose();
         mConfirmEmailCodeSendAgain.dispose();
-        mCompositeDisposable.dispose();
         super.onDetach();
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onDestroy() {
+        if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            mCompositeDisposable.dispose();
+        }
+        if (mConfirmEmailValidate != null && mConfirmEmailValidate.isAnimating()) {
+            mConfirmEmailValidate.revertAnimation();
+            mConfirmEmailValidate.dispose();
+        }
+        if (mConfirmEmailCodeSendAgain != null && mConfirmEmailCodeSendAgain.isAnimating()) {
+            mConfirmEmailCodeSendAgain.revertAnimation();
+            mConfirmEmailCodeSendAgain.dispose();
+        }
+        super.onDestroy();
     }
 }

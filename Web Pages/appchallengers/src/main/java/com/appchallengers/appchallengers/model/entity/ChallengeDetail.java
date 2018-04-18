@@ -11,7 +11,7 @@ import java.util.List;
 @NamedNativeQueries({
         @NamedNativeQuery(name = "ChallengeDetail.getUserChallengeDetail", query = "SELECT" +
                 " CHALLENGE_DETAİL_USER_İD,FULLNAME,PROFİLEPİCTURE,CHALLENGEDETAİL.CHALLENGE_İD AS CHALLENGE_İD," +
-                " CHALLENGE_URL,HEADLİNE,CASE WHEN V.VOTE_USER_İD = ? THEN 1 ELSE 0 END AS vote," +
+                " CHALLENGEDETAİL.İD as CHALLENGE_DETAİL_İD,CHALLENGE_URL,HEADLİNE,CASE WHEN V.VOTE_USER_İD = ? THEN 1 ELSE 0 END AS vote," +
                 " COUNT(V2.İD) AS LİKES FROM CHALLENGEDETAİL" +
                 " LEFT JOIN USERS ON CHALLENGEDETAİL.CHALLENGE_DETAİL_USER_İD = USERS.İD" +
                 " LEFT JOIN CHALLENGES ON CHALLENGEDETAİL.CHALLENGE_İD = CHALLENGES.İD" +
@@ -20,7 +20,7 @@ import java.util.List;
                 " WHERE CHALLENGE_DETAİL_USER_İD IN (SELECT USERS.İD FROM USERS, RELATİONSHİP" +
                 " WHERE USERS.İD = CASE WHEN FİRSTUSER_İD = ? THEN SECONDUSER_İD WHEN SECONDUSER_İD = ?" +
                 " THEN FİRSTUSER_İD ELSE -1 END AND STATUS = ?)" +
-                " GROUP BY CHALLENGE_DETAİL_USER_İD, FULLNAME, PROFİLEPİCTURE, CHALLENGEDETAİL.CHALLENGE_İD, " +
+                " GROUP BY CHALLENGE_DETAİL_USER_İD, FULLNAME, PROFİLEPİCTURE, CHALLENGEDETAİL.CHALLENGE_İD,CHALLENGEDETAİL.İD, " +
                 " CHALLENGE_URL, HEADLİNE,V.VOTE_USER_İD,APPCHALLENGERS.CHALLENGEDETAİL.CREATE_DATE" +
                 " ORDER BY APPCHALLENGERS.CHALLENGEDETAİL.CREATE_DATE DESC",
                 resultSetMapping = "userChallengeFeedList")})
@@ -33,6 +33,7 @@ import java.util.List;
                         @ColumnResult(name = "fullname"),
                         @ColumnResult(name = "profilepicture"),
                         @ColumnResult(name = "challenge_id",type = long.class),
+                        @ColumnResult(name = "challenge_detail_id",type = long.class),
                         @ColumnResult(name = "challenge_url"),
                         @ColumnResult(name = "headline"),
                         @ColumnResult(name = "vote" ,type = long.class),

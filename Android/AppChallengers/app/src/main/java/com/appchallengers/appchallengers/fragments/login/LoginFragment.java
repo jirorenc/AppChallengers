@@ -187,18 +187,18 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             return MoveAnimation.create(MoveAnimation.RIGHT, enter, 500);
         }
     }
-    @Override
-    public void onPause() {
-
-        super.onPause();
-    }
 
     @Override
-    public void onDetach() {
-        mLoginFragmentLogin.revertAnimation();
-        mLoginFragmentLogin.dispose();
-        mCompositeDisposable.dispose();
-        super.onDetach();
+    public void onDestroy() {
+        if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            mCompositeDisposable.dispose();
+        }
+        if (mLoginFragmentLogin != null && mLoginFragmentLogin.isAnimating()) {
+            mLoginFragmentLogin.revertAnimation();
+            mLoginFragmentLogin.dispose();
+        }
+        super.onDestroy();
     }
+
 
 }

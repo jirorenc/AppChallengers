@@ -1,6 +1,7 @@
 package com.appchallengers.appchallengers.webservice.remote;
 
 import com.appchallengers.appchallengers.webservice.response.CountryList;
+import com.appchallengers.appchallengers.webservice.response.TrendsDataModel;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ public interface AppClient {
 
     @GET("application/get_country_list")
     Observable<Response<List<CountryList>>> getCountryList();
+
+    @GET("application/get_trends_list")
+    Observable<Response<List<TrendsDataModel>>> getTrendsList();
 }

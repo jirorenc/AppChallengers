@@ -166,16 +166,16 @@ public class UserFeedFragment extends Fragment {
     }
 
     @Override
-    public void onDetach() {
-        if (mCompositeDisposable != null)
+    public void onDestroy() {
+        if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
             mCompositeDisposable.dispose();
-        if (mRotateLoading != null) {
-            mRotateLoading.stop();
-            mRotateLoading.setVisibility(View.GONE);
         }
-
-        super.onDetach();
+        if (mRotateLoading != null && mRotateLoading.isStart()) {
+            mRotateLoading.stop();
+        }
+        super.onDestroy();
     }
+
 
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {

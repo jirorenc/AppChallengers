@@ -129,6 +129,7 @@ public class UserFeedAdapter extends RecyclerView.Adapter<UserFeedAdapter.UserFe
             likebutton.setOnClickListener(this);
             like.setOnClickListener(this);
             imageview.setOnClickListener(this);
+            fullname.setOnClickListener(this);
 
         }
 
@@ -207,6 +208,9 @@ public class UserFeedAdapter extends RecyclerView.Adapter<UserFeedAdapter.UserFe
                     intent.putExtra("user_id", cardlist.getChallenge_detail_user_id());
                     mActivity.startActivity(intent);
                     break;
+                }
+                case R.id.flow_video_cardview_fullname_and_headline:{
+
                 }
             }
         }

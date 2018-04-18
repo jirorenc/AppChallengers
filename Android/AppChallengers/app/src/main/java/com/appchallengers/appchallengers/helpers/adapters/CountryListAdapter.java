@@ -23,6 +23,7 @@ public class CountryListAdapter extends BaseAdapter {
     private Context mContext;
     private List<CountryList> mCountriesListModelList;
     private ArrayList<CountryList> mCountriesListModelArray;
+
     public CountryListAdapter(Context context, List<CountryList> list) {
         mContext=context;
         mCountriesListModelList = list;

@@ -487,17 +487,13 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
 
     @Override
-    public void onDetach() {
-        mSignUpButton.revertAnimation();
-        mSignUpButton.dispose();
-        mCompositeDisposable.dispose();
-        super.onDetach();
+    public void onDestroy() {
+        if (mCompositeDisposable != null && !mCompositeDisposable.isDisposed()) {
+            mCompositeDisposable.dispose();
+        }
+        super.onDestroy();
     }
 
 }

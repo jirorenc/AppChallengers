@@ -166,13 +166,11 @@
                 <div class="panel-heading " style="background-color: #fefefe">
                     <ul class="list-inline">
                         <li>
-                            <div class="profil-image" id="pimage-<%=feed.getChallenge_detail_user_id()%>">
+                            <a href="profil.jsp?ref=<%=feed.getChallenge_detail_user_id()%>" i> <!-- jsp?=feed.getChallenge_detail_user_id()-->
                                 <img src="<%=feed.getProfilepicture()%>" alt="profil.jpg"  class="dairesel">
-                            </div>
+                            </a>
                         <li>
-                            <div id="fullname-<%=feed.getChallenge_detail_id()%>" class="fullname text-info">
-                                <strong><%=feed.getFullname()%></strong>
-                            </div>
+                        <a href="profil.jsp?ref=<%=feed.getChallenge_detail_user_id()%>"><strong><%=feed.getFullname()%></strong></a> <!-- jsp?=feed.getChallenge_detail_user_id()-->
                         </li>
                         <li><strong>></strong></li>
                         <li><div class="text-muted"><%=feed.getHeadline()%></div></li>
@@ -194,7 +192,7 @@
                                     class="glyphicon glyphicon-thumbs-up" ></span>Like
                             </button>
                         </li>
-                        <li><div id="likenumber-<%=feed.getChallenge_detail_id()%>" data-toggle="modal" data-target="#begenenler" ><%=feed.getLikes()%></div></li>
+                        <li><div class="modal-like" id="likenumber-<%=feed.getChallenge_detail_id()%>" data-toggle="modal" data-target="#begenenler" ><%=feed.getLikes()%></div></li>
 
                     </ul>
                     <div align="right">
@@ -213,12 +211,12 @@
 <script  type="text/javascript">
     $(document).ready(function () {
        $('.vote').hide();
+        <% if(feed.getVote()==1){ %>
+        // $('#btnlike-<%=feed.getChallenge_detail_id()%>').css("background-color","yellow");
+        $('#btnlike-<%=feed.getChallenge_detail_id()%>').css("background-color","yellow");
+        <%}%>
     });
-  <% if(feed.getVote()==1){ %>
-    $('#btnlike-<%=feed.getChallenge_detail_id()%>').css("background-color","blue");
-    <%} else if(feed.getVote()==0){%>
-  $('#btnlike-<%=feed.getChallenge_detail_id()%>').removeProperty("background-color");
-  <%}%>
+
 </script>
 
 <%}%>
@@ -235,7 +233,6 @@
                 <h4 class="modal-title">Begenenler</h4>
             </div>
             <div class="modal-body">
-                // ajax like response
 
             </div>
             <div class="modal-footer">
@@ -263,10 +260,12 @@
         var  vote=$('#vote-'+clear_id).html();
         if(vote==0){
             $('#vote-'+clear_id).html(1);
+            $('#btnlike-'+clear_id).css("background-color","yellow");
         }else if(vote ==1){
             $('#vote-'+clear_id).html(0);
+            $('#btnlike-'+clear_id).css("background-color","");
         }
-        alert(vote);
+        //alert(vote);
         if(id_lenght==7){                               // like butonuna basılma durumu
 
             var like_idd="likenumber-"+clear_id;         // begenelerin sayısısnı yazan div in id si
@@ -301,6 +300,21 @@
         //alert(spaceindex);
         window.location.href = "http://localhost:8080/profil.jsp";
         alert(userid);
+    });
+
+    // modal filling with ajax
+    $('.modal-like').click(function () {
+        var id=$(this).attr('id').toString();
+        var index= id.indexOf("-");
+        var post_id = id.slice(index+1);
+        $.ajax({
+            url:"http://localhost:8080/likepeopleresponse.jsp",
+            data:{postid:post_id},
+            success: function (cevap) {
+                // $("#"+like_idd).html(cevap);
+                $('.modal-body').html(cevap);
+            }
+        });
     });
 
 </script>
