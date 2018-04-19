@@ -1,6 +1,7 @@
 package com.appchallengers.appchallengers.model.entity;
 
 import com.appchallengers.appchallengers.model.response.ChallengeResponse;
+import com.appchallengers.appchallengers.model.response.GetChallengeDetailInfoModel;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -23,23 +24,55 @@ import java.util.List;
                 " GROUP BY CHALLENGE_DETAİL_USER_İD, FULLNAME, PROFİLEPİCTURE, CHALLENGEDETAİL.CHALLENGE_İD,CHALLENGEDETAİL.İD, " +
                 " CHALLENGE_URL, HEADLİNE,V.VOTE_USER_İD,APPCHALLENGERS.CHALLENGEDETAİL.CREATE_DATE" +
                 " ORDER BY APPCHALLENGERS.CHALLENGEDETAİL.CREATE_DATE DESC",
-                resultSetMapping = "userChallengeFeedList")})
+                resultSetMapping = "userChallengeFeedList"),
+        @NamedNativeQuery(name = "ChallengeDetail.getChallengeDetailInfo", query = "SELECT" +
+                "  A.HEADLİNE AS HEADLİNE," +
+                "  COUNT(A.CHALLENGE_İD) AS COUNTER FROM (" +
+                "       SELECT CHALLENGE_İD,C.HEADLİNE" +
+                "       FROM CHALLENGEDETAİL" +
+                "         LEFT JOIN CHALLENGES C ON CHALLENGEDETAİL.CHALLENGE_İD = C.İD" +
+                "       WHERE CHALLENGE_İD = ?" +
+                "     ) AS A" +
+                " GROUP BY CHALLENGE_İD, HEADLİNE", resultSetMapping = "getChallengeDetailInfo"),
+        @NamedNativeQuery(name = "ChallengeDetail.getChallengeDetailOrderByDesc", query = "SELECT" +
+                " CHALLENGE_DETAİL_USER_İD,FULLNAME,PROFİLEPİCTURE,CHALLENGEDETAİL.CHALLENGE_İD AS CHALLENGE_İD," +
+                " CHALLENGEDETAİL.İD as CHALLENGE_DETAİL_İD,CHALLENGE_URL,HEADLİNE,CASE WHEN V.VOTE_USER_İD = ? THEN 1 ELSE 0 END AS vote," +
+                " COUNT(V2.İD) AS LİKES" +
+                " FROM CHALLENGES" +
+                "  JOIN CHALLENGEDETAİL ON CHALLENGES.İD = CHALLENGEDETAİL.CHALLENGE_İD" +
+                "  LEFT JOIN USERS ON CHALLENGEDETAİL.CHALLENGE_DETAİL_USER_İD = USERS.İD" +
+                "  LEFT JOIN VOTES AS V ON CHALLENGEDETAİL.İD = V.CHALLENGE_DETAİL_İD AND V.VOTE_USER_İD = ?" +
+                "  LEFT JOIN VOTES AS V2 ON CHALLENGEDETAİL.İD = V2.CHALLENGE_DETAİL_İD" +
+                " WHERE CHALLENGE_İD =?" +
+                " GROUP BY CHALLENGE_DETAİL_USER_İD, FULLNAME, PROFİLEPİCTURE, CHALLENGEDETAİL.CHALLENGE_İD,CHALLENGEDETAİL.İD," +
+                "  CHALLENGE_URL, HEADLİNE, V.VOTE_USER_İD, APPCHALLENGERS.CHALLENGEDETAİL.CREATE_DATE" +
+                " ORDER BY APPCHALLENGERS.CHALLENGEDETAİL.CREATE_DATE DESC",resultSetMapping = "userChallengeFeedList")})
 
-@SqlResultSetMapping(name = "userChallengeFeedList",
-        classes = @ConstructorResult(
-                targetClass = ChallengeResponse.class,
-                columns = {
-                        @ColumnResult(name = "challenge_detail_user_id",type = long.class),
-                        @ColumnResult(name = "fullname"),
-                        @ColumnResult(name = "profilepicture"),
-                        @ColumnResult(name = "challenge_id",type = long.class),
-                        @ColumnResult(name = "challenge_detail_id",type = long.class),
-                        @ColumnResult(name = "challenge_url"),
-                        @ColumnResult(name = "headline"),
-                        @ColumnResult(name = "vote" ,type = long.class),
-                        @ColumnResult(name = "likes",type = long.class)
-                }
-        ))
+@SqlResultSetMappings({
+        @SqlResultSetMapping(name = "userChallengeFeedList",
+                classes = @ConstructorResult(
+                        targetClass = ChallengeResponse.class,
+                        columns = {
+                                @ColumnResult(name = "challenge_detail_user_id", type = long.class),
+                                @ColumnResult(name = "fullname"),
+                                @ColumnResult(name = "profilepicture"),
+                                @ColumnResult(name = "challenge_id", type = long.class),
+                                @ColumnResult(name = "challenge_detail_id", type = long.class),
+                                @ColumnResult(name = "challenge_url"),
+                                @ColumnResult(name = "headline"),
+                                @ColumnResult(name = "vote", type = long.class),
+                                @ColumnResult(name = "likes", type = long.class)
+                        }
+                )),
+        @SqlResultSetMapping(name = "getChallengeDetailInfo",
+                classes = @ConstructorResult(
+                        targetClass = GetChallengeDetailInfoModel.class,
+                        columns = {
+                                @ColumnResult(name = "headline"),
+                                @ColumnResult(name = "counter", type = long.class),
+                        }
+                ))
+})
 public class ChallengeDetail {
 
     @Id
