@@ -3,8 +3,12 @@
 
     <persistence-unit name="AppChallengersPersistenceUnit">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>com.appchallengers.webservice.model.Users</class>
-        <class>com.appchallengers.webservice.model.Country</class>
+        <class>com.appchallengers.appchallengers.model.entity.Users</class>
+        <class>com.appchallengers.appchallengers.model.entity.Country</class>
+        <class>com.appchallengers.appchallengers.model.entity.Relationship</class>
+        <class>com.appchallengers.appchallengers.model.entity.Challenges</class>
+        <class>com.appchallengers.appchallengers.model.entity.ChallengeDetail</class>
+        <class>com.appchallengers.appchallengers.model.entity.Votes</class>
         <properties>
             <property name="eclipselink.jdbc.url" value="jdbc:derby://localhost:1527/appchallengers_vt"/>
             <property name="eclipselink.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>

@@ -123,6 +123,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                             Utils.setSharedPreferences("imageUrl", value.body().getImageUrl());
                             Utils.setSharedPreferences("email", value.body().getEmail());
                             Utils.setSharedPreferences("active", value.body().getActive() + "");
+
                             ButtonActionPasif();
                             if (value.body().getActive() == 0) {
                                 SetLoginPages.getInstance().constructor(getActivity(), 4);

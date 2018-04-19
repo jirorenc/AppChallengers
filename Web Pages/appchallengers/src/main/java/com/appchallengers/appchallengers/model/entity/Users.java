@@ -48,7 +48,7 @@ import java.util.List;
                 "  LEFT JOIN (" +
                 "              SELECT COUNT(RELATİONSHİP.İD) AS FRİENDS" +
                 "              FROM RELATİONSHİP" +
-                "              WHERE SECONDUSER_İD = ? OR FİRSTUSER_İD = ?" +
+                "              WHERE (SECONDUSER_İD = ? OR FİRSTUSER_İD = ?) AND STATUS=1" +
                 "            ) AS B ON A.İD = ?", resultSetMapping = "Users.getUserInfo")
 })
 @SqlResultSetMapping(name = "Users.getUserInfo",

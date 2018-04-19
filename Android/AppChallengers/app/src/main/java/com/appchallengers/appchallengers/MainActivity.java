@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         mBottomNavigationView.setOnNavigationItemSelectedListener(this);
         mNotificationImageview.setOnClickListener(this);
+        mProfileImageView.setOnClickListener(this);
 
     }
 
@@ -121,6 +122,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch (view.getId()){
             case R.id.mani_activity_notification_imageview:{
                 startActivity(new Intent(MainActivity.this,NotificationActivity.class));
+                break;
+            }
+            case R.id.main_activity_user_profile_picture:{
+                startActivity(new Intent(MainActivity.this,ShowProfilActivity.class));
+                break;
             }
         }
     }

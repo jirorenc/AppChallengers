@@ -42,6 +42,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:gravity="left"
+                android:onClick="onClick"
                 android:text="Name"
                 android:textColor="#24243D"
                 android:textSize="15sp"

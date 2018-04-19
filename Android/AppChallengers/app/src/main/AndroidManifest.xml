@@ -54,9 +54,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChallengeDetailActivity">
-
-        </activity>
+        <activity android:name=".ChallengeDetailActivity"></activity>
         <activity android:name=".NotificationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.NOTIFICATIONACTIVITY" />
@@ -64,6 +62,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <receiver
             android:name=".helpers.util.ConnectivityReceiver"
             android:enabled="true">
@@ -72,7 +71,13 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".ShowProfilActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SHOWPROFILACTIVITY" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

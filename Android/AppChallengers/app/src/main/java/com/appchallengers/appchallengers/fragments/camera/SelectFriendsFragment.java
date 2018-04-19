@@ -19,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
+
 import com.appchallengers.appchallengers.MainActivity;
 import com.appchallengers.appchallengers.R;
 import com.appchallengers.appchallengers.helpers.adapters.FriendsListAdapter;
@@ -32,6 +34,7 @@ import com.victor.loading.rotate.RotateLoading;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.ArrayList;
 
 import br.com.simplepass.loading_button_lib.customViews.CircularProgressButton;
 import io.reactivex.Observable;
@@ -236,11 +239,13 @@ public class SelectFriendsFragment extends Fragment implements AdapterView.OnIte
                     ErrorHandler.getInstance(getContext()).showInfo(152);
                 } else {
                     mBottomSheetDialog.dismiss();
-                    //TODO PUT THE CHALLENGED LİST IN BUNDLE
+                    List<FriendsList> selectList =mFriendsListAdapter.getSelectedItemsList();
+                    ArrayList <FriendsList> selectListFriend= new ArrayList<>(selectList);
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.putExtra("status", true);
                     intent.putExtra("headLine", mEditext.getText().toString());
                     intent.putExtra("path", mPath);
+                    intent.putParcelableArrayListExtra("selectfriendlist", selectListFriend);
                     startActivity(intent);
                     getActivity().finish();
                 }

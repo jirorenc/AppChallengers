@@ -9,9 +9,16 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureException;
 
 
 public class Utils {
@@ -67,5 +74,29 @@ public class Utils {
         }
         return true;
 
+    }
+
+    public static Integer getIdFromToken(String token) throws UnsupportedEncodingException {
+        Jws<Claims> claims = null;
+        try {
+            claims = Jwts.parser()
+                    .setSigningKey("secret".getBytes("UTF-8"))
+                    .parseClaimsJws(token);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return (Integer) claims.getBody().get("id");
+    }
+
+    public static long getId(String token) throws Exception {
+        try {
+            return Utils.getIdFromToken(token);
+        } catch (MalformedJwtException exception) {
+            throw new Exception();
+        } catch (SignatureException exception) {
+            throw new Exception();
+        } catch (UnsupportedEncodingException e) {
+            throw new Exception();
+        }
     }
 }

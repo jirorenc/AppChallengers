@@ -18,75 +18,223 @@
     <schema id="12" parent="1" name="SYSPROC"/>
     <schema id="13" parent="1" name="SYSSTAT"/>
     <schema id="14" parent="1" name="USER"/>
-    <table id="15" parent="3" name="COUNTRY"/>
-    <table id="16" parent="3" name="USERS"/>
-    <column id="17" parent="15" name="İD">
+    <table id="15" parent="3" name="CHALLENGEDETAİL"/>
+    <table id="16" parent="3" name="CHALLENGES"/>
+    <table id="17" parent="3" name="COUNTRY"/>
+    <table id="18" parent="3" name="RELATİONSHİP"/>
+    <table id="19" parent="3" name="USERS"/>
+    <table id="20" parent="3" name="VOTES"/>
+    <column id="21" parent="15" name="İD">
       <Position>1</Position>
-      <DataType>INTEGER(10)|4</DataType>
+      <DataType>BIGINT(19)|-5</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
-      <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
     </column>
-    <column id="18" parent="15" name="COUNTRYCODE">
+    <column id="22" parent="15" name="CHALLENGE_URL">
       <Position>2</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="19" parent="15" name="COUNTRYNAME">
+    <column id="23" parent="15" name="CREATE_DATE">
       <Position>3</Position>
-      <DataType>VARCHAR(255)|12</DataType>
+      <DataType>TIMESTAMP(29,9)|93</DataType>
     </column>
-    <key id="20" parent="15" name="SQL180220183202410">
+    <column id="24" parent="15" name="CHALLENGE_İD">
+      <Position>4</Position>
+      <DataType>BIGINT(19)|-5</DataType>
+    </column>
+    <column id="25" parent="15" name="CHALLENGE_DETAİL_USER_İD">
+      <Position>5</Position>
+      <DataType>BIGINT(19)|-5</DataType>
+    </column>
+    <key id="26" parent="15" name="SQL180314102819190">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>İD</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="21" parent="16" name="İD">
+    <foreign-key id="27" parent="15" name="CHLLNGDTİLCHLLNGİD">
+      <ColNames>CHALLENGE_İD</ColNames>
+      <RefSchemaName>APPCHALLENGERS</RefSchemaName>
+      <RefTableName>CHALLENGES</RefTableName>
+      <RefKeyName>SQL180314102819160</RefKeyName>
+      <RefColNames>İD</RefColNames>
+    </foreign-key>
+    <foreign-key id="28" parent="15" name="CHLLCHLLNGDTİLSRİD">
+      <ColNames>CHALLENGE_DETAİL_USER_İD</ColNames>
+      <RefSchemaName>APPCHALLENGERS</RefSchemaName>
+      <RefTableName>USERS</RefTableName>
+      <RefKeyName>SQL180314102819070</RefKeyName>
+      <RefColNames>İD</RefColNames>
+    </foreign-key>
+    <column id="29" parent="16" name="İD">
+      <Position>1</Position>
+      <DataType>BIGINT(19)|-5</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="30" parent="16" name="CREATEDATE">
+      <Position>2</Position>
+      <DataType>TIMESTAMP(29,9)|93</DataType>
+    </column>
+    <column id="31" parent="16" name="HEADLİNE">
+      <Position>3</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="32" parent="16" name="CHALLENGE_USER_İD">
+      <Position>4</Position>
+      <DataType>BIGINT(19)|-5</DataType>
+    </column>
+    <key id="33" parent="16" name="SQL180314102819160">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>İD</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="34" parent="16" name="CHLLNGSCHLLNGSERİD">
+      <ColNames>CHALLENGE_USER_İD</ColNames>
+      <RefSchemaName>APPCHALLENGERS</RefSchemaName>
+      <RefTableName>USERS</RefTableName>
+      <RefKeyName>SQL180314102819070</RefKeyName>
+      <RefColNames>İD</RefColNames>
+    </foreign-key>
+    <column id="35" parent="17" name="İD">
       <Position>1</Position>
       <DataType>INTEGER(10)|4</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
     </column>
-    <column id="22" parent="16" name="ACTİVE">
+    <column id="36" parent="17" name="COUNTRYCODE">
       <Position>2</Position>
-      <DataType>INTEGER(10)|4</DataType>
+      <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="23" parent="16" name="COUNTRY">
+    <column id="37" parent="17" name="COUNTRYNAME">
       <Position>3</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="24" parent="16" name="CREATEDATE">
+    <key id="38" parent="17" name="SQL180314102819110">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>İD</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="39" parent="18" name="İD">
+      <Position>1</Position>
+      <DataType>BIGINT(19)|-5</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="40" parent="18" name="STATUS">
+      <Position>2</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <column id="41" parent="18" name="USERACTİONID">
+      <Position>3</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <column id="42" parent="18" name="FİRSTUSER_İD">
+      <Position>4</Position>
+      <DataType>BIGINT(19)|-5</DataType>
+    </column>
+    <column id="43" parent="18" name="SECONDUSER_İD">
+      <Position>5</Position>
+      <DataType>BIGINT(19)|-5</DataType>
+    </column>
+    <key id="44" parent="18" name="SQL180314102819130">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>İD</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="45" parent="18" name="RLTİNSHİPFİRSTSRİD">
+      <ColNames>FİRSTUSER_İD</ColNames>
+      <RefSchemaName>APPCHALLENGERS</RefSchemaName>
+      <RefTableName>USERS</RefTableName>
+      <RefKeyName>SQL180314102819070</RefKeyName>
+      <RefColNames>İD</RefColNames>
+    </foreign-key>
+    <foreign-key id="46" parent="18" name="RLTİNSHİPSCNDSERİD">
+      <ColNames>SECONDUSER_İD</ColNames>
+      <RefSchemaName>APPCHALLENGERS</RefSchemaName>
+      <RefTableName>USERS</RefTableName>
+      <RefKeyName>SQL180314102819070</RefKeyName>
+      <RefColNames>İD</RefColNames>
+    </foreign-key>
+    <column id="47" parent="19" name="İD">
+      <Position>1</Position>
+      <DataType>BIGINT(19)|-5</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="48" parent="19" name="ACTİVE">
+      <Position>2</Position>
+      <DataType>INTEGER(10)|4</DataType>
+    </column>
+    <column id="49" parent="19" name="COUNTRY">
+      <Position>3</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <column id="50" parent="19" name="CREATEDATE">
       <Position>4</Position>
       <DataType>TIMESTAMP(29,9)|93</DataType>
     </column>
-    <column id="25" parent="16" name="EMAİL">
+    <column id="51" parent="19" name="EMAİL">
       <Position>5</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="26" parent="16" name="FULLNAME">
+    <column id="52" parent="19" name="FULLNAME">
       <Position>6</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="27" parent="16" name="PASSWORDHASH">
+    <column id="53" parent="19" name="PASSWORDHASH">
       <Position>7</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="28" parent="16" name="PASSWORDSALT">
+    <column id="54" parent="19" name="PASSWORDSALT">
       <Position>8</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="29" parent="16" name="PROFİLEPİCTURE">
+    <column id="55" parent="19" name="PROFİLEPİCTURE">
       <Position>9</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="30" parent="16" name="UPDATEDATE">
+    <column id="56" parent="19" name="UPDATEDATE">
       <Position>10</Position>
       <DataType>TIMESTAMP(29,9)|93</DataType>
     </column>
-    <key id="31" parent="16" name="SQL180220183202300">
+    <key id="57" parent="19" name="SQL180314102819070">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>İD</ColNames>
       <Primary>1</Primary>
     </key>
+    <column id="58" parent="20" name="İD">
+      <Position>1</Position>
+      <DataType>BIGINT(19)|-5</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="59" parent="20" name="CREATE_DATE">
+      <Position>2</Position>
+      <DataType>TIMESTAMP(29,9)|93</DataType>
+    </column>
+    <column id="60" parent="20" name="CHALLENGE_DETAİL_İD">
+      <Position>3</Position>
+      <DataType>BIGINT(19)|-5</DataType>
+    </column>
+    <column id="61" parent="20" name="VOTE_USER_İD">
+      <Position>4</Position>
+      <DataType>BIGINT(19)|-5</DataType>
+    </column>
+    <key id="62" parent="20" name="SQL180314102819230">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>İD</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="63" parent="20" name="VTSCHLLNGEDETAİLİD">
+      <ColNames>CHALLENGE_DETAİL_İD</ColNames>
+      <RefSchemaName>APPCHALLENGERS</RefSchemaName>
+      <RefTableName>CHALLENGEDETAİL</RefTableName>
+      <RefKeyName>SQL180314102819190</RefKeyName>
+      <RefColNames>İD</RefColNames>
+    </foreign-key>
+    <foreign-key id="64" parent="20" name="VOTES_VOTE_USER_İD">
+      <ColNames>VOTE_USER_İD</ColNames>
+      <RefSchemaName>APPCHALLENGERS</RefSchemaName>
+      <RefTableName>USERS</RefTableName>
+      <RefKeyName>SQL180314102819070</RefKeyName>
+      <RefColNames>İD</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>

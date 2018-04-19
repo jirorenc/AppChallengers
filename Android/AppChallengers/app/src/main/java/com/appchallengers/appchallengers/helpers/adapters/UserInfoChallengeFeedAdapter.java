@@ -9,8 +9,6 @@ import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.text.style.ImageSpan;
 import android.util.DisplayMetrics;
 import android.view.KeyEvent;
@@ -21,7 +19,12 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.text.style.ClickableSpan;
+import 	android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
 
+import com.appchallengers.appchallengers.ChallengeDetailActivity;
 import com.appchallengers.appchallengers.R;
 import com.appchallengers.appchallengers.ShowUserActivity;
 import com.appchallengers.appchallengers.helpers.util.ErrorHandler;
@@ -34,6 +37,7 @@ import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.ViewHolder;
 import com.squareup.picasso.Picasso;
 import com.victor.loading.rotate.RotateLoading;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -57,7 +61,8 @@ public class UserInfoChallengeFeedAdapter extends RecyclerView.Adapter<UserInfoC
     private Context mContext;
     private List<UserChallengeFeedListModel> mCardList;
     private Activity mActivity;
-    private UserChallengeFeedListModel mCard;
+    private SpannableString mSpannableString;
+    private long mChallangeId;
 
     @Override
     public UserFeedAdapterHelper onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -77,9 +82,8 @@ public class UserInfoChallengeFeedAdapter extends RecyclerView.Adapter<UserInfoC
     @Override
     public void onBindViewHolder(final UserFeedAdapterHelper holder, int position) {
         final UserChallengeFeedListModel cardlist = mCardList.get(position);
-        mCard=cardlist;
         holder.bind(Uri.parse(cardlist.getChallenge_url()));
-        holder.fullname.setText(spannableStringModel(cardlist.getFullname() + " ", " " + cardlist.getHeadline()));
+        holder.fullname.setText( holder.spannableStringModel(cardlist.getFullname() + " ", " " + cardlist.getHeadline()));
         holder.fullname.setMovementMethod(LinkMovementMethod.getInstance());
         holder.like.setText(cardlist.getLikes() + " like");
         if (cardlist.getVote() == 1) {
@@ -87,6 +91,7 @@ public class UserInfoChallengeFeedAdapter extends RecyclerView.Adapter<UserInfoC
             holder.likebutton.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_favorite_orange_24dp, 0, 0, 0);
         }
         Picasso.with(mContext).load(cardlist.getProfilepicture()).into(holder.imageview);
+
     }
 
     @Override
@@ -94,16 +99,6 @@ public class UserInfoChallengeFeedAdapter extends RecyclerView.Adapter<UserInfoC
         return mCardList.size();
     }
 
-    private SpannableString spannableStringModel(String name, String headline) {
-        Drawable drawable = mContext.getResources().getDrawable(R.drawable.ic_keyboard_arrow_right_grey_24dp);
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-        ImageSpan span = new ImageSpan(drawable, ImageSpan.ALIGN_BOTTOM);
-        SpannableString spannableString = new SpannableString(name + headline);
-        spannableString.setSpan(name, 0, name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(span, name.length(), name.length() + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableString.setSpan(headline, name.length() + 1, headline.length() + name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return spannableString;
-    }
 
 
     public class UserFeedAdapterHelper extends RecyclerView.ViewHolder implements ToroPlayer, View.OnClickListener {
@@ -123,6 +118,38 @@ public class UserInfoChallengeFeedAdapter extends RecyclerView.Adapter<UserInfoC
         private RotateLoading mRotateLoading;
         private Observable<Response<List<UserBaseDataModel>>> mResponseObservable;
 
+        private SpannableString spannableStringModel(final String name, final String headline) {
+            Drawable drawable = mContext.getResources().getDrawable(R.drawable.ic_keyboard_arrow_right_grey_24dp);
+            drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+            ImageSpan span = new ImageSpan(drawable, ImageSpan.ALIGN_BOTTOM);
+            mSpannableString = new SpannableString(name + headline);
+            mSpannableString.setSpan(name, 0, name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mSpannableString.setSpan(span, name.length(), name.length() + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mSpannableString.setSpan(new MyClickableSpan(headline), name.length() + 1, headline.length() + name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            return mSpannableString;
+        }
+        class MyClickableSpan extends ClickableSpan{// extend ClickableSpan
+
+            String clicked;
+            public MyClickableSpan(String string) {
+                super();
+                clicked = string;
+            }
+
+            public void onClick(View tv) {
+                int position = getAdapterPosition();
+                UserChallengeFeedListModel cardlist = mCardList.get(position);
+                mChallangeId=cardlist.getChallenge_id();
+                Intent intent = new Intent(mActivity, ChallengeDetailActivity.class);
+                intent.putExtra("challenge_detail_id", mChallangeId);
+                mActivity.startActivity(intent);
+            }
+
+            public void updateDrawState(TextPaint ds) {
+                ds.setColor(Color.parseColor("#24243D"));
+                ds.setUnderlineText(false);
+            }
+        }
         public UserFeedAdapterHelper(View itemView) {
             super(itemView);
             playerView = (SimpleExoPlayerView) itemView.findViewById(R.id.flow_video_cardview_videoview);
@@ -133,7 +160,6 @@ public class UserInfoChallengeFeedAdapter extends RecyclerView.Adapter<UserInfoC
             mCompositeDisposable = new CompositeDisposable();
             likebutton.setOnClickListener(this);
             like.setOnClickListener(this);
-            imageview.setOnClickListener(this);
 
         }
 
@@ -197,6 +223,7 @@ public class UserInfoChallengeFeedAdapter extends RecyclerView.Adapter<UserInfoC
         public void onClick(View view) {
             int position = getAdapterPosition();
             UserChallengeFeedListModel cardlist = mCardList.get(position);
+            mChallangeId=cardlist.getChallenge_id();
             switch (view.getId()) {
                 case R.id.flow_video_cardview_like_button: {
                     vote(position, cardlist);
@@ -206,11 +233,8 @@ public class UserInfoChallengeFeedAdapter extends RecyclerView.Adapter<UserInfoC
                     getVoteList(cardlist.getChallenge_detail_id());
                     break;
                 }
-                case R.id.flow_video_cardview_profil_picture: {
-                    Intent intent = new Intent(mActivity, ShowUserActivity.class);
-                    intent.putExtra("user_id", cardlist.getChallenge_detail_user_id());
-                    mActivity.startActivity(intent);
-                    break;
+                case R.id.flow_video_cardview_fullname_and_headline: {
+
                 }
             }
         }
@@ -262,7 +286,6 @@ public class UserInfoChallengeFeedAdapter extends RecyclerView.Adapter<UserInfoC
                         }
                     });
         }
-
         public void getVoteList(long challenge_detail_id) {
             UserVote userVote = UserVoteApiClient.getVoteClientWithCache(mContext);
             mResponseObservable = userVote.getVoteList(challenge_detail_id);
