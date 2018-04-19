@@ -15,4 +15,8 @@ public class BusinessMainpage {
         System.out.println("---->>>DİSLİKE metodu calıstı");
         return 1;
     }
+     public int checkpassword(String password){
+
+        return 0;
+     }
 }

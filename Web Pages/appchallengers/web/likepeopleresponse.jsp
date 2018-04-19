@@ -30,19 +30,20 @@
     // begenenlerin id si ve  ismi alınacacak
     VotesDaoImpl votesDao=new VotesDaoImpl();
     List<UsersBaseData> usersBaseData=votesDao.getVotes(postid);
+    System.out.println("AAAAAAAAAAA----------->>>>>Girdiiii");
 %>
 <%for(UsersBaseData feed: usersBaseData){%>
 <ul class="list-inline">
     <li>
         <div class="profil-image" >
-            <a href="http://localhost:8080/profil.jsp?ref=<%=feed.getId()%>">
+            <a href="http://localhost:8080/profile.jsp?ref=<%=feed.getId()%>">
                 <img src="<%=feed.getProfile_picture()%>" alt="profil.jpg"  class="daireselimage">
                 <!-- yukarıya resim dinamik gelecek-->
             </a>
         </div>
     <li>
         <div  class="fullname text-info">
-            <a href="http://localhost:8080/profil.jsp?ref=<%=feed.getId()%>">
+            <a href="http://localhost:8080/profile.jsp?ref=<%=feed.getId()%>">
                 <strong><%=feed.getFullName()%></strong>
             </a>
         </div>

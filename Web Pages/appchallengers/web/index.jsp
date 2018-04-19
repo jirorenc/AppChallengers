@@ -87,77 +87,50 @@
     ChallengesDetailDao challengesDetailDao= new ChallengesDetailDaoImpl();
     List<ChallengeResponse> userChallengeFeedList =challengesDetailDao.getUserChallengeFeedList(users.getId());
 %>
-<div class="page-header">
-    <!--Hedaer -->
-    <div class="container">
-        <!--NAVBAR BEGINNING -->
-        <div class="container">
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-             <div class="container">
-                 <div class="row">
-                     <div class="col-sm-2"></div>
-                     <div class="col-sm-8">
-                         <div class="navbar-header navbar-left" >
-                             <a class="navbar-brand" href="#">AppChallenger <span
-                                     class="glyphicon glyphicon-eye-open"></span></a>
-                         </div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" onclick="toggle()"  data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.jsp">AppChallengers</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><!-- Give Link!--><a href="index.jsp"><i class="glyphicon glyphicon-home"></i></a></li>
+                        <li><a href="trends.jsp"><!-- Give Link!--><i class="glyphicon glyphicon-fire"></i></a></li>
+                        <li ><a href="myprofile.jsp"><!-- Give L�nk!--><i class="glyphicon glyphicon-user"></i></a></li>
+                        <li data-toggle="modal" data-target="#mynotification"><a href="javascript:notification();"><!-- Give L�nk!--><i class="glyphicon glyphicon-star"></i></a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right" action="/action_page.php">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm" placeholder="Search" name="search" >
+                            <div class="input-group-btn">
+                                <button class="btn btn-default input-sm" type="submit">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-                         <!-- NAVBAR LIST-->
-                         <ul class="nav navbar-nav navbar-right">
-                             <li class="active"><!-- Give Link!--><a href="#"><i class="glyphicon glyphicon-home"></i></a></li>
-                             <li><a href="#"><!-- Give Link!--><i class="glyphicon glyphicon-fire"></i></a></li>
-                             <li><a href="#"><!-- Give Lİnk!--><i class="glyphicon glyphicon-user"></i></a></li>
-                             <li>
-                                 <!-- SEARCH PART -->
-                                 <form class="navbar-form navbar-right" action="LogoutServlet">
-                                     <div class="input-group">
-                                         <div class="input-group-btn">
-                                             <button class="btn btn-default input-sm" type="submit2">
-                                                     <span class="glyphicon glyphicon-log-out"></span>
-                                             </button>
-                                         </div>
-                                     </div>
-                                 </form>
-                             </li>
-                         </ul>
-                             <li>
-                                 <!-- SEARCH PART -->
-                                 <form class="navbar-form navbar-right" action="LogoutServlet">
-                                     <div class="input-group">
-                                         <input type="text" class="form-control input-sm" placeholder="Search" name="search">
-                                         <div class="input-group-btn">
-                                             <button class="btn btn-default input-sm" type="submit">
-                                                 <i class="glyphicon glyphicon-search"></i>
-                                             </button>
-                                         </div>
-                                     </div>
-                                 </form>
-                             </li>
-                         </ul>
-
-
-                     </div>
-                     <div class="col-sm-2"></div>
-                 </div>
-             </div>
-
-                <!-- NAVBAR LIST-->
-
-
-                <!-- SEARCH PART -->
-
-        </nav>
-    </div>
-        <!--NAVBAR ENDİNG -->
-    </div>
-</div>
-
-
-<%for(ChallengeResponse feed: userChallengeFeedList){%>
-<div class="container">
-    <div class="row">
-        <!-- LEFT PART -->
+            </div>
+        </div>
         <div class="col-sm-2"></div>
+    </div>
+</nav>
+<br><br><br><br><br>
+<div id="dene"></div>
+<%for(ChallengeResponse feed: userChallengeFeedList){%>
+        <div class="container">
+            <div class="row">
+                <!-- LEFT PART -->
+                <div class="col-sm-2"></div>
         <!-- CONTENT PART-->
         <div class="col-sm-8">
             <!-- PANEL BEGINNIG -->
@@ -166,14 +139,14 @@
                 <div class="panel-heading " style="background-color: #fefefe">
                     <ul class="list-inline">
                         <li>
-                            <a href="profil.jsp?ref=<%=feed.getChallenge_detail_user_id()%>" i> <!-- jsp?=feed.getChallenge_detail_user_id()-->
+                            <a href="profile.jsp?ref=<%=feed.getChallenge_detail_user_id()%>" i> <!-- jsp?=feed.getChallenge_detail_user_id()-->
                                 <img src="<%=feed.getProfilepicture()%>" alt="profil.jpg"  class="dairesel">
                             </a>
                         <li>
-                        <a href="profil.jsp?ref=<%=feed.getChallenge_detail_user_id()%>"><strong><%=feed.getFullname()%></strong></a> <!-- jsp?=feed.getChallenge_detail_user_id()-->
+                        <a href="profile.jsp?ref=<%=feed.getChallenge_detail_user_id()%>"><strong><%=feed.getFullname()%></strong></a> <!-- jsp?=feed.getChallenge_detail_user_id()-->
                         </li>
                         <li><strong>></strong></li>
-                        <li><div class="text-muted"><%=feed.getHeadline()%></div></li>
+                        <li><a href="challengedetail.jsp?ref=<%=feed.getChallenge_id()%>"><%=feed.getHeadline()%></a></li>
                     </ul></div>
                 <div class="panel-body">
                     <div align="center"  class="embed-responsive embed-responsive-4by3">
@@ -232,7 +205,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Begenenler</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" >
 
             </div>
             <div class="modal-footer">
@@ -243,6 +216,24 @@
 </div>
 <!-- BEGENELER MODAL-->
 
+<div class="modal fade" id="mynotification" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Bildirimler</h4>
+            </div>
+            <div class="modal-body" id="notification">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="page-fooer">
 
@@ -251,7 +242,7 @@
 <script  type="text/javascript">
 
     $('.btn').click(function () {
-       var id=$(this).attr('id').toString();            // Tıklanılan butonun id sin, al
+            var id=$(this).attr('id').toString();            // Tıklanılan butonun id sin, al
 
         var index= id.indexOf("-");                     // btnlike- kısmını at sadece id yi al  "clear_id"
         var id_firstpart = id.slice(0,index);           // - den öncesini al ve kontrol et like mı dislike butonumu
@@ -317,7 +308,27 @@
         });
     });
 
+    $(".modal-like").hover(function () {
+        $(this).css("cursor","pointer");
+    },function () {
+    });
+
+
+    function notification() {
+        alert("aa");
+        $.ajax({
+            url:"http://localhost:8080/notifications.jsp",
+            data:{userid:<%=users.getId()%>},
+            success: function (cevap) {
+                $('#notification').html(cevap);
+            }
+        });
+
+    }
+
+
 </script>
 
-</body>
 </html>
+
+</body>
