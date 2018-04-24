@@ -1,5 +1,6 @@
 package com.appchallengers.appchallengers;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -126,6 +127,7 @@ public class ShowProfilActivity extends AppCompatActivity implements View.OnClic
                         mRotateLoading.start();
                     }
 
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onNext(Response<GetUserInfoResponseModel> getUserInfoResponseModelResponse) {
                         if (getUserInfoResponseModelResponse.isSuccessful()) {
@@ -198,13 +200,7 @@ public class ShowProfilActivity extends AppCompatActivity implements View.OnClic
             }
             case R.id.fragmnet_show_profil_setting_button: {
 
-                mSharedPreferences.edit().remove("token").commit();
-                mSharedPreferences.edit().remove("fullName").commit();
-                mSharedPreferences.edit().remove("imageUrl").commit();
-                mSharedPreferences.edit().remove("email").commit();
-                mSharedPreferences.edit().remove("active").commit();
-                mSharedPreferences.edit().remove("status").commit();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), ShowSettingUserActivity.class));
                 finish();
                   break;
             }

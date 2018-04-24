@@ -123,9 +123,11 @@ public class UserFeedFragment extends Fragment {
 
     private void getUserChallengeFeed() {
         UserChallenges userChallenges = UserChallengesApiClient.getUserChallengesClient(getContext());
-        Observable<Response<List<UserChallengeFeedListModel>>> responseObservable = userChallenges.getUserChallengeFeed();
+        Observable<Response<List<UserChallengeFeedListModel>>> responseObservable =
+                userChallenges.getUserChallengeFeed();
         responseObservable.subscribeOn(Schedulers.newThread())
-                .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread()).subscribe(new Observer<Response<List<UserChallengeFeedListModel>>>() {
+                .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Response<List<UserChallengeFeedListModel>>>() {
             @Override
             public void onSubscribe(Disposable d) {
                 mCompositeDisposable.add(d);

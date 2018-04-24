@@ -2,20 +2,25 @@ package com.appchallengers.appchallengers.fragments.show_profil_activity_fragmen
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.content.Context;
+
 
 import com.appchallengers.appchallengers.R;
 import com.appchallengers.appchallengers.ShowProfilActivity;
 import com.appchallengers.appchallengers.ShowUserActivity;
 import com.appchallengers.appchallengers.helpers.adapters.ShowLikesAdapter;
 import com.appchallengers.appchallengers.helpers.util.ErrorHandler;
+import com.appchallengers.appchallengers.helpers.util.Utils;
 import com.appchallengers.appchallengers.webservice.remote.GetProfileApiClient;
 import com.appchallengers.appchallengers.webservice.remote.GetProfileInfo;
 import com.appchallengers.appchallengers.webservice.remote.GetUserInfo;
@@ -34,6 +39,9 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
+
+import static com.appchallengers.appchallengers.helpers.util.Constants.MY_PREFS_NAME;
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class ProfilFriendFragment extends Fragment implements AdapterView.OnItemClickListener {

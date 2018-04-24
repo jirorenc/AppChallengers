@@ -104,10 +104,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
     private List<CountryList> mCountryList;
     private EditText mSearchEdittext;
     private ListView mCountryListView;
-    private static final int REQUEST_CAMERA_PERMISSION_RESULT = 0;
-    private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_RESULT = 1;
     private CompositeDisposable mCompositeDisposable;
-    private Observable<Response<UserPreferencesData>> mResponseObservableWithImage;
     private Observable<Response<UserPreferencesData>> mResponseObservableWithoutImage;
 
     @Override
@@ -380,6 +377,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                     Utils.setSharedPreferences("fullName", response.body().getFullName());
                     Utils.setSharedPreferences("imageUrl", response.body().getImageUrl());
                     Utils.setSharedPreferences("email", response.body().getEmail());
+                    Utils.setSharedPreferences("country", response.body().getCountry());
                     Utils.setSharedPreferences("active", response.body().getActive() + "");
                     ButtonActionPasif();
                     SetLoginPages.getInstance().constructor(getActivity(), 4);
@@ -440,6 +438,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                             Utils.setSharedPreferences("fullName", value.body().getFullName());
                             Utils.setSharedPreferences("imageUrl", value.body().getImageUrl());
                             Utils.setSharedPreferences("email", value.body().getEmail());
+                            Utils.setSharedPreferences("country", value.body().getCountry());
                             Utils.setSharedPreferences("active", value.body().getActive() + "");
                             ButtonActionPasif();
                             SetLoginPages.getInstance().constructor(getActivity(), 4);

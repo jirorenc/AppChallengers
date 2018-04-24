@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.appchallengers.appchallengers.fragments.show_challenge_detail_activity_fragment.DetailChallengeFragment;
-import com.appchallengers.appchallengers.fragments.show_challenge_detail_activity_fragment.KnowDetailChallengesFragment;
+import com.appchallengers.appchallengers.fragments.show_challenge_detail_activity_fragment.LatestDetailChallengeFragment;
+import com.appchallengers.appchallengers.fragments.show_challenge_detail_activity_fragment.PopularDetailChallengesFragment;
 
 /**
  * Created by jir on 17.4.2018.
@@ -25,15 +25,15 @@ public class DetailChallengePagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:{
-                DetailChallengeFragment detailChallengeFragment=new DetailChallengeFragment();
-                detailChallengeFragment.setArguments(mBundle);
-                return  detailChallengeFragment;
+                LatestDetailChallengeFragment latestDetailChallengeFragment =new LatestDetailChallengeFragment();
+                latestDetailChallengeFragment.setArguments(mBundle);
+                return latestDetailChallengeFragment;
             }
 
             case 1:{
-                KnowDetailChallengesFragment knowDetailChallengesFragment =new KnowDetailChallengesFragment();
-                knowDetailChallengesFragment.setArguments(mBundle);
-                return knowDetailChallengesFragment;
+                PopularDetailChallengesFragment popularDetailChallengesFragment =new PopularDetailChallengesFragment();
+                popularDetailChallengesFragment.setArguments(mBundle);
+                return popularDetailChallengesFragment;
             }
 
             default: return null;

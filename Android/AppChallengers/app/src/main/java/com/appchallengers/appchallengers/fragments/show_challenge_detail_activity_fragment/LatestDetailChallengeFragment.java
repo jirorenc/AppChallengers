@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.appchallengers.appchallengers.R;
-import com.appchallengers.appchallengers.helpers.adapters.UserInfoChallengeFeedAdapter;
+import com.appchallengers.appchallengers.helpers.adapters.DetailChallengeAdapter;
 import com.appchallengers.appchallengers.helpers.util.ErrorHandler;
-import com.appchallengers.appchallengers.webservice.remote.GetUserInfo;
-import com.appchallengers.appchallengers.webservice.remote.GetUserInfoApiClient;
+import com.appchallengers.appchallengers.webservice.remote.GetChallengeDetailInfo;
+import com.appchallengers.appchallengers.webservice.remote.GetChallengeDetailInfoApiClient;
 import com.appchallengers.appchallengers.webservice.response.UserChallengeFeedListModel;
 import com.victor.loading.rotate.RotateLoading;
 
@@ -30,75 +30,61 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Response;
 
-public class DetailChallengeFragment extends Fragment {
+public class LatestDetailChallengeFragment extends Fragment {
     private View mRootView;
-    private long mUserId;
-    private List<UserChallengeFeedListModel> mUserChallengeInfoFeedList;
-    private UserInfoChallengeFeedAdapter mUserInfoChallengeFeedAdapter;
     private Container mContainer;
-    private RotateLoading mFeedRotateLoading;
     private LinearLayoutManager mLinerlayoutmanager;
+    private RotateLoading mRotateLoading;
+    private Bundle mBundle;
+    private Long mDetailChallengeId;
     private CompositeDisposable mCompositeDisposable;
-    Observable<Response<List<UserChallengeFeedListModel>>> getUserChallenges;
+    private DetailChallengeAdapter mDetailChallengeAdapter;
+    private List<UserChallengeFeedListModel> mLatestChallengeDetailList;
+    Observable<Response<List<UserChallengeFeedListModel>>> getLatestDetailChallenges;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mRootView = inflater.inflate(R.layout.fragment_detail_challenge, container, false);
-     //   initialView(mRootView);
+        initialView(mRootView);
         return mRootView;
     }
 
     private void initialView(View mRootView) {
-        mUserChallengeInfoFeedList = new ArrayList<>();
+        mLatestChallengeDetailList = new ArrayList<>();
         mContainer = mRootView.findViewById(R.id.player_container);
         mLinerlayoutmanager = new LinearLayoutManager(getContext());
         mContainer.setLayoutManager(mLinerlayoutmanager);
         mCompositeDisposable = new CompositeDisposable();
-        mFeedRotateLoading = (RotateLoading) mRootView.findViewById(R.id.activity_show_user_rotateloading);
-        Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey("user_id")) {
-            mUserId = bundle.getLong("user_id");
-            getUserInfoChallengeFeed();
+        mRotateLoading = (RotateLoading) mRootView.findViewById(R.id.fragment_detail_Challenge_rotateloading);
+         mBundle = getArguments();
+        if (mBundle != null && mBundle.containsKey("challenge_detail_id")) {
+            mDetailChallengeId = mBundle.getLong("challenge_detail_id");
+            getDetailChallenge();
         } else {
             getActivity().finish();
         }
     }
 
-    private void getUserInfoChallengeFeed() {
-        GetUserInfo getUserInfo = GetUserInfoApiClient.getUserInfoClientWithCache(getContext());
-        getUserChallenges = getUserInfo.getUserChallenges(mUserId);
-        getUserChallenges.subscribeOn(Schedulers.io())
+    private void getDetailChallenge() {
+        final GetChallengeDetailInfo getChallengeDetailInfo = GetChallengeDetailInfoApiClient.getChallengeDetailInfoClientWithCache(getContext());
+        getLatestDetailChallenges = getChallengeDetailInfo.getLatestChallengeDetail(mDetailChallengeId);
+        getLatestDetailChallenges.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Response<List<UserChallengeFeedListModel>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         mCompositeDisposable.add(d);
-                        mFeedRotateLoading.start();
+                        mRotateLoading.start();
                     }
 
                     @Override
-                    public void onNext(Response<List<UserChallengeFeedListModel>> listResponse) {
-                        if (listResponse.isSuccessful()) {
-                            mUserChallengeInfoFeedList.addAll(listResponse.body());
-                            mUserInfoChallengeFeedAdapter = new UserInfoChallengeFeedAdapter(getContext(), listResponse.body(), getActivity());
-                            mContainer.setAdapter(mUserInfoChallengeFeedAdapter);
-                        } else {
-                            if (listResponse.code() == 400) {
-                                if (listResponse.errorBody() != null) {
-                                    try {
-                                        ErrorHandler.getInstance(getContext()).showEror(listResponse.errorBody().string());
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            } else {
-                                ErrorHandler.getInstance(getContext()).showEror("{code:1000}");
-                            }
-
-                        }
-
+                    public void onNext(Response<List<UserChallengeFeedListModel>> detailChallengeListModelResponse) {
+                            mLatestChallengeDetailList =detailChallengeListModelResponse.body();
+                            mDetailChallengeAdapter = new DetailChallengeAdapter(getContext(), mLatestChallengeDetailList,getActivity());
+                            mContainer.setAdapter(mDetailChallengeAdapter);
                     }
+
 
                     @Override
                     public void onError(Throwable e) {
@@ -109,16 +95,17 @@ public class DetailChallengeFragment extends Fragment {
                         } else {
                             ErrorHandler.getInstance(getContext()).showEror("{code:1000}");
                         }
-                        mFeedRotateLoading.stop();
-                        mFeedRotateLoading.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onComplete() {
-                        mFeedRotateLoading.stop();
-                        mFeedRotateLoading.setVisibility(View.GONE);
+                        mRotateLoading.stop();
+                        mRotateLoading.setVisibility(View.GONE);
                     }
                 });
+    }
+    public void fabState(int state){
+
     }
 
 
@@ -126,9 +113,9 @@ public class DetailChallengeFragment extends Fragment {
     public void onDestroy() {
         if (mCompositeDisposable != null)
             mCompositeDisposable.dispose();
-        if (mFeedRotateLoading != null) {
-            mFeedRotateLoading.stop();
-            mFeedRotateLoading.setVisibility(View.GONE);
+        if (mRotateLoading != null) {
+            mRotateLoading.stop();
+            mRotateLoading.setVisibility(View.GONE);
         }
         super.onDestroy();
     }

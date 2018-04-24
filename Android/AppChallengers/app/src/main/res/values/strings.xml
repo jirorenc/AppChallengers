@@ -18,4 +18,5 @@
     //deneme
     <string name="permission_request">This sample needs permission for camera and audio recording.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="title_activity_show_setting_user">ShowSettingUserActivity</string>
 </resources>

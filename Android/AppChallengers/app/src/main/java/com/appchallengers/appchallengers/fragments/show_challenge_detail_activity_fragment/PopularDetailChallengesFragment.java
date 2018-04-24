@@ -1,33 +1,34 @@
-package com.appchallengers.appchallengers.fragments.show_user_activity_fragment;
+package com.appchallengers.appchallengers.fragments.show_challenge_detail_activity_fragment;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.appchallengers.appchallengers.R;
 import com.appchallengers.appchallengers.ShowProfilActivity;
 import com.appchallengers.appchallengers.ShowUserActivity;
-import com.appchallengers.appchallengers.helpers.adapters.ShowLikesAdapter;
+import com.appchallengers.appchallengers.helpers.adapters.DetailChallengeAdapter;
 import com.appchallengers.appchallengers.helpers.util.ErrorHandler;
 import com.appchallengers.appchallengers.helpers.util.Utils;
-import com.appchallengers.appchallengers.webservice.remote.GetUserInfo;
-import com.appchallengers.appchallengers.webservice.remote.GetUserInfoApiClient;
+import com.appchallengers.appchallengers.webservice.remote.GetChallengeDetailInfo;
+import com.appchallengers.appchallengers.webservice.remote.GetChallengeDetailInfoApiClient;
 import com.appchallengers.appchallengers.webservice.response.UserBaseDataModel;
+import com.appchallengers.appchallengers.webservice.response.UserChallengeFeedListModel;
 import com.victor.loading.rotate.RotateLoading;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import im.ene.toro.widget.Container;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -40,70 +41,65 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.appchallengers.appchallengers.helpers.util.Constants.MY_PREFS_NAME;
 
 
-public class UserFriendFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class PopularDetailChallengesFragment extends Fragment implements AdapterView.OnItemClickListener {
 
 
     private View mRootView;
-    private long mUserId;
-    private ListView mUserFriendsListview;
-    private List<UserBaseDataModel> mUserFriendsList;
-    private ShowLikesAdapter mUserFriendsAdapter;
+    private long mPopularDetailChallengeId;
+    private List<UserChallengeFeedListModel> mPopularDetailChallengeList;
+    private DetailChallengeAdapter mDetailChallengeAdapter;
+    private Container mContainer;
     private RotateLoading mFeedRotateLoading;
-    private CompositeDisposable mCompositeDisposable;
+    private LinearLayoutManager mLinerlayoutmanager;
     private SharedPreferences mSharedPreferences;
-    Observable<Response<List<UserBaseDataModel>>> getUserFriends;
+    private CompositeDisposable mCompositeDisposable;
+    Observable<Response<List<UserChallengeFeedListModel>>> getPopularDetailChallenges;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mRootView = inflater.inflate(R.layout.fragment_user_friend, container, false);
+        mRootView = inflater.inflate(R.layout.fragment_popular_detail_challenges,container,false);
         initialView(mRootView);
         return mRootView;
     }
-
     private void initialView(View mRootView) {
-        mUserFriendsList = new ArrayList<>();
-        mUserFriendsListview = (ListView) mRootView.findViewById(R.id.user_friends_fragment_listview);
+        mPopularDetailChallengeList = new ArrayList<>();
+        mContainer = mRootView.findViewById(R.id.player_container);
+        mLinerlayoutmanager = new LinearLayoutManager(getContext());
+        mContainer.setLayoutManager(mLinerlayoutmanager);
         mCompositeDisposable = new CompositeDisposable();
         mSharedPreferences = getContext().getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-        mFeedRotateLoading = (RotateLoading) mRootView.findViewById(R.id.user_friends_fragment_rotateloading);
-
+        mFeedRotateLoading = (RotateLoading) mRootView.findViewById(R.id.fragment_popular_detail_Challenge_rotateloading);
         Bundle bundle = getArguments();
-        if (bundle != null && bundle.containsKey("user_id")) {
-            mUserId = bundle.getLong("user_id");
-            getFriendList(mUserId);
+        if (bundle != null && bundle.containsKey("challenge_detail_id")) {
+            mPopularDetailChallengeId = bundle.getLong("challenge_detail_id");
+            getPopularDetailChallenge();
         } else {
             getActivity().finish();
         }
-        mUserFriendsListview.setOnItemClickListener(this);
     }
 
-    public void getFriendList(long userId) {
-        GetUserInfo userFriend = GetUserInfoApiClient.getUserInfoClientWithCache(getContext());
-        getUserFriends = userFriend.getUserFriends(userId);
-        getUserFriends.subscribeOn(Schedulers.io())
+    private void getPopularDetailChallenge() {
+        final GetChallengeDetailInfo getChallengeDetailInfo = GetChallengeDetailInfoApiClient.getChallengeDetailInfoClientWithCache(getContext());
+        getPopularDetailChallenges = getChallengeDetailInfo.getPopularChallengeDetail(mPopularDetailChallengeId);
+        getPopularDetailChallenges.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Response<List<UserBaseDataModel>>>() {
+                .subscribe(new Observer<Response<List<UserChallengeFeedListModel>>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         mCompositeDisposable.add(d);
                         mFeedRotateLoading.start();
                     }
-
                     @Override
-                    public void onNext(Response<List<UserBaseDataModel>> value) {
-                        mUserFriendsList = value.body();
-                        if (mUserFriendsList.size() != 0 && mUserFriendsList != null) {
-                            mUserFriendsAdapter = new ShowLikesAdapter(getContext(), mUserFriendsList);
-                            mUserFriendsListview.setAdapter(mUserFriendsAdapter);
-                        } else {
-                            //todo there isnt anyone like this post
-                        }
+                    public void onNext(Response<List<UserChallengeFeedListModel>> detailChallengeListModelResponse) {
+                        mPopularDetailChallengeList =detailChallengeListModelResponse.body();
+                        mDetailChallengeAdapter = new DetailChallengeAdapter(getContext(), mPopularDetailChallengeList,getActivity());
+                        mContainer.setAdapter(mDetailChallengeAdapter);
                     }
+
 
                     @Override
                     public void onError(Throwable e) {
-                        onComplete();
                         if (e instanceof IOException) {
                             if (e instanceof java.net.ConnectException) {
                                 ErrorHandler.getInstance(getContext()).showInfo(300);
@@ -120,6 +116,28 @@ public class UserFriendFragment extends Fragment implements AdapterView.OnItemCl
                     }
                 });
     }
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Utils.sharedPreferences=mSharedPreferences;
+        UserChallengeFeedListModel userChallengeFeedListModel = mPopularDetailChallengeList.get(i);
+        try {
+            if (Utils.getId(Utils.getPref("token"))==userChallengeFeedListModel.getChallenge_id()){
+                Intent intent = new Intent(getActivity(), ShowProfilActivity.class);
+                intent.putExtra("user_id", userChallengeFeedListModel.getChallenge_id());
+                startActivity(intent);
+                getActivity().finish();
+            }
+            else{
+                Intent intent = new Intent(getActivity(), ShowUserActivity.class);
+                intent.putExtra("user_id", userChallengeFeedListModel.getChallenge_id());
+                startActivity(intent);
+                getActivity().finish();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 
 
     @Override
@@ -131,29 +149,6 @@ public class UserFriendFragment extends Fragment implements AdapterView.OnItemCl
             mFeedRotateLoading.setVisibility(View.GONE);
         }
         super.onDestroy();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Utils.sharedPreferences=mSharedPreferences;
-        UserBaseDataModel userBaseDataModel = mUserFriendsList.get(i);
-        try {
-            if (Utils.getId(Utils.getPref("token"))==userBaseDataModel.getId()){
-                Intent intent = new Intent(getActivity(), ShowProfilActivity.class);
-                intent.putExtra("user_id", userBaseDataModel.getId());
-                startActivity(intent);
-                getActivity().finish();
-            }
-            else{
-                Intent intent = new Intent(getActivity(), ShowUserActivity.class);
-                intent.putExtra("user_id", userBaseDataModel.getId());
-                startActivity(intent);
-                getActivity().finish();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
     public interface OnFragmentInteractionListener {

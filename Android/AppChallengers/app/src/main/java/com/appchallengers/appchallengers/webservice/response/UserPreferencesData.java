@@ -5,6 +5,7 @@ public class UserPreferencesData {
     private String fullName;
     private String imageUrl;
     private String email;
+    private String country;
     private Integer active;
 
     public Integer getActive() {
@@ -33,6 +34,14 @@ public class UserPreferencesData {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public void setFullName(String fullName) {

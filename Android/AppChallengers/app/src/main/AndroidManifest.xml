@@ -54,7 +54,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ChallengeDetailActivity"></activity>
+        <activity android:name=".ChallengeDetailActivity" />
         <activity android:name=".NotificationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.NOTIFICATIONACTIVITY" />
@@ -78,6 +78,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ShowSettingUserActivity"
+            android:label="@string/title_activity_show_setting_user"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

@@ -10,6 +10,6 @@ import retrofit2.http.GET;
 
 public interface UserNotification {
 
-    @GET("users/natifications/get_user_natification")
+    @GET("users/notifications/get_user_notification")
     Observable<Response<List<NotificationResponseModel>>> getNotificationList();
 }
