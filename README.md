@@ -1,4 +1,4 @@
-# AppChallengers
+# AppChallengers- Android- app
 Application For Challengers
 
 In this project, a social media application software was developed. This software application was programed for Android and Web platforms. In this project, firstly database of social media application that will be developed was designed. Following the designing of database, Java Classes and Web services those process data to database was created. Following the designing of database, Java Classes and Web services those process data to database was created to serve data for andorid platform. In second step of this project, social media application was developed in synchronous for mobile and Web platforms.
